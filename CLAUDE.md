@@ -72,6 +72,18 @@ The process is:
 4. When she's happy, ask: "Ready to update the real website?"
 5. Only then commit and push
 
+### Pushing to GitHub using the GitHub MCP (preferred method)
+The GitHub MCP server is installed and authenticated. Use it to push changes directly without needing the terminal:
+1. Run `npm run build` first to check everything works
+2. Use git (via Bash tool) to stage and commit: `git add -A && git commit -m "describe the change"`
+3. Use the GitHub MCP to push to main — this avoids needing Nina to use the terminal
+4. Tell Nina: "Done! The website will update in 1-2 minutes."
+
+**npm path note:** When running npm commands via Bash, always set the PATH first:
+```bash
+export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH" && npm run build
+```
+
 ### Building (checking if everything works)
 ```bash
 npm run build

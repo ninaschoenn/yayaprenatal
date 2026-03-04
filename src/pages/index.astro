@@ -24,24 +24,7 @@ import Footer from '../components/Footer.astro';
     <BabyFirst />
 
     <!-- Body Map: React island with client-side hydration -->
-    <section class="py-20 md:py-28 px-4 md:px-12 overflow-hidden relative" style="background: linear-gradient(180deg, #FFFCF9 0%, #F7F3EE 50%, #FFFCF9 100%);">
-      <!-- Decorative accent line -->
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[60px] h-[3px] bg-terra rounded-sm"></div>
-
-      <div class="text-center mb-8 md:mb-12">
-        <p class="text-[12px] tracking-[3px] uppercase text-terra mb-4 font-medium">
-          Dein Körper-Check
-        </p>
-        <h2 class="font-serif text-[28px] md:text-[52px] font-light leading-[1.2] text-deep mb-3">
-          Was wir in deinem Blut lesen.
-        </h2>
-        <p class="text-sm md:text-base text-subtle font-light max-w-[520px] mx-auto leading-[1.6]">
-          22 Marker. 14 davon testet deine Frauenärztin nicht. Klick auf einen Bereich und erfahre, warum er wichtig ist.
-        </p>
-      </div>
-
-      <BodyMap client:visible />
-    </section>
+    <BodyMap client:visible />
 
     <CoachingSection />
     <HowItWorks />
