@@ -5,12 +5,28 @@ const dialogues = [
     response: "Was genau macht dir Angst? Lass uns das gemeinsam anschauen.",
   },
   {
+    thought: "Alle sagen, ich soll mich freuen. Aber ich fühle mich nur überfordert.",
+    response: "Was wäre, wenn beides gleichzeitig da sein darf?",
+  },
+  {
     thought: "Mein Partner und ich streiten mehr.",
     response: "Was hat sich zwischen euch verändert? Was brauchst du gerade von ihm?",
   },
   {
+    thought: "Ich habe das Gefühl, ich verliere mich selbst.",
+    response: "Was von dir möchtest du unbedingt behalten?",
+  },
+  {
     thought: "Ich weiß nicht, ob ich bereit bin, Mutter zu sein.",
     response: "Wer warst du bisher — und wer möchtest du als Mutter sein?",
+  },
+  {
+    thought: "Meine Mutter mischt sich ständig ein.",
+    response: "Was davon ist Fürsorge — und was ist Grenzüberschreitung?",
+  },
+  {
+    thought: "Was, wenn ich es nicht schaffe?",
+    response: "Was genau bedeutet ‚schaffen' für dich? Und wer hat das definiert?",
   },
 ];
 ---
@@ -31,22 +47,42 @@ const dialogues = [
       deine Identität, deine Ängste, deine Träume. Das verdient einen Raum, der nur dir gehört.
     </p>
 
-    <!-- Dialogue cards -->
-    <div class="flex flex-col gap-4 max-w-[700px] mb-10">
-      {dialogues.map((item) => (
-        <div class="bg-pearl rounded-lg overflow-hidden flex flex-col md:flex-row">
-          <div class="flex-1 px-6 py-5 border-b md:border-b-0 md:border-r border-warm">
-            <p class="text-xs uppercase tracking-widest text-subtle font-sans mb-2">Du denkst:</p>
-            <p class="font-serif text-deep text-lg italic leading-snug">
-              &bdquo;{item.thought}&ldquo;
-            </p>
+    <!-- Chat carousel -->
+    <div class="max-w-[540px] mb-10 relative overflow-hidden" id="coaching-carousel">
+      {dialogues.map((item, i) => (
+        <div class={`coaching-slide flex flex-col gap-2 transition-opacity duration-500 ${i === 0 ? 'block' : 'hidden'}`} data-index={i}>
+          <!-- Thought bubble (left) -->
+          <div class="flex justify-start">
+            <div class="bg-deep text-cream px-5 py-4 rounded-2xl rounded-bl-sm max-w-[85%] shadow-sm">
+              <p class="text-[10px] uppercase tracking-widest text-cream/50 font-sans mb-1.5">Du denkst</p>
+              <p class="font-serif text-[17px] italic leading-snug">
+                &bdquo;{item.thought}&ldquo;
+              </p>
+            </div>
           </div>
-          <div class="flex-1 px-6 py-5">
-            <p class="text-xs uppercase tracking-widest text-terra font-sans mb-2">Bei Yaya:</p>
-            <p class="text-ink text-base leading-relaxed">{item.response}</p>
+
+          <!-- Response bubble (right) -->
+          <div class="flex justify-end">
+            <div class="bg-terra text-pearl px-5 py-4 rounded-2xl rounded-br-sm max-w-[85%] shadow-sm">
+              <p class="text-[10px] uppercase tracking-widest text-pearl/50 font-sans mb-1.5">Nina</p>
+              <p class="text-[15px] leading-relaxed">
+                {item.response}
+              </p>
+            </div>
           </div>
         </div>
       ))}
+
+      <!-- Navigation dots -->
+      <div class="flex justify-center gap-2 mt-6">
+        {dialogues.map((_, i) => (
+          <button
+            class={`coaching-dot w-2 h-2 rounded-full transition-colors duration-300 ${i === 0 ? 'bg-terra' : 'bg-warm'}`}
+            data-index={i}
+            aria-label={`Frage ${i + 1}`}
+          />
+        ))}
+      </div>
     </div>
 
     <!-- Bottom info box -->
@@ -64,3 +100,38 @@ const dialogues = [
     </div>
   </div>
 </section>
+
+<script>
+  const slides = document.querySelectorAll('.coaching-slide');
+  const dots = document.querySelectorAll('.coaching-dot');
+  let current = 0;
+  let interval: ReturnType<typeof setInterval>;
+
+  function showSlide(index: number) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('hidden', i !== index);
+      slide.classList.toggle('block', i === index);
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('bg-terra', i === index);
+      dot.classList.toggle('bg-warm', i !== index);
+    });
+    current = index;
+  }
+
+  function nextSlide() {
+    showSlide((current + 1) % slides.length);
+  }
+
+  // Auto-advance every 5 seconds
+  interval = setInterval(nextSlide, 5000);
+
+  // Click on dots to navigate
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      clearInterval(interval);
+      showSlide(Number((dot as HTMLElement).dataset.index));
+      interval = setInterval(nextSlide, 5000);
+    });
+  });
+</script>
