@@ -48,7 +48,7 @@ const dialogues = [
     </p>
 
     <!-- Chat carousel -->
-    <div class="max-w-[540px] mb-10 relative overflow-hidden" id="coaching-carousel">
+    <div class="max-w-[540px] mb-10 relative overflow-hidden min-h-[220px]" id="coaching-carousel">
       {dialogues.map((item, i) => (
         <div class={`coaching-slide flex flex-col gap-2 transition-opacity duration-500 ${i === 0 ? 'block' : 'hidden'}`} data-index={i}>
           <!-- Thought bubble (left) -->
@@ -91,11 +91,7 @@ const dialogues = [
         Systemisches Coaching ist keine Therapie und keine Beratung. Es ist ein Raum, in dem du
         deine eigenen Antworten findest. Nina gibt keine Ratschläge — sie stellt die Fragen, die
         dich weiterbringen. Geburtsängste, Identitätswandel, Partnerschaftsdynamik,
-        Entscheidungen, Selbstvertrauen.
-      </p>
-      <p class="text-terra font-sans text-sm leading-relaxed">
-        Das ist keine Hebammen-Arbeit. Keine Atemtechnik, keine Geburtsvorbereitung. Das hier ist
-        innere Arbeit.
+        Entscheidungen, Selbstvertrauen — innere Arbeit, die dich stärkt, bevor das Baby da ist.
       </p>
     </div>
   </div>
