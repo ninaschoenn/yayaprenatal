@@ -47,31 +47,48 @@ const dialogues = [
       deine Identität, deine Ängste, deine Träume. Das verdient einen Raum, der nur dir gehört.
     </p>
 
-    <!-- Chat carousel -->
-    <div class="max-w-[540px] mb-10 relative overflow-hidden min-h-[320px] md:min-h-[220px]" id="coaching-carousel">
-      {dialogues.map((item, i) => (
-        <div class={`coaching-slide flex flex-col gap-2 transition-opacity duration-500 ${i === 0 ? 'block' : 'hidden'}`} data-index={i}>
-          <!-- Thought bubble (left) -->
-          <div class="flex justify-start">
-            <div class="bg-deep text-cream px-5 py-4 rounded-2xl rounded-bl-sm max-w-[85%] shadow-sm">
-              <p class="text-[10px] uppercase tracking-widest text-cream/50 font-sans mb-1.5">Du denkst</p>
-              <p class="font-serif text-[17px] italic leading-snug">
-                &bdquo;{item.thought}&ldquo;
-              </p>
-            </div>
-          </div>
+    <!-- Chat carousel with arrows -->
+    <div class="max-w-[600px] mb-10 relative" id="coaching-carousel">
+      <!-- Left arrow -->
+      <button id="carousel-prev" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-10 z-10 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center text-subtle/40 hover:text-terra transition-colors duration-300" aria-label="Vorherige Frage">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 md:w-6 md:h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+        </svg>
+      </button>
 
-          <!-- Response bubble (right) -->
-          <div class="flex justify-end">
-            <div class="bg-terra text-pearl px-5 py-4 rounded-2xl rounded-br-sm max-w-[85%] shadow-sm">
-              <p class="text-[10px] uppercase tracking-widest text-pearl/50 font-sans mb-1.5">Nina</p>
-              <p class="text-[15px] leading-relaxed">
-                {item.response}
-              </p>
+      <!-- Right arrow -->
+      <button id="carousel-next" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-10 z-10 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center text-subtle/40 hover:text-terra transition-colors duration-300" aria-label="Nächste Frage">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 md:w-6 md:h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+        </svg>
+      </button>
+
+      <!-- Slides container -->
+      <div class="overflow-hidden min-h-[320px] md:min-h-[220px] px-6 md:px-0">
+        {dialogues.map((item, i) => (
+          <div class={`coaching-slide flex flex-col gap-2 absolute inset-x-6 md:inset-x-0 transition-all duration-700 ease-in-out ${i === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} data-index={i}>
+            <!-- Thought bubble (left) -->
+            <div class="flex justify-start">
+              <div class="bg-deep text-cream px-5 py-4 rounded-2xl rounded-bl-sm max-w-[85%] shadow-sm">
+                <p class="text-[10px] uppercase tracking-widest text-cream/50 font-sans mb-1.5">Du denkst</p>
+                <p class="font-serif text-[17px] italic leading-snug">
+                  &bdquo;{item.thought}&ldquo;
+                </p>
+              </div>
+            </div>
+
+            <!-- Response bubble (right) -->
+            <div class="flex justify-end">
+              <div class="bg-terra text-pearl px-5 py-4 rounded-2xl rounded-br-sm max-w-[85%] shadow-sm">
+                <p class="text-[10px] uppercase tracking-widest text-pearl/50 font-sans mb-1.5">Nina</p>
+                <p class="text-[15px] leading-relaxed">
+                  {item.response}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
       <!-- Navigation dots -->
       <div class="flex justify-center gap-2 mt-6">
@@ -100,13 +117,21 @@ const dialogues = [
 <script>
   const slides = document.querySelectorAll('.coaching-slide');
   const dots = document.querySelectorAll('.coaching-dot');
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
   let current = 0;
   let interval: ReturnType<typeof setInterval>;
 
   function showSlide(index: number) {
     slides.forEach((slide, i) => {
-      slide.classList.toggle('hidden', i !== index);
-      slide.classList.toggle('block', i === index);
+      const el = slide as HTMLElement;
+      if (i === index) {
+        el.classList.remove('opacity-0', 'pointer-events-none');
+        el.classList.add('opacity-100');
+      } else {
+        el.classList.remove('opacity-100');
+        el.classList.add('opacity-0', 'pointer-events-none');
+      }
     });
     dots.forEach((dot, i) => {
       dot.classList.toggle('bg-terra', i === index);
@@ -119,15 +144,27 @@ const dialogues = [
     showSlide((current + 1) % slides.length);
   }
 
-  // Auto-advance every 5 seconds
+  function prevSlide() {
+    showSlide((current - 1 + slides.length) % slides.length);
+  }
+
+  function resetInterval() {
+    clearInterval(interval);
+    interval = setInterval(nextSlide, 7000);
+  }
+
+  // Auto-advance every 7 seconds
   interval = setInterval(nextSlide, 7000);
 
-  // Click on dots to navigate
+  // Arrow navigation
+  nextBtn?.addEventListener('click', () => { nextSlide(); resetInterval(); });
+  prevBtn?.addEventListener('click', () => { prevSlide(); resetInterval(); });
+
+  // Dot navigation
   dots.forEach((dot) => {
     dot.addEventListener('click', () => {
-      clearInterval(interval);
       showSlide(Number((dot as HTMLElement).dataset.index));
-      interval = setInterval(nextSlide, 7000);
+      resetInterval();
     });
   });
 </script>
