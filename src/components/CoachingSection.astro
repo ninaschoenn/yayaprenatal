@@ -48,7 +48,7 @@ const dialogues = [
     </p>
 
     <!-- Chat carousel -->
-    <div class="max-w-[540px] mb-10 relative overflow-hidden min-h-[220px]" id="coaching-carousel">
+    <div class="max-w-[540px] mb-10 relative overflow-hidden min-h-[320px] md:min-h-[220px]" id="coaching-carousel">
       {dialogues.map((item, i) => (
         <div class={`coaching-slide flex flex-col gap-2 transition-opacity duration-500 ${i === 0 ? 'block' : 'hidden'}`} data-index={i}>
           <!-- Thought bubble (left) -->
