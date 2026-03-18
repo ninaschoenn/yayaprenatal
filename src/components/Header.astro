@@ -12,7 +12,7 @@
     <div class="hidden md:flex items-center gap-9">
       {["Paket", "Über mich", "Kontakt"].map((link) => (
         <a
-          href={`#${link === "Paket" ? "paket" : link === "Über mich" ? "ueber" : "kontakt"}`}
+          href={`/${link === "Paket" ? "#paket" : link === "Über mich" ? "#ueber" : "#kontakt"}`}
           class="text-[14px] text-subtle tracking-wider uppercase no-underline hover:text-terra transition-colors duration-200"
         >
           {link}
@@ -42,7 +42,7 @@
   <div class="flex flex-col items-center justify-center gap-10 h-full pb-20">
     {["Paket", "Über mich", "Kontakt"].map((link) => (
       <a
-        href={`#${link === "Paket" ? "paket" : link === "Über mich" ? "ueber" : "kontakt"}`}
+        href={`/${link === "Paket" ? "#paket" : link === "Über mich" ? "#ueber" : "#kontakt"}`}
         class="mobile-nav-link font-serif text-[28px] text-cream tracking-wider no-underline font-light"
       >
         {link}
