@@ -198,6 +198,10 @@ export default function BodyMap() {
                   height={9}
                   fill="transparent"
                 />
+                <circle cx={t.x} cy={t.y} r="4" fill={catColor} opacity={isActive ? 0.12 : 0.08}>
+                  <animate attributeName="r" values={isActive ? "3;5;3" : "2;4;2"} dur={isActive ? "2s" : "3s"} repeatCount="indefinite" />
+                  <animate attributeName="opacity" values={isActive ? "0.12;0.06;0.12" : "0.1;0.02;0.1"} dur={isActive ? "2s" : "3s"} repeatCount="indefinite" />
+                </circle>
                 <circle
                   cx={t.x}
                   cy={t.y}
@@ -205,15 +209,8 @@ export default function BodyMap() {
                   fill={catColor}
                   opacity={isActive ? 1 : 0.5}
                 >
-                  {isActive && (
-                    <animate attributeName="r" values="2;2.8;2" dur="2s" repeatCount="indefinite" />
-                  )}
+                  <animate attributeName="r" values={isActive ? "2;2.8;2" : "1.4;1.8;1.4"} dur={isActive ? "2s" : "3s"} repeatCount="indefinite" />
                 </circle>
-                {isActive && (
-                  <circle cx={t.x} cy={t.y} r="4" fill={catColor} opacity="0.12">
-                    <animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite" />
-                  </circle>
-                )}
                 <path
                   d={`M${t.x} ${t.y} L${elbowX} ${t.y}`}
                   fill="none"
