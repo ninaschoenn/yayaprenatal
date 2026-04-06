@@ -112,6 +112,9 @@ export default function BodyMap() {
         <h2 className="font-serif text-3xl md:text-5xl font-light leading-tight text-[#5C3D2E] mb-3">
           Was wir in deinem Blut lesen.
         </h2>
+        <p className="font-serif text-lg md:text-xl text-[#5C3D2E] font-light max-w-lg mx-auto leading-relaxed mb-4" style={{ opacity: 0.8 }}>
+          Wir schauen nicht einfach auf Werte — wir verstehen, was sie für dich und dein Baby bedeuten.
+        </p>
         <p className="text-sm md:text-base text-[#7A6B60] font-light max-w-lg mx-auto leading-relaxed">
           22 Marker. 18 davon testet deine Frauenärztin nicht. Die anderen 4 schon — aber isoliert, ohne das volle Bild. Klick auf einen Bereich und erfahre, warum er wichtig ist.
         </p>
