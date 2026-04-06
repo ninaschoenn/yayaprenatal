@@ -97,6 +97,7 @@ const markers: Marker[] = [
 
 export default function BodyMap() {
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [hoverId, setHoverId] = useState<string | null>(null);
   const selected = markers.find((m) => m.id === activeId);
 
   return (
@@ -192,6 +193,8 @@ export default function BodyMap() {
               <g
                 key={t.id}
                 onClick={() => setActiveId(isActive ? null : t.id)}
+                onMouseEnter={() => setHoverId(t.id)}
+                onMouseLeave={() => setHoverId(null)}
                 style={{ cursor: 'pointer' }}
               >
                 <rect
@@ -252,6 +255,20 @@ export default function BodyMap() {
                 >
                   {t.sub}
                 </text>
+                {hoverId === t.id && !isActive && (
+                  <text
+                    x={t.side === 'L' ? 4 : 96.5}
+                    y={t.y + 5}
+                    textAnchor={textAnchor}
+                    fill={catColor}
+                    fontSize={1.8}
+                    fontFamily="DM Sans, sans-serif"
+                    fontWeight={400}
+                    fontStyle="italic"
+                  >
+                    klick für mehr
+                  </text>
+                )}
               </g>
             );
           })}
