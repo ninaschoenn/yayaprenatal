@@ -3,6 +3,9 @@ export const site = {
   url: 'https://yayaprenatal.de',
   locale: 'de_DE',
   language: 'de',
+  branding: {
+    logoPath: '/logo.png',
+  },
   publicContact: {
     email: 'nina@yayaprenatal.de',
     phone: '0172 3479464',
@@ -25,9 +28,11 @@ export const site = {
     country: 'Deutschland',
   },
   socialImage: {
-    path: '/images/optimized/og-yaya-prenatal.jpg',
+    path: '/images/og-yaya-prenatal.jpg',
     width: 1200,
     height: 630,
+    type: 'image/jpeg',
+    alt: 'Yaya Prenatal preview image with Nina portrait and warm natural branding',
   },
   business: {
     neighborhood: 'Friedrichshain',

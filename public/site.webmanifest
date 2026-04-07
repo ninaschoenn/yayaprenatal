@@ -1,9 +1,15 @@
 {
   "name": "Yaya Prenatal",
   "short_name": "Yaya",
+  "description": "Ganzheitliche Schwangerschaftsbegleitung in Berlin Friedrichshain.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "de-DE",
+  "categories": ["health", "wellness", "medical"],
   "icons": [
-    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
   ],
   "theme_color": "#F7F3EE",
   "background_color": "#F7F3EE",

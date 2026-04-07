@@ -1,5 +1,5 @@
 ---
-import { navLinks } from '../data/site';
+import { navLinks, site } from '../data/site';
 ---
 
 <header class="sticky top-0 z-50 backdrop-blur-md bg-cream/90 border-b border-warm/50">
@@ -7,7 +7,7 @@ import { navLinks } from '../data/site';
     <!-- Logo -->
     <a href="/" class="no-underline">
       <img
-        src="/Logo/YAYA Prenatal transparent.png"
+        src={site.branding.logoPath}
         alt="Yaya Prenatal"
         width="2000"
         height="2000"

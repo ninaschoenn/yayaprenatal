@@ -4,11 +4,11 @@ import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const outputDir = path.join(rootDir, 'public/images/optimized');
+const outputDir = path.join(rootDir, 'public/images');
 
 const tasks = [
   {
-    input: 'public/images/20260313_Nina_00391_Ed Mehravaran.jpg',
+    input: 'assets/images/hero-source.jpg',
     outputs: [
       {
         output: 'hero-nina-720.jpg',
@@ -39,7 +39,7 @@ const tasks = [
     ],
   },
   {
-    input: 'public/images/20260313_Nina_00353_Ed Mehravaran.jpg',
+    input: 'assets/images/about-source.jpg',
     outputs: [
       {
         output: 'about-nina-640.jpg',
@@ -100,4 +100,4 @@ for (const task of tasks) {
   }
 }
 
-console.log('Optimized images written to public/images/optimized');
+console.log('Optimized images written to public/images');
