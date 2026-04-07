@@ -1,0 +1,262 @@
+---
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { getAlternateLinks, uiCopy } from '../../data/i18n';
+import { site } from '../../data/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  locale="en"
+  title="Privacy Policy — Yaya Prenatal"
+  description="Privacy policy for the Yaya Prenatal practice in Berlin. Information on the handling of personal data under the GDPR."
+  alternates={getAlternateLinks('privacy')}
+>
+  <Header locale="en" pageKey="privacy" />
+  <main class="px-4 py-16 md:px-12 md:py-24">
+    <article class="mx-auto max-w-2xl">
+      <p class="mb-4 font-sans text-xs uppercase tracking-widest text-terra">
+        {uiCopy.en.legalEyebrow}
+      </p>
+      <h1 class="mb-6 font-serif text-4xl leading-tight text-ink md:text-5xl">
+        Privacy Policy
+      </h1>
+
+      <p class="mb-16 rounded-md border border-warm bg-cream px-5 py-4 text-sm leading-[1.8] text-subtle">
+        This English version is provided for clarity. The German version remains legally authoritative.
+      </p>
+
+      <div class="text-[15px] leading-[1.8] text-subtle">
+        <section>
+          <hr class="border-warm" />
+          <div class="mt-8 mb-2 flex items-center gap-4">
+            <span class="font-serif text-[40px] font-light leading-none text-terra/40 md:text-[56px]">01</span>
+            <h2 class="font-serif text-xl text-ink md:text-2xl">
+              Privacy at a glance
+            </h2>
+          </div>
+
+          <h3 class="mt-6 mb-2 text-sm font-medium text-ink">General information</h3>
+          <p>
+            The following information provides a simple overview of what happens to your personal data when you visit this website. Personal data is any data that can be used to identify you personally. Detailed information on data protection can be found in the full privacy policy below.
+          </p>
+
+          <h3 class="mt-6 mb-2 text-sm font-medium text-ink">Data collection on this website</h3>
+          <p>
+            <strong class="text-ink">Who is responsible for data collection on this website?</strong><br />
+            Data processing on this website is carried out by the website operator:
+          </p>
+          <p class="mt-3">
+            {site.legalContact.displayName}<br />
+            {site.legalContact.brand}<br />
+            {site.legalContact.street}<br />
+            {site.legalContact.postalCode} {site.legalContact.city}<br />
+            Email:
+            <a href={site.legalContact.emailHref} class="text-terra underline transition-colors hover:text-deep">
+              {site.legalContact.email}
+            </a>
+          </p>
+
+          <h3 class="mt-6 mb-2 text-sm font-medium text-ink">How do we collect your data?</h3>
+          <p>
+            Some data is collected when you provide it to us directly, for example when you send us an email.
+          </p>
+          <p class="mt-3">
+            Other data is collected automatically or after your consent when you visit the website through our IT systems. This mainly includes technical data such as your browser, operating system, or the time a page was viewed. This data is collected automatically as soon as you enter the website.
+          </p>
+        </section>
+
+        <section class="mt-12">
+          <hr class="border-warm" />
+          <div class="mt-8 mb-2 flex items-center gap-4">
+            <span class="font-serif text-[40px] font-light leading-none text-terra/40 md:text-[56px]">02</span>
+            <h2 class="font-serif text-xl text-ink md:text-2xl">
+              Hosting
+            </h2>
+          </div>
+          <p>
+            This website is hosted by an external service provider. Personal data collected on this website is stored on the provider's servers. This may include IP addresses, contact inquiries, metadata and communication data, contract data, contact details, names, website access data, and other data generated through a website.
+          </p>
+          <p class="mt-3">
+            The host is used in the interest of secure, fast, and efficient delivery of our online offering by a professional provider (Art. 6 para. 1 lit. f GDPR). If consent has been requested, processing is carried out exclusively on the basis of Art. 6 para. 1 lit. a GDPR.
+          </p>
+        </section>
+
+        <section class="mt-12">
+          <hr class="border-warm" />
+          <div class="mt-8 mb-2 flex items-center gap-4">
+            <span class="font-serif text-[40px] font-light leading-none text-terra/40 md:text-[56px]">03</span>
+            <h2 class="font-serif text-xl text-ink md:text-2xl">
+              General information and mandatory information
+            </h2>
+          </div>
+
+          <h3 class="mt-6 mb-2 text-sm font-medium text-ink">Data protection</h3>
+          <p>
+            The operator of this website takes the protection of your personal data very seriously. We treat your personal data confidentially and in accordance with the statutory data protection regulations and this privacy policy.
+          </p>
+          <p class="mt-3">
+            Please note that data transmission over the internet, for example in communication by email, may have security gaps. Complete protection of data against access by third parties is not possible.
+          </p>
+
+          <h3 class="mt-6 mb-2 text-sm font-medium text-ink">Information about the responsible entity</h3>
+          <p>
+            The responsible entity for data processing on this website is:
+          </p>
+          <p class="mt-3">
+            {site.legalContact.displayName}<br />
+            {site.legalContact.brand}<br />
+            {site.legalContact.street}<br />
+            {site.legalContact.postalCode} {site.legalContact.city}<br />
+            Phone:
+            <a href={site.legalContact.phoneHref} class="text-terra underline transition-colors hover:text-deep">
+              {site.legalContact.phone}
+            </a><br />
+            Email:
+            <a href={site.legalContact.emailHref} class="text-terra underline transition-colors hover:text-deep">
+              {site.legalContact.email}
+            </a>
+          </p>
+          <p class="mt-3">
+            The responsible entity is the natural or legal person who alone or together with others decides on the purposes and means of processing personal data such as names or email addresses.
+          </p>
+
+          <h3 class="mt-6 mb-2 text-sm font-medium text-ink">Storage period</h3>
+          <p>
+            Unless a more specific storage period is stated in this privacy policy, your personal data will remain with us until the purpose for processing no longer applies. If you assert a legitimate request for deletion or revoke your consent to data processing, your data will be deleted unless we have other legally permissible reasons for storing your personal data.
+          </p>
+
+          <h3 class="mt-6 mb-2 text-sm font-medium text-ink">Revocation of your consent to data processing</h3>
+          <p>
+            Many data processing operations are only possible with your explicit consent. You may revoke any consent already given at any time. The legality of the data processing carried out before the revocation remains unaffected.
+          </p>
+
+          <h3 class="mt-6 mb-2 text-sm font-medium text-ink">Right to data portability</h3>
+          <p>
+            You have the right to receive data that we process automatically on the basis of your consent or in fulfillment of a contract, either for yourself or for a third party, in a common machine-readable format.
+          </p>
+
+          <h3 class="mt-6 mb-2 text-sm font-medium text-ink">Access, deletion, and correction</h3>
+          <p>
+            Within the framework of the applicable legal provisions, you have the right at any time to receive information free of charge about your stored personal data, its origin, recipients, and the purpose of the data processing, and if necessary a right to correction or deletion of this data. You may contact us at any time regarding this or any further questions on the subject of personal data.
+          </p>
+
+          <h3 class="mt-6 mb-2 text-sm font-medium text-ink">Right to restriction of processing</h3>
+          <p>
+            You have the right to request restriction of the processing of your personal data. You may contact us at any time for this purpose.
+          </p>
+
+          <h3 class="mt-6 mb-2 text-sm font-medium text-ink">Right to lodge a complaint with the competent supervisory authority</h3>
+          <p>
+            In the event of violations of the GDPR, data subjects have the right to lodge a complaint with a supervisory authority. The competent supervisory authority is:
+          </p>
+          <p class="mt-3">
+            Berliner Beauftragte für Datenschutz und Informationsfreiheit<br />
+            Alt-Moabit 59-61<br />
+            10555 Berlin<br />
+            Phone: +49 30 13889-0<br />
+            Email: mailbox@datenschutz-berlin.de
+          </p>
+        </section>
+
+        <section class="mt-12">
+          <hr class="border-warm" />
+          <div class="mt-8 mb-2 flex items-center gap-4">
+            <span class="font-serif text-[40px] font-light leading-none text-terra/40 md:text-[56px]">04</span>
+            <h2 class="font-serif text-xl text-ink md:text-2xl">
+              Data collection on this website
+            </h2>
+          </div>
+
+          <h3 class="mt-6 mb-2 text-sm font-medium text-ink">Server log files</h3>
+          <p>
+            The provider of the pages automatically collects and stores information in so-called server log files that your browser transmits to us automatically. These are:
+          </p>
+          <ul class="mt-2 list-inside list-disc space-y-1">
+            <li>Browser type and browser version</li>
+            <li>Operating system used</li>
+            <li>Referrer URL</li>
+            <li>Host name of the accessing computer</li>
+            <li>Time of the server request</li>
+            <li>IP address</li>
+          </ul>
+          <p class="mt-3">
+            This data is not merged with other data sources. The collection of this data is based on Art. 6 para. 1 lit. f GDPR. The website operator has a legitimate interest in the technically error-free presentation and optimization of the website.
+          </p>
+
+          <h3 class="mt-6 mb-2 text-sm font-medium text-ink">Contact by email</h3>
+          <p>
+            If you contact us by email, your inquiry including all personal data resulting from it, such as your name and request, will be stored and processed by us for the purpose of handling your request. We do not pass this data on without your consent.
+          </p>
+          <p class="mt-3">
+            This data is processed on the basis of Art. 6 para. 1 lit. b GDPR if your inquiry is related to the fulfillment of a contract or is necessary for carrying out pre-contractual measures. In all other cases, processing is based on our legitimate interest in the effective handling of inquiries directed to us (Art. 6 para. 1 lit. f GDPR) or on your consent (Art. 6 para. 1 lit. a GDPR).
+          </p>
+          <p class="mt-3">
+            The data you send to us by email remains with us until you request deletion, revoke your consent to storage, or the purpose for data storage no longer applies. Mandatory legal provisions, especially statutory retention periods, remain unaffected.
+          </p>
+        </section>
+
+        <section class="mt-12">
+          <hr class="border-warm" />
+          <div class="mt-8 mb-2 flex items-center gap-4">
+            <span class="font-serif text-[40px] font-light leading-none text-terra/40 md:text-[56px]">05</span>
+            <h2 class="font-serif text-xl text-ink md:text-2xl">
+              Locally hosted fonts
+            </h2>
+          </div>
+
+          <h3 class="mt-6 mb-2 text-sm font-medium text-ink">Fonts</h3>
+          <p>
+            This website uses locally hosted fonts. No fonts are loaded from external providers such as Google when the page is visited.
+          </p>
+          <p class="mt-3">
+            As a result, no personal data is transmitted to third parties solely for the purpose of retrieving fonts when you visit this website.
+          </p>
+          <p class="mt-3">
+            The display of the website therefore relies exclusively on files delivered together with this website.
+          </p>
+        </section>
+
+        <section class="mt-12">
+          <hr class="border-warm" />
+          <div class="mt-8 mb-2 flex items-center gap-4">
+            <span class="font-serif text-[40px] font-light leading-none text-terra/40 md:text-[56px]">06</span>
+            <h2 class="font-serif text-xl text-ink md:text-2xl">
+              Handling of health data
+            </h2>
+          </div>
+          <p>
+            As part of our work as a Heilpraktiker practice, we process health data, which is classified as a special category of personal data under Art. 9 GDPR. This data is processed exclusively on the basis of your explicit consent (Art. 9 para. 2 lit. a GDPR) or for the purposes of health care (Art. 9 para. 2 lit. h GDPR).
+          </p>
+          <p class="mt-3">
+            All health data is subject to professional confidentiality under Section 203 of the German Criminal Code. Data is only shared with third parties with your explicit consent or if we are legally obliged to do so.
+          </p>
+          <p class="mt-3">
+            Health data is stored for the legally prescribed retention period after the end of treatment, currently 10 years under Section 630f of the German Civil Code, and is then deleted.
+          </p>
+        </section>
+
+        <section class="mt-12">
+          <hr class="border-warm" />
+          <div class="mt-8 mb-2 flex items-center gap-4">
+            <span class="font-serif text-[40px] font-light leading-none text-terra/40 md:text-[56px]">07</span>
+            <h2 class="font-serif text-xl text-ink md:text-2xl">
+              SSL or TLS encryption
+            </h2>
+          </div>
+          <p>
+            For security reasons and to protect the transmission of confidential content, this site uses SSL or TLS encryption. You can recognize an encrypted connection by the change in the browser address line from “http://” to “https://” and by the lock symbol in your browser bar.
+          </p>
+        </section>
+
+        <section class="mt-12">
+          <hr class="border-warm" />
+          <p class="mt-8 text-sm text-subtle">
+            Status: April 2026
+          </p>
+        </section>
+      </div>
+    </article>
+  </main>
+  <Footer locale="en" />
+</BaseLayout>

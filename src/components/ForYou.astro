@@ -1,41 +1,32 @@
 ---
+import type { HomeContent } from '../data/home-content';
+
+interface Props {
+  content: HomeContent['forYou'];
+}
+
+const { content } = Astro.props;
 ---
 
-<!-- Neuer Abschnitt: Für wen ist das Angebot -->
-<section class="bg-cream py-16 md:py-24 px-4 md:px-12">
-  <div class="max-w-5xl mx-auto">
-    <div class="flex flex-col md:flex-row gap-8 md:gap-16">
-
-      <!-- Linke Spalte: Überschrift -->
-      <div class="md:w-[40%] md:sticky md:top-32 md:self-start">
-        <p class="text-[12px] tracking-[3px] uppercase text-terra mb-4 font-medium">
-          Für wen
+<section class="bg-cream px-4 py-16 md:px-12 md:py-24">
+  <div class="mx-auto max-w-5xl">
+    <div class="flex flex-col gap-8 md:flex-row md:gap-16">
+      <div class="md:sticky md:top-32 md:w-[40%] md:self-start">
+        <p class="mb-4 text-[12px] font-medium uppercase tracking-[3px] text-terra">
+          {content.eyebrow}
         </p>
-        <h2 class="font-serif text-[28px] md:text-[42px] font-light leading-[1.2] text-deep">
-          Vielleicht erkennst du
-          <em class="italic text-terra">dich hier wieder.</em>
+        <h2 class="font-serif text-[28px] font-light leading-[1.2] text-deep md:text-[42px]">
+          {content.titlePrefix}{' '}
+          <em class="italic text-terra">{content.titleAccent}</em>
         </h2>
       </div>
 
-      <!-- Rechte Spalte: Textblöcke -->
-      <div class="md:w-[60%] space-y-8 text-[15px] md:text-base leading-[1.9] text-subtle font-light">
-        <p class="border-l-2 border-warm pl-5">
-          Du möchtest deine Blutwerte wirklich verstehen — nicht nur „im Normbereich" sein.
-        </p>
-        <p class="border-l-2 border-warm pl-5">
-          Du fragst dich, ob dein Körper optimal versorgt ist, oder ob etwas übersehen wird.
-        </p>
-        <p class="border-l-2 border-warm pl-5">
-          Du willst Supplemente nicht „auf Verdacht" nehmen, sondern wissen, was du wirklich brauchst.
-        </p>
-        <p class="border-l-2 border-warm pl-5">
-          Du möchtest dich innerlich vorbereiten auf das, was vor dir liegt.
-        </p>
-        <p class="text-deep font-medium pl-5">
-          Dann bist du hier richtig.
-        </p>
+      <div class="space-y-8 text-[15px] font-light leading-[1.9] text-subtle md:w-[60%] md:text-base">
+        {content.items.map((item) => (
+          <p class="border-l-2 border-warm pl-5">{item}</p>
+        ))}
+        <p class="pl-5 font-medium text-deep">{content.closing}</p>
       </div>
-
     </div>
   </div>
 </section>

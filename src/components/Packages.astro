@@ -1,24 +1,30 @@
 ---
-import { introOffer, oneOffOffers, primaryOffer } from '../data/offers';
+import type { HomeContent } from '../data/home-content';
+
+interface Props {
+  id: string;
+  content: HomeContent['packages'];
+}
+
+const { id, content } = Astro.props;
 ---
 
-<section id="paket" class="bg-deep py-16 md:py-24 px-4 md:px-12">
-  <div class="max-w-5xl mx-auto">
-    <p class="text-blush text-xs uppercase tracking-widest font-sans mb-4">
-      Das Angebot
+<section id={id} class="bg-deep px-4 py-16 md:px-12 md:py-24">
+  <div class="mx-auto max-w-5xl">
+    <p class="mb-4 font-sans text-xs uppercase tracking-widest text-blush">
+      {content.eyebrow}
     </p>
 
-    <h2 class="font-serif text-3xl md:text-5xl text-cream leading-tight mb-12">
-      Finde deinen Weg zu <em class="text-terra italic">Yaya.</em>
+    <h2 class="mb-12 font-serif text-3xl leading-tight text-cream md:text-5xl">
+      {content.titlePrefix} <em class="italic text-terra">{content.titleAccent}</em>
     </h2>
 
-    <!-- Erstgespräch -->
-    <div class="bg-white/[0.05] rounded-lg p-6 md:p-7 border-t-[3px] border-blush mb-5 max-w-md">
-      <p class="text-blush text-[10px] uppercase tracking-widest font-sans mb-3">{introOffer.label}</p>
-      <h3 class="font-serif text-cream text-2xl md:text-[28px] font-light mb-1">{introOffer.title}</h3>
-      <p class="text-terra text-2xl font-light mb-4">{introOffer.price}</p>
-      <p class="text-blush text-[13px] leading-[1.8] font-light">
-        {introOffer.details.map((detail) => (
+    <div class="mb-5 max-w-md rounded-lg border-t-[3px] border-blush bg-white/[0.05] p-6 md:p-7">
+      <p class="mb-3 font-sans text-[10px] uppercase tracking-widest text-blush">{content.introOffer.label}</p>
+      <h3 class="mb-1 font-serif text-2xl font-light text-cream md:text-[28px]">{content.introOffer.title}</h3>
+      <p class="mb-4 text-2xl font-light text-terra">{content.introOffer.price}</p>
+      <p class="text-[13px] font-light leading-[1.8] text-blush">
+        {content.introOffer.details.map((detail) => (
           <>
             {detail}
             <br />
@@ -27,53 +33,51 @@ import { introOffer, oneOffOffers, primaryOffer } from '../data/offers';
       </p>
     </div>
 
-    <!-- Complete Care -->
-    <p class="text-blush text-xs uppercase tracking-widest font-sans mb-4 mt-12">
-      Das Paket
+    <p class="mt-12 mb-4 font-sans text-xs uppercase tracking-widest text-blush">
+      {content.introEyebrow}
     </p>
 
-    <p class="text-cream/70 text-sm font-light leading-relaxed max-w-xl mb-6">
-      Die umfassendste Form der Begleitung — für Frauen, die tiefer schauen wollen.
+    <p class="mb-6 max-w-xl text-sm font-light leading-relaxed text-cream/70">
+      {content.introText}
     </p>
 
-    <div class="bg-terra/20 rounded-lg p-6 md:p-7 border-t-[3px] border-terra flex flex-col relative ring-1 ring-terra/40 max-w-2xl">
+    <div class="relative flex max-w-2xl flex-col rounded-lg border-t-[3px] border-terra bg-terra/20 p-6 ring-1 ring-terra/40 md:p-7">
       <div class="absolute -top-3 right-4">
-        <span class="bg-terra text-pearl text-[9px] font-semibold tracking-[1.5px] uppercase px-3 py-1 rounded-full">
-          Empfehlung
+        <span class="rounded-full bg-terra px-3 py-1 text-[9px] font-semibold uppercase tracking-[1.5px] text-pearl">
+          {content.featuredBadge}
         </span>
       </div>
 
-      <p class="text-terra text-[10px] uppercase tracking-widest font-sans mb-3 mt-1">{primaryOffer.label}</p>
-      <h3 class="font-serif text-cream text-2xl md:text-[28px] font-light mb-1">{primaryOffer.title}</h3>
-      <p class="text-terra text-3xl md:text-4xl font-light mb-1">
-        {primaryOffer.price} <span class="text-lg">{primaryOffer.priceSuffix}</span>
+      <p class="mt-1 mb-3 font-sans text-[10px] uppercase tracking-widest text-terra">{content.primaryOffer.label}</p>
+      <h3 class="mb-1 font-serif text-2xl font-light text-cream md:text-[28px]">{content.primaryOffer.title}</h3>
+      <p class="mb-1 text-3xl font-light text-terra md:text-4xl">
+        {content.primaryOffer.price} <span class="text-lg">{content.primaryOffer.priceSuffix}</span>
       </p>
-      <p class="text-cream/60 text-[13px] font-light mb-1">{primaryOffer.duration}</p>
-      <p class="text-cream/40 text-[12px] font-light mb-4">{primaryOffer.savings}</p>
-      <p class="text-cream/90 text-[13px] leading-[1.8] font-light flex-1">
-        {primaryOffer.details.map((detail) => (
+      <p class="mb-1 text-[13px] font-light text-cream/60">{content.primaryOffer.duration}</p>
+      <p class="mb-4 text-[12px] font-light text-cream/40">{content.primaryOffer.savings}</p>
+      <p class="flex-1 text-[13px] font-light leading-[1.8] text-cream/90">
+        {content.primaryOffer.details.map((detail) => (
           <>
             {detail}
             <br />
           </>
         ))}
       </p>
-      <p class="text-cream/50 text-[12px] font-light italic mt-4 pt-4 border-t border-cream/10">
-        {primaryOffer.note}
+      <p class="mt-4 border-t border-cream/10 pt-4 text-[12px] font-light italic text-cream/50">
+        {content.primaryOffer.note}
       </p>
     </div>
 
-    <!-- Einzelleistungen -->
-    <p class="text-blush text-xs uppercase tracking-widest font-sans mb-4 mt-12">
-      Einzelleistungen
+    <p class="mt-12 mb-4 font-sans text-xs uppercase tracking-widest text-blush">
+      {content.oneOffEyebrow}
     </p>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-      {oneOffOffers.map((offer) => (
-        <div class={`bg-white/[0.03] rounded-lg p-4 md:p-5 border-t-2 ${offer.accent} flex flex-col`}>
-          <h3 class="font-serif text-cream text-lg md:text-xl font-light mb-1">{offer.title}</h3>
-          <p class="text-terra text-lg font-light mb-3">{offer.price}</p>
-          <p class="text-blush/70 text-[12px] leading-[1.7] font-light flex-1">
+    <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
+      {content.oneOffOffers.map((offer) => (
+        <div class={`flex flex-col rounded-lg border-t-2 bg-white/[0.03] p-4 md:p-5 ${offer.accent}`}>
+          <h3 class="mb-1 font-serif text-lg font-light text-cream md:text-xl">{offer.title}</h3>
+          <p class="mb-3 text-lg font-light text-terra">{offer.price}</p>
+          <p class="flex-1 text-[12px] font-light leading-[1.7] text-blush/70">
             {offer.details.map((detail) => (
               <>
                 {detail}

@@ -1,23 +1,32 @@
 ---
+import { pageRoutes, type Locale, uiCopy } from '../data/i18n';
 import { site } from '../data/site';
 
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
 const year = new Date().getFullYear();
+const footerCopy = uiCopy[locale].footer;
+const routes = pageRoutes[locale];
 ---
 
-<footer class="bg-deep px-4 md:px-12 py-8 md:py-10">
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-    <!-- Logo -->
-    <div class="font-serif text-[20px] font-light text-cream tracking-wider">
+<footer class="bg-deep px-4 py-8 md:px-12 md:py-10">
+  <div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+    <div class="font-serif text-[20px] font-light tracking-wider text-cream">
       Yaya<span class="italic text-blush"> prenatal</span>
     </div>
 
-    <!-- Links -->
     <div class="flex flex-wrap gap-6 text-[12px] text-blush">
-      <a href="/impressum" class="hover:text-cream transition-colors duration-200 no-underline text-blush">Impressum</a>
-      <a href="/datenschutz" class="hover:text-cream transition-colors duration-200 no-underline text-blush">Datenschutz</a>
+      <a href={routes.imprint} class="text-blush no-underline transition-colors duration-200 hover:text-cream">
+        {footerCopy.imprintLabel}
+      </a>
+      <a href={routes.privacy} class="text-blush no-underline transition-colors duration-200 hover:text-cream">
+        {footerCopy.privacyLabel}
+      </a>
     </div>
 
-    <!-- Copyright -->
     <div class="text-[12px] text-blush">
       &copy; {year} {site.name} &middot; {site.business.neighborhood}, Berlin
     </div>

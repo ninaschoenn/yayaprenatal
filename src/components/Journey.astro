@@ -1,85 +1,55 @@
 ---
-const chapters = [
-  {
-    number: "Kapitel 1",
-    theme: "Ankommen",
-    body: "Erstes Kennenlernen. Große Blutanalyse. Wir bauen dein Gesundheitsprofil auf und du erzählst: Wie geht es dir wirklich?",
-  },
-  {
-    number: "Kapitel 2",
-    theme: "Verstehen",
-    body: "Supplementoptimierung. Ergebnisse vertiefen. Coaching: Was verändert sich gerade in dir und deinem Leben?",
-  },
-  {
-    number: "Kapitel 3",
-    theme: "Verbinden",
-    body: "Zweite Blutanalyse: Nährstoffe und Vitamine, die dein Baby jetzt für den Organaufbau braucht. Coaching: Du, dein Partner, das neue Wir. Partner-Session möglich.",
-  },
-  {
-    number: "Kapitel 4",
-    theme: "Loslassen",
-    body: "Innere Arbeit. Ängste anschauen — nicht wegdrücken. Geburt, Partnerschaft danach, Identität, Arbeit, Freiheit. Was brauchst du, um zu vertrauen?",
-  },
-  {
-    number: "Kapitel 5",
-    theme: "Vertrauen",
-    body: "Letzte große Blutanalyse. Körper-Check. Coaching: Dein Körper weiß, was er tut. Kannst du ihm glauben?",
-  },
-  {
-    number: "Kapitel 6",
-    theme: "Bereit",
-    body: "Letzte Termine. Du bist bereit. Nina bleibt per Chat erreichbar bis zum großen Tag.",
-  },
-];
+import type { HomeContent } from '../data/home-content';
+
+interface Props {
+  content: HomeContent['journey'];
+}
+
+const { content } = Astro.props;
 ---
 
-<section class="bg-cream py-16 md:py-24 px-4 md:px-12">
-  <div class="max-w-5xl mx-auto">
-    <p class="text-terra text-xs uppercase tracking-widest font-sans mb-4">
-      Deine Reise
+<section class="bg-cream px-4 py-16 md:px-12 md:py-24">
+  <div class="mx-auto max-w-5xl">
+    <p class="mb-4 font-sans text-xs uppercase tracking-widest text-terra">
+      {content.eyebrow}
     </p>
 
-    <h2 class="font-serif text-3xl md:text-5xl text-ink leading-tight mb-6">
-      6 Monate mit Nina.<br />
-      <em class="text-terra italic">Wann immer du bereit bist.</em>
+    <h2 class="mb-6 font-serif text-3xl leading-tight text-ink md:text-5xl">
+      {content.titlePrefix}<br />
+      <em class="italic text-terra">{content.titleAccent}</em>
     </h2>
 
-    <p class="text-subtle text-base md:text-lg leading-relaxed mb-12 max-w-2xl">
-      Die meisten Frauen starten zwischen der 12. und 20. Schwangerschaftswoche — aber du
-      entscheidest, wann der richtige Zeitpunkt für dich ist.
+    <p class="mb-12 max-w-2xl text-base leading-relaxed text-subtle md:text-lg">
+      {content.intro}
     </p>
 
-    <!-- Mobile: vertical timeline -->
-    <div class="md:hidden flex flex-col">
-      {chapters.map((chapter, i) => (
+    <div class="flex flex-col md:hidden">
+      {content.chapters.map((chapter, i) => (
         <div class="flex gap-5">
-          <div class="flex flex-col items-center shrink-0">
-            <div class="w-3 h-3 rounded-full bg-terra mt-1 shrink-0"></div>
-            {i < chapters.length - 1 && (
-              <div class="w-0.5 bg-warm flex-1 mt-1 min-h-[48px]"></div>
-            )}
+          <div class="flex shrink-0 flex-col items-center">
+            <div class="mt-1 h-3 w-3 shrink-0 rounded-full bg-terra"></div>
+            {i < content.chapters.length - 1 && <div class="mt-1 min-h-[48px] w-0.5 flex-1 bg-warm"></div>}
           </div>
           <div class="pb-8">
-            <p class="text-terra text-xs uppercase tracking-widest font-sans mb-0.5">
+            <p class="mb-0.5 font-sans text-xs uppercase tracking-widest text-terra">
               {chapter.number}
             </p>
-            <h3 class="font-serif text-deep text-xl mb-2">{chapter.theme}</h3>
-            <p class="text-subtle text-sm leading-relaxed">{chapter.body}</p>
+            <h3 class="mb-2 font-serif text-xl text-deep">{chapter.theme}</h3>
+            <p class="text-sm leading-relaxed text-subtle">{chapter.body}</p>
           </div>
         </div>
       ))}
     </div>
 
-    <!-- Desktop: 3-col grid -->
-    <div class="hidden md:grid grid-cols-3 gap-8">
-      {chapters.map((chapter) => (
+    <div class="hidden grid-cols-3 gap-8 md:grid">
+      {content.chapters.map((chapter) => (
         <div class="flex flex-col">
-          <div class="w-3 h-3 rounded-full bg-terra mb-4"></div>
-          <p class="text-terra text-xs uppercase tracking-widest font-sans mb-1">
+          <div class="mb-4 h-3 w-3 rounded-full bg-terra"></div>
+          <p class="mb-1 font-sans text-xs uppercase tracking-widest text-terra">
             {chapter.number}
           </p>
-          <h3 class="font-serif text-deep text-2xl mb-3">{chapter.theme}</h3>
-          <p class="text-subtle text-sm leading-relaxed">{chapter.body}</p>
+          <h3 class="mb-3 font-serif text-2xl text-deep">{chapter.theme}</h3>
+          <p class="text-sm leading-relaxed text-subtle">{chapter.body}</p>
         </div>
       ))}
     </div>

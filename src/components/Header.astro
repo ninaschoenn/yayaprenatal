@@ -1,11 +1,22 @@
 ---
-import { navLinks, site } from '../data/site';
+import { getLanguageLinks, getNavLinks, pageRoutes, type Locale, type PageKey, uiCopy } from '../data/i18n';
+import { site } from '../data/site';
+
+interface Props {
+  locale: Locale;
+  pageKey: PageKey;
+}
+
+const { locale, pageKey } = Astro.props;
+
+const navLinks = getNavLinks(locale);
+const languageLinks = getLanguageLinks(pageKey);
+const labels = uiCopy[locale].nav;
 ---
 
-<header class="sticky top-0 z-50 backdrop-blur-md bg-cream/90 border-b border-warm/50">
-  <nav class="flex items-center justify-between px-4 md:px-12 py-4 md:py-6 max-w-7xl mx-auto">
-    <!-- Logo -->
-    <a href="/" class="no-underline">
+<header class="sticky top-0 z-50 border-b border-warm/50 bg-cream/90 backdrop-blur-md">
+  <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-12 md:py-6">
+    <a href={pageRoutes[locale].home} class="no-underline">
       <img
         src={site.branding.logoPath}
         alt="Yaya Prenatal"
@@ -13,54 +24,101 @@ import { navLinks, site } from '../data/site';
         height="2000"
         loading="eager"
         decoding="async"
-        class="h-[55px] md:h-[70px] w-auto"
+        class="h-[55px] w-auto md:h-[70px]"
       />
     </a>
 
-    <!-- Desktop nav links -->
-    <div class="hidden md:flex items-center gap-9">
+    <div class="hidden items-center gap-9 md:flex">
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class="text-[14px] text-subtle tracking-wider uppercase no-underline hover:text-terra transition-colors duration-200"
+          class="text-[14px] uppercase tracking-wider text-subtle no-underline transition-colors duration-200 hover:text-terra"
         >
           {link.label}
         </a>
       ))}
+
+      <div
+        class="flex items-center gap-1 rounded-full border border-warm bg-pearl px-1.5 py-1"
+        aria-label={labels.languageSwitcherLabel}
+      >
+        {languageLinks.map((link) => {
+          const isActive = link.locale === locale;
+
+          return (
+            <a
+              href={link.href}
+              lang={link.lang}
+              hreflang={link.lang}
+              aria-current={isActive ? 'page' : undefined}
+              class:list={[
+                'rounded-full px-3 py-1 text-[11px] font-medium uppercase tracking-[1.5px] no-underline transition-colors duration-200',
+                isActive ? 'bg-terra text-pearl' : 'text-subtle hover:text-terra',
+              ]}
+            >
+              {link.label}
+            </a>
+          );
+        })}
+      </div>
     </div>
 
-    <!-- Mobile menu button -->
     <button
       id="mobile-menu-btn"
       type="button"
-      class="md:hidden flex flex-col gap-1.5 p-2 -mr-2"
-      aria-label="Menü öffnen"
+      class="flex flex-col gap-1.5 p-2 -mr-2 md:hidden"
+      aria-label={labels.menuOpenLabel}
       aria-controls="mobile-menu"
       aria-expanded="false"
+      data-open-label={labels.menuOpenLabel}
+      data-close-label={labels.menuCloseLabel}
     >
-      <span class="w-5 h-[1.5px] bg-deep block transition-transform duration-200"></span>
-      <span class="w-5 h-[1.5px] bg-deep block transition-opacity duration-200"></span>
-      <span class="w-3.5 h-[1.5px] bg-deep block transition-transform duration-200"></span>
+      <span class="block h-[1.5px] w-5 bg-deep transition-transform duration-200"></span>
+      <span class="block h-[1.5px] w-5 bg-deep transition-opacity duration-200"></span>
+      <span class="block h-[1.5px] w-3.5 bg-deep transition-transform duration-200"></span>
     </button>
   </nav>
 </header>
 
-<!-- Mobile menu overlay (outside header to avoid sticky clipping) -->
 <div
   id="mobile-menu"
-  class="md:hidden hidden fixed inset-0 top-[57px] z-[60]"
+  class="fixed inset-0 top-[57px] z-[60] hidden md:hidden"
   aria-hidden="true"
   style="background-color: #C4856C;"
 >
-  <div class="flex flex-col items-center justify-center gap-10 h-full pb-20">
+  <div class="flex h-full flex-col items-center justify-center gap-10 pb-20">
     {navLinks.map((link) => (
       <a
         href={link.href}
-        class="mobile-nav-link font-serif text-[28px] text-cream tracking-wider no-underline font-light"
+        class="mobile-nav-link font-serif text-[28px] font-light tracking-wider text-cream no-underline"
       >
         {link.label}
       </a>
     ))}
+
+    <div
+      class="mt-2 flex items-center gap-2 rounded-full border border-cream/35 px-2 py-2"
+      aria-label={labels.languageSwitcherLabel}
+    >
+      {languageLinks.map((link) => {
+        const isActive = link.locale === locale;
+
+        return (
+          <a
+            href={link.href}
+            lang={link.lang}
+            hreflang={link.lang}
+            aria-current={isActive ? 'page' : undefined}
+            class:list={[
+              'rounded-full px-4 py-1.5 text-[12px] font-medium uppercase tracking-[1.5px] no-underline transition-colors duration-200',
+              isActive ? 'bg-cream text-deep' : 'text-cream/85 hover:text-cream',
+            ]}
+          >
+            {link.label}
+          </a>
+        );
+      })}
+    </div>
   </div>
 </div>
 
@@ -68,10 +126,14 @@ import { navLinks, site } from '../data/site';
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
   const links = document.querySelectorAll('.mobile-nav-link');
+  const openLabel = btn?.getAttribute('data-open-label') ?? 'Open menu';
+  const closeLabel = btn?.getAttribute('data-close-label') ?? 'Close menu';
+
   const closeMenu = () => {
     menu?.classList.add('hidden');
     menu?.setAttribute('aria-hidden', 'true');
     btn?.setAttribute('aria-expanded', 'false');
+    btn?.setAttribute('aria-label', openLabel);
     document.body.classList.remove('overflow-hidden');
   };
 
@@ -79,6 +141,7 @@ import { navLinks, site } from '../data/site';
     menu?.classList.remove('hidden');
     menu?.setAttribute('aria-hidden', 'false');
     btn?.setAttribute('aria-expanded', 'true');
+    btn?.setAttribute('aria-label', closeLabel);
     document.body.classList.add('overflow-hidden');
   };
 
@@ -92,7 +155,7 @@ import { navLinks, site } from '../data/site';
     openMenu();
   });
 
-  links.forEach(link => {
+  links.forEach((link) => {
     link.addEventListener('click', () => {
       closeMenu();
     });

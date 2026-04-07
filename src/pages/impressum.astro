@@ -2,19 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { getAlternateLinks, uiCopy } from '../data/i18n';
 import { site } from '../data/site';
 ---
 
 <BaseLayout
+  locale="de"
   title="Impressum — Yaya Prenatal"
   description="Impressum und rechtliche Angaben der Heilpraktiker-Praxis Yaya Prenatal in Berlin Friedrichshain."
+  alternates={getAlternateLinks('imprint')}
 >
-  <Header />
+  <Header locale="de" pageKey="imprint" />
   <main class="px-4 md:px-12 py-16 md:py-24">
     <article class="max-w-2xl mx-auto">
 
       <p class="text-terra text-xs uppercase tracking-widest font-sans mb-4">
-        Rechtliches
+        {uiCopy.de.legalEyebrow}
       </p>
       <h1 class="font-serif text-4xl md:text-5xl text-ink leading-tight mb-16">
         Impressum
@@ -213,5 +216,5 @@ import { site } from '../data/site';
       </div>
     </article>
   </main>
-  <Footer />
+  <Footer locale="de" />
 </BaseLayout>

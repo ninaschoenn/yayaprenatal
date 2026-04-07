@@ -1,49 +1,52 @@
 ---
-import { bodyMapCategories, bodyMapMarkers } from '../data/body-map';
+import type { HomeContent } from '../data/home-content';
+
+interface Props {
+  content: HomeContent['bodyMap'];
+}
+
+const { content } = Astro.props;
 ---
 
-<section class="relative overflow-hidden py-20 px-4 md:py-30 md:px-12">
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-15 h-[3px] rounded-full bg-terra" />
+<section class="relative overflow-hidden px-4 py-20 md:px-12 md:py-30">
+  <div class="absolute top-0 left-1/2 h-[3px] w-15 -translate-x-1/2 rounded-full bg-terra" />
 
-  <div class="text-center mb-8 md:mb-12">
-    <p class="text-xs tracking-[3px] uppercase text-terra mb-4 font-medium">
-      Dein Körper-Check
+  <div class="mb-8 text-center md:mb-12">
+    <p class="mb-4 text-xs font-medium uppercase tracking-[3px] text-terra">
+      {content.eyebrow}
     </p>
-    <h2 class="font-serif text-3xl md:text-5xl font-light leading-tight text-deep mb-3">
-      Was wir in deinem Blut lesen.
+    <h2 class="mb-3 font-serif text-3xl font-light leading-tight text-deep md:text-5xl">
+      {content.title}
     </h2>
-    <p class="font-serif text-lg md:text-xl text-deep font-light max-w-lg mx-auto leading-relaxed mb-4 opacity-80">
-      Wir schauen nicht einfach auf Werte — wir verstehen, was sie für dich und dein Baby bedeuten.
+    <p class="mx-auto mb-4 max-w-lg font-serif text-lg font-light leading-relaxed text-deep opacity-80 md:text-xl">
+      {content.intro}
     </p>
-    <p class="text-sm md:text-base text-subtle font-light max-w-lg mx-auto leading-relaxed">
-      22 Marker. 18 davon testet deine Frauenärztin nicht. Die anderen 4 schon — aber isoliert,
-      ohne das volle Bild. Klick auf einen Bereich und erfahre, warum er wichtig ist.
+    <p class="mx-auto max-w-lg text-sm font-light leading-relaxed text-subtle md:text-base">
+      {content.description}
     </p>
   </div>
 
-  <div class="flex gap-3 md:gap-6 mb-6 md:mb-10 flex-wrap justify-center">
-    {Object.values(bodyMapCategories).map((category) => (
+  <div class="mb-6 flex flex-wrap justify-center gap-3 md:mb-10 md:gap-6">
+    {Object.values(content.categories).map((category) => (
       <div class="flex items-center gap-1.5">
         <div
-          class="w-2.5 h-2.5 rounded-full"
+          class="h-2.5 w-2.5 rounded-full"
           style={`background:${category.color}; box-shadow: 0 0 6px ${category.color}44;`}
         />
-        <span class="text-xs text-subtle font-medium tracking-wide">{category.label}</span>
+        <span class="text-xs font-medium tracking-wide text-subtle">{category.label}</span>
       </div>
     ))}
   </div>
 
-  <div data-body-map-root class="relative w-full max-w-sm md:max-w-2xl mx-auto">
+  <div data-body-map-root class="relative mx-auto w-full max-w-sm md:max-w-2xl">
     <svg
       viewBox="0 0 100 105"
-      class="body-map-figure w-full h-auto transition-opacity duration-300"
+      class="body-map-figure h-auto w-full transition-opacity duration-300"
       aria-labelledby="body-map-title body-map-description"
       role="img"
     >
-      <title id="body-map-title">Interaktive Körperkarte</title>
-      <desc id="body-map-description">
-        Wähle einen Marker, um mehr über relevante Blutwerte und deren Bedeutung für Mutter und Baby zu lesen.
-      </desc>
+      <title id="body-map-title">{content.title}</title>
+      <desc id="body-map-description">{content.description}</desc>
       <defs>
         <radialGradient id="bodyGlow" cx="50%" cy="45%" r="35%">
           <stop offset="0%" stop-color="#C4856C" stop-opacity="0.12" />
@@ -72,8 +75,8 @@ import { bodyMapCategories, bodyMapMarkers } from '../data/body-map';
       <circle cx="49" cy="42" r="2.5" fill="none" stroke="#C4856C" stroke-width="0.2" opacity="0.25" />
       <path d="M50.5 44 Q52 46 51 48" fill="none" stroke="#C4856C" stroke-width="0.15" opacity="0.2" />
 
-      {bodyMapMarkers.map((marker) => {
-        const category = bodyMapCategories[marker.cat];
+      {content.markers.map((marker) => {
+        const category = content.categories[marker.cat];
         const labelX = marker.side === 'L' ? 2 : 98;
         const elbowX = marker.side === 'L' ? 22 : 78;
         const textAnchor = marker.side === 'L' ? 'start' : 'end';
@@ -87,7 +90,7 @@ import { bodyMapCategories, bodyMapMarkers } from '../data/body-map';
             role="button"
             aria-controls={`body-map-panel-${marker.id}`}
             aria-pressed="false"
-            aria-label={`${marker.label}: Details anzeigen`}
+            aria-label={marker.label}
             style="cursor:pointer"
           >
             <rect
@@ -172,12 +175,12 @@ import { bodyMapCategories, bodyMapMarkers } from '../data/body-map';
       })}
     </svg>
 
-    {bodyMapMarkers.map((marker) => {
-      const category = bodyMapCategories[marker.cat];
+    {content.markers.map((marker) => {
+      const category = content.categories[marker.cat];
       return (
         <div
           id={`body-map-panel-${marker.id}`}
-          class="body-map-panel hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] md:w-[85%] max-w-lg bg-pearl rounded-xl p-5 md:p-7 z-10 animate-fade-in"
+          class="body-map-panel absolute top-1/2 left-1/2 z-10 hidden w-[92%] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl bg-pearl p-5 md:w-[85%] md:p-7"
           data-panel-id={marker.id}
           role="dialog"
           aria-modal="false"
@@ -185,12 +188,12 @@ import { bodyMapCategories, bodyMapMarkers } from '../data/body-map';
           aria-labelledby={`body-map-panel-title-${marker.id}`}
           style={`box-shadow: 0 8px 40px rgba(92,61,46,0.18); border-left: 4px solid ${category.color};`}
         >
-          <div class="flex justify-between items-start mb-3.5">
+          <div class="mb-3.5 flex items-start justify-between">
             <div>
-              <div class="flex items-center gap-2.5 mb-1">
-                <div class="w-2.5 h-2.5 rounded-full" style={`background:${category.color};`} />
+              <div class="mb-1 flex items-center gap-2.5">
+                <div class="h-2.5 w-2.5 rounded-full" style={`background:${category.color};`} />
                 <span
-                  class="text-[10px] tracking-[1.5px] uppercase font-medium"
+                  class="text-[10px] font-medium uppercase tracking-[1.5px]"
                   style={`color:${category.color};`}
                 >
                   {category.label}
@@ -198,57 +201,57 @@ import { bodyMapCategories, bodyMapMarkers } from '../data/body-map';
               </div>
               <h3
                 id={`body-map-panel-title-${marker.id}`}
-                class="font-serif text-xl md:text-2xl font-light text-deep"
+                class="font-serif text-xl font-light text-deep md:text-2xl"
               >
                 {marker.label}
               </h3>
-              <p class="text-xs text-terra mt-0.5">{marker.sub}</p>
+              <p class="mt-0.5 text-xs text-terra">{marker.sub}</p>
             </div>
             <button
               type="button"
-              class="body-map-close text-subtle text-xl leading-none px-2 py-1 rounded bg-black/[0.04] hover:bg-black/[0.08] transition-colors cursor-pointer"
+              class="body-map-close cursor-pointer rounded bg-black/[0.04] px-2 py-1 text-xl leading-none text-subtle transition-colors hover:bg-black/[0.08]"
               data-close-panel
-              aria-label="Details schließen"
+              aria-label={content.closeLabel}
             >
               &times;
             </button>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-            <div class="p-3.5 rounded-md" style="background: rgba(196,133,108,0.1);">
-              <p class="text-[10px] tracking-[2px] uppercase text-terra mb-1.5 font-semibold">
-                Für dich
+          <div class="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
+            <div class="rounded-md p-3.5" style="background: rgba(196,133,108,0.1);">
+              <p class="mb-1.5 text-[10px] font-semibold uppercase tracking-[2px] text-terra">
+                {content.detailLabels.mother}
               </p>
-              <p class="text-xs leading-relaxed text-subtle font-light">
+              <p class="text-xs font-light leading-relaxed text-subtle">
                 {marker.mother}
               </p>
             </div>
-            <div class="p-3.5 rounded-md" style="background: rgba(212,168,154,0.1);">
-              <p class="text-[10px] tracking-[2px] uppercase text-terra mb-1.5 font-semibold">
-                Für dein Baby
+            <div class="rounded-md p-3.5" style="background: rgba(212,168,154,0.1);">
+              <p class="mb-1.5 text-[10px] font-semibold uppercase tracking-[2px] text-terra">
+                {content.detailLabels.baby}
               </p>
-              <p class="text-xs leading-relaxed text-subtle font-light">
+              <p class="text-xs font-light leading-relaxed text-subtle">
                 {marker.baby}
               </p>
             </div>
           </div>
 
           <div
-            class="mt-3 p-2.5 px-3.5 rounded-md"
+            class="mt-3 rounded-md p-2.5 px-3.5"
             style="background: rgba(220,38,38,0.06); border-left: 2px solid rgba(220,38,38,0.4);"
           >
-            <p class="text-[10px] tracking-[2px] uppercase text-red-800 mb-1 font-semibold">
-              Die Lücke
+            <p class="mb-1 text-[10px] font-semibold uppercase tracking-[2px] text-red-800">
+              {content.detailLabels.gap}
             </p>
-            <p class="text-xs leading-snug text-red-900 font-light">{marker.gap}</p>
+            <p class="text-xs font-light leading-snug text-red-900">{marker.gap}</p>
           </div>
         </div>
       );
     })}
   </div>
 
-  <p data-body-map-hint class="text-center mt-6 text-sm text-subtle font-light opacity-70">
-    Klick auf einen Marker
+  <p data-body-map-hint class="mt-6 text-center text-sm font-light text-subtle opacity-70">
+    {content.hint}
   </p>
 </section>
 
@@ -369,7 +372,17 @@ import { bodyMapCategories, bodyMapMarkers } from '../data/body-map';
         }
 
         event.preventDefault();
-        marker.dispatchEvent(new Event('click'));
+        const id = marker.getAttribute('data-marker-id');
+        if (!id) {
+          return;
+        }
+
+        if (activeId === id) {
+          closePanels();
+          return;
+        }
+
+        openPanel(id);
       });
     });
 
@@ -379,8 +392,8 @@ import { bodyMapCategories, bodyMapMarkers } from '../data/body-map';
       });
     });
 
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && activeId) {
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
         closePanels();
       }
     });

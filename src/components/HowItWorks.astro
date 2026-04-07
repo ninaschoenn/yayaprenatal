@@ -1,53 +1,38 @@
 ---
-const features = [
-  {
-    icon: "\u{1FA78}",
-    title: "Alle 2 Wochen: Dein Termin",
-    text: "75 Minuten nur für dich. Je nach Bedarf mit Blutabnahme und Besprechung der Ergebnisse, immer mit systemischem Coaching. Kein Zeitdruck.",
-  },
-  {
-    icon: "\u{1F4AC}",
-    title: "Chat-Zugang",
-    text: "WhatsApp oder Signal — du wählst. Zwischen den Terminen bin ich eine Nachricht entfernt.",
-  },
-  {
-    icon: "\u{1F48A}",
-    title: "Ernährung & Supplements",
-    text: "Basierend auf deinen Blutwerten: was dein Körper jetzt wirklich braucht. Keine Standard-Prenatal-Vitamine.",
-  },
-  {
-    icon: "\u{1F46B}",
-    title: "Partner-Session",
-    text: "Dein Partner ist willkommen. Systemisches Coaching zu zweit — Kommunikation, gemeinsame Ängste, als Team in die Elternschaft.",
-  },
-];
+import type { HomeContent } from '../data/home-content';
+
+interface Props {
+  content: HomeContent['howItWorks'];
+}
+
+const { content } = Astro.props;
 ---
 
-<section class="bg-pearl py-16 md:py-24 px-4 md:px-12">
-  <div class="max-w-3xl mx-auto">
-    <p class="text-terra text-xs uppercase tracking-widest font-sans mb-4">
-      So läuft es ab
+<section class="bg-pearl px-4 py-16 md:px-12 md:py-24">
+  <div class="mx-auto max-w-3xl">
+    <p class="mb-4 font-sans text-xs uppercase tracking-widest text-terra">
+      {content.eyebrow}
     </p>
 
-    <h2 class="font-serif text-3xl md:text-5xl text-ink leading-tight mb-3">
-      Blut + Coaching + alles dazwischen.
+    <h2 class="mb-3 font-serif text-3xl leading-tight text-ink md:text-5xl">
+      {content.title}
     </h2>
 
-    <p class="text-subtle text-sm font-light mb-12">
-      Deine Begleitung im <span class="text-terra font-medium">Complete Care</span> Paket.
+    <p class="mb-12 text-sm font-light text-subtle">
+      {content.noteBefore}<span class="font-medium text-terra">{content.noteAccent}</span>{content.noteAfter}
     </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[700px]">
-      {features.map((feature) => (
-        <div class="bg-cream rounded-md p-6 flex gap-4 items-start">
-          <span class="text-2xl leading-none mt-0.5 shrink-0" aria-hidden="true">
+    <div class="grid max-w-[700px] grid-cols-1 gap-5 md:grid-cols-2">
+      {content.features.map((feature) => (
+        <div class="flex items-start gap-4 rounded-md bg-cream p-6">
+          <span class="mt-0.5 shrink-0 text-2xl leading-none" aria-hidden="true">
             {feature.icon}
           </span>
           <div>
-            <h3 class="font-sans font-semibold text-ink text-sm leading-snug mb-2">
+            <h3 class="mb-2 text-sm leading-snug font-semibold text-ink">
               {feature.title}
             </h3>
-            <p class="text-subtle text-sm leading-relaxed">{feature.text}</p>
+            <p class="text-sm leading-relaxed text-subtle">{feature.text}</p>
           </div>
         </div>
       ))}

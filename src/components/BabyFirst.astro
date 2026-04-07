@@ -1,25 +1,26 @@
 ---
+import type { HomeContent } from '../data/home-content';
+
+interface Props {
+  content: HomeContent['babyFirst'];
+}
+
+const { content } = Astro.props;
 ---
 
-<section class="bg-cream py-12 md:py-[72px] px-4 md:px-12 text-center">
-  <div class="max-w-[560px] mx-auto">
-    <p class="font-serif text-[20px] md:text-[26px] font-light leading-[1.6] text-deep mb-4">
-      Dein Körper schickt dir Signale. Müdigkeit, Heißhunger, Vergesslichkeit — das sind keine
-      normalen Schwangerschaftsbeschwerden. Das sind
-      <em class="italic text-terra">Botschaften.</em>
+<section class="bg-cream px-4 py-12 text-center md:px-12 md:py-[72px]">
+  <div class="mx-auto max-w-[560px]">
+    <p class="mb-4 font-serif text-[20px] font-light leading-[1.6] text-deep md:text-[26px]">
+      {content.intro}{' '}
+      <em class="italic text-terra">{content.introAccent}</em>
     </p>
 
-    <p class="text-sm md:text-base leading-[1.8] text-subtle font-light mb-4">
-      Die Natur lebt nach dem Motto: Baby first. Dein Baby nimmt sich, was es braucht — aus
-      deinen Reserven. Deshalb spürst du den Mangel zuerst.
+    <p class="mb-4 text-sm font-light leading-[1.8] text-subtle md:text-base">
+      {content.body[0]}
     </p>
 
-    <p class="text-sm md:text-base leading-[1.8] text-subtle font-light">
-      Und was die Forschung heute weiß: Was dein Körper in der Schwangerschaft bereitstellt,
-      prägt dein Kind weit über die Geburt hinaus. Nährstoffversorgung in diesen neun Monaten
-      beeinflusst die Gesundheit deines Kindes — ein Leben lang. In der Wissenschaft heißt das
-      <em class="italic text-terra">fetale Programmierung.</em> Lass uns hinschauen, was dein
-      Körper dir sagen will.
+    <p class="text-sm font-light leading-[1.8] text-subtle md:text-base">
+      {content.body[1]} <em class="italic text-terra">{content.bodyAccent}</em> {content.bodySuffix}
     </p>
   </div>
 </section>

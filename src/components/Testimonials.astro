@@ -1,44 +1,34 @@
 ---
-const testimonials = [
-  {
-    quote: "Meine Frauenärztin hat meine Schilddrüse nie gecheckt. Nina hat es sofort gefunden. Zum Glück.",
-    name: "— Maria K.",
-    tag: "Blutanalyse",
-  },
-  {
-    quote: "Ich hatte so viel Angst vor der Geburt. Nina hat mir nicht gesagt, was ich tun soll. Sie hat mir geholfen zu verstehen, woher die Angst kommt. Das hat alles verändert.",
-    name: "— Sophie L.",
-    tag: "Coaching",
-  },
-  {
-    quote: "Endlich jemand, der sich wirklich Zeit nimmt. 75 Minuten nur für mich. Ich habe mich zum ersten Mal wirklich gehört gefühlt in dieser Schwangerschaft.",
-    name: "— Lena M.",
-    tag: "Begleitung",
-  },
-];
+import type { HomeContent } from '../data/home-content';
+
+interface Props {
+  content: HomeContent['testimonials'];
+}
+
+const { content } = Astro.props;
 ---
 
-<section class="bg-deep py-16 md:py-24 px-4 md:px-12">
-  <div class="max-w-5xl mx-auto">
-    <p class="text-blush text-xs uppercase tracking-widest font-sans mb-4">
-      Stimmen
+<section class="bg-deep px-4 py-16 md:px-12 md:py-24">
+  <div class="mx-auto max-w-5xl">
+    <p class="mb-4 font-sans text-xs uppercase tracking-widest text-blush">
+      {content.eyebrow}
     </p>
 
-    <h2 class="font-serif text-[28px] md:text-[40px] font-light text-cream mb-12">
-      Was Mamas sagen.
+    <h2 class="mb-12 font-serif text-[28px] font-light text-cream md:text-[40px]">
+      {content.title}
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-      {testimonials.map((t) => (
-        <div class="p-5 md:p-7 bg-white/[0.06] rounded-lg border-l-[3px] border-terra flex flex-col">
-          <p class="text-[9px] tracking-widest uppercase text-terra font-medium mb-3">
-            {t.tag}
+    <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+      {content.items.map((item) => (
+        <div class="flex flex-col rounded-lg border-l-[3px] border-terra bg-white/[0.06] p-5 md:p-7">
+          <p class="mb-3 text-[9px] font-medium uppercase tracking-widest text-terra">
+            {item.tag}
           </p>
-          <p class="font-serif text-[15px] md:text-base font-light italic text-cream leading-[1.7] flex-1 mb-4">
-            &bdquo;{t.quote}&ldquo;
+          <p class="mb-4 flex-1 font-serif text-[15px] font-light italic leading-[1.7] text-cream md:text-base">
+            &bdquo;{item.quote}&ldquo;
           </p>
-          <p class="text-[12px] text-blush tracking-wider">
-            {t.name}
+          <p class="text-[12px] tracking-wider text-blush">
+            {item.name}
           </p>
         </div>
       ))}

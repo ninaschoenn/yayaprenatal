@@ -1,55 +1,38 @@
 ---
-const stats = [
-  {
-    num: "10",
-    unit: "Minuten",
-    text: "So lange dauert ein durchschnittlicher Frauenarzt-Termin. Für Blutwerte jenseits vom Standard hat das System weder Zeit noch Budget.",
-    accent: "border-red-600",
-    numColor: "text-red-600",
-  },
-  {
-    num: "18",
-    unit: "Marker",
-    text: "Achtzehn kritische Blutwerte — von Schilddrüse bis Leber — werden im Mutterpass nie getestet. Nie.",
-    accent: "border-terra",
-    numColor: "text-terra",
-  },
-  {
-    num: "0",
-    unit: "Minuten",
-    text: "Für deine Ängste, deine Fragen, dein inneres Erleben. Emotionale Vorbereitung? Nicht Teil der Standardvorsorge.",
-    accent: "border-deep",
-    numColor: "text-deep",
-  },
-];
+import type { HomeContent } from '../data/home-content';
+
+interface Props {
+  content: HomeContent['gapStats'];
+}
+
+const { content } = Astro.props;
 ---
 
-<section class="bg-pearl py-16 md:py-24 px-4 md:px-12">
-  <div class="max-w-5xl mx-auto">
-    <p class="text-[12px] tracking-[3px] uppercase text-terra mb-4 font-medium">
-      Die Lücke
+<section class="bg-pearl px-4 py-16 md:px-12 md:py-24">
+  <div class="mx-auto max-w-5xl">
+    <p class="mb-4 text-[12px] font-medium uppercase tracking-[3px] text-terra">
+      {content.eyebrow}
     </p>
 
-    <h2 class="font-serif text-[28px] md:text-[48px] font-light leading-[1.2] text-deep mb-4">
-      Was die Standardvorsorge<br />
-      <em class="italic text-terra">nicht sieht.</em>
+    <h2 class="mb-4 font-serif text-[28px] font-light leading-[1.2] text-deep md:text-[48px]">
+      {content.titlePrefix}<br />
+      <em class="italic text-terra">{content.titleAccent}</em>
     </h2>
 
-    <p class="text-sm md:text-base text-subtle font-light leading-[1.7] max-w-[540px] mb-10 md:mb-14">
-      Standardvorsorge ist gut. Aber sie zeigt dir nicht alles. Zwischen den kurzen Arztterminen
-      bleiben Fragen offen — über deinen Körper und über dich.
+    <p class="mb-10 max-w-[540px] text-sm font-light leading-[1.7] text-subtle md:mb-14 md:text-base">
+      {content.intro}
     </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-10 md:mb-14">
-      {stats.map((stat) => (
-        <div class={`p-6 md:p-8 bg-cream rounded border-t-[3px] ${stat.accent}`}>
-          <div class={`font-serif text-[48px] md:text-[56px] font-light leading-none ${stat.numColor}`}>
+    <div class="mb-10 grid grid-cols-1 gap-4 md:mb-14 md:grid-cols-3 md:gap-6">
+      {content.stats.map((stat) => (
+        <div class={`rounded bg-cream p-6 border-t-[3px] md:p-8 ${stat.accent}`}>
+          <div class={`font-serif text-[48px] font-light leading-none md:text-[56px] ${stat.numColor}`}>
             {stat.num}
           </div>
-          <div class="text-[13px] font-semibold text-ink mt-1 mb-3">
+          <div class="mt-1 mb-3 text-[13px] font-semibold text-ink">
             {stat.unit}
           </div>
-          <p class="text-[14px] leading-[1.7] text-subtle font-light">
+          <p class="text-[14px] font-light leading-[1.7] text-subtle">
             {stat.text}
           </p>
         </div>
@@ -57,27 +40,17 @@ const stats = [
     </div>
 
     <div class="max-w-[540px] space-y-6">
-      <div class="flex gap-4 items-start">
-        <span class="text-deep font-serif text-lg leading-none mt-1 shrink-0">01</span>
-        <div>
-          <p class="font-sans font-semibold text-deep text-sm">Deine Ärztin sieht dein Baby.</p>
-          <p class="text-[14px] leading-[1.7] text-subtle font-light">Ultraschall, Blutdruck, Mutterpass — medizinische Grundversorgung.</p>
+      {content.steps.map((step) => (
+        <div class="flex items-start gap-4">
+          <span class={`mt-1 shrink-0 font-serif text-lg leading-none ${step.numberClass}`}>
+            {step.number}
+          </span>
+          <div>
+            <p class={`text-sm font-semibold ${step.titleClass}`}>{step.title}</p>
+            <p class="text-[14px] font-light leading-[1.7] text-subtle">{step.text}</p>
+          </div>
         </div>
-      </div>
-      <div class="flex gap-4 items-start">
-        <span class="text-deep font-serif text-lg leading-none mt-1 shrink-0">02</span>
-        <div>
-          <p class="font-sans font-semibold text-deep text-sm">Deine Hebamme begleitet die Geburt.</p>
-          <p class="text-[14px] leading-[1.7] text-subtle font-light">Geburtsvorbereitung, Atemtechniken, Wochenbett.</p>
-        </div>
-      </div>
-      <div class="flex gap-4 items-start">
-        <span class="text-terra font-serif text-lg leading-none mt-1 shrink-0">03</span>
-        <div>
-          <p class="font-sans font-semibold text-terra text-sm">Yaya sieht dich.</p>
-          <p class="text-[14px] leading-[1.7] text-subtle font-light">Erweiterte Blutanalyse, individuelle Supplements nach deinen Werten, systemisches Coaching.</p>
-        </div>
-      </div>
+      ))}
     </div>
   </div>
 </section>

@@ -1,0 +1,55 @@
+---
+import AboutNina from '../components/AboutNina.astro';
+import BabyFirst from '../components/BabyFirst.astro';
+import BodyMap from '../components/BodyMap.astro';
+import CTASection from '../components/CTASection.astro';
+import CoachingSection from '../components/CoachingSection.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+import Footer from '../components/Footer.astro';
+import ForYou from '../components/ForYou.astro';
+import GapStats from '../components/GapStats.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Journey from '../components/Journey.astro';
+import Packages from '../components/Packages.astro';
+import Testimonials from '../components/Testimonials.astro';
+import USPBridge from '../components/USPBridge.astro';
+import { homeContent } from '../data/home-content';
+import { getAlternateLinks, sectionIds, type Locale } from '../data/i18n';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const content = homeContent[locale];
+const ids = sectionIds[locale];
+---
+
+<BaseLayout
+  locale={locale}
+  title={content.meta.title}
+  description={content.meta.description}
+  alternates={getAlternateLinks('home')}
+>
+  <Header locale={locale} pageKey="home" />
+  <main>
+    <Hero content={content.hero} contactId={ids.contact} />
+    <ForYou content={content.forYou} />
+    <USPBridge content={content.uspBridge} />
+    <GapStats content={content.gapStats} />
+    <BabyFirst content={content.babyFirst} />
+    <BodyMap content={content.bodyMap} />
+    <CoachingSection content={content.coaching} />
+    <HowItWorks content={content.howItWorks} />
+    <Packages id={ids.packages} content={content.packages} />
+    <Journey content={content.journey} />
+    <AboutNina id={ids.about} content={content.about} />
+    <Testimonials content={content.testimonials} />
+    <CTASection id={ids.contact} content={content.cta} />
+    <Disclaimer content={content.disclaimer} />
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

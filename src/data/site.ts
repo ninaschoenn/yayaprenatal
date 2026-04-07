@@ -1,8 +1,6 @@
 export const site = {
   name: 'Yaya Prenatal',
   url: 'https://yayaprenatal.de',
-  locale: 'de_DE',
-  language: 'de',
   branding: {
     logoPath: '/logo.png',
   },
@@ -39,13 +37,7 @@ export const site = {
     region: 'Berlin',
     countryCode: 'DE',
     medicalSpecialty: 'Prenatal Care',
-    availableLanguages: ['German'],
+    availableLanguages: ['German', 'English'],
     priceRange: '€€',
   },
 } as const;
-
-export const navLinks = [
-  { label: 'Paket', href: '/#paket' },
-  { label: 'Über mich', href: '/#ueber' },
-  { label: 'Kontakt', href: '/#kontakt' },
-] as const;

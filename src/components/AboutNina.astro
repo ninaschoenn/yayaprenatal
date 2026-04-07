@@ -1,19 +1,28 @@
 ---
+import type { HomeContent } from '../data/home-content';
+
+interface Props {
+  id: string;
+  content: HomeContent['about'];
+}
+
+const { id, content } = Astro.props;
+const introParagraphs = content.paragraphs.slice(0, -1);
+const finalParagraph = content.paragraphs.at(-1);
 ---
 
-<section id="ueber" class="bg-pearl py-16 md:py-24 px-4 md:px-12">
-  <div class="max-w-5xl mx-auto">
-    <p class="text-terra text-xs uppercase tracking-widest font-sans mb-4">
-      Über Nina
+<section id={id} class="bg-pearl px-4 py-16 md:px-12 md:py-24">
+  <div class="mx-auto max-w-5xl">
+    <p class="mb-4 font-sans text-xs uppercase tracking-widest text-terra">
+      {content.eyebrow}
     </p>
 
-    <h2 class="font-serif text-3xl md:text-5xl text-ink leading-tight mb-12">
-      Wer an deiner Seite steht.
+    <h2 class="mb-12 font-serif text-3xl leading-tight text-ink md:text-5xl">
+      {content.title}
     </h2>
 
-    <div class="flex flex-col md:flex-row gap-8 md:gap-16">
-      <!-- Portrait -->
-      <div class="w-full md:w-[300px] h-[400px] md:h-[520px] rounded-lg overflow-hidden shrink-0">
+    <div class="flex flex-col gap-8 md:flex-row md:gap-16">
+      <div class="h-[400px] w-full shrink-0 overflow-hidden rounded-lg md:h-[520px] md:w-[300px]">
         <picture>
           <source
             type="image/webp"
@@ -24,54 +33,47 @@
             src="/images/about-nina-960.jpg"
             srcset="/images/about-nina-640.jpg 640w, /images/about-nina-960.jpg 960w"
             sizes="(min-width: 768px) 300px, 100vw"
-            alt="Nina – Yaya Prenatal"
+            alt={content.imageAlt}
             width="960"
             height="1290"
             loading="lazy"
             decoding="async"
-            class="w-full h-full object-cover object-center scale-[1.0] brightness-[1.05] saturate-[0.95] contrast-[0.85] sepia-[0.08]"
+            class="h-full w-full object-cover object-center brightness-[1.05] contrast-[0.85] saturate-[0.95] sepia-[0.08]"
           />
         </picture>
       </div>
 
-      <!-- Text content -->
       <div>
-        <h3 class="font-serif text-[28px] md:text-[32px] font-light text-deep mb-6 mt-0">
-          Schwanger — und jetzt?
+        <h3 class="mt-0 mb-6 font-serif text-[28px] font-light text-deep md:text-[32px]">
+          {content.subtitle}
         </h3>
 
-        <p class="text-[15px] leading-[1.9] text-subtle font-light mb-4">
-          Als ich in deiner Situation war, habe ich nächtelang gegoogelt. Was jetzt zu tun ist.
-          Was normal ist und was nicht. Ich habe nach irgendwas gesucht, das mir Sicherheit gibt.
-          Das mir beweist: alles ist gut, du machst das richtig. Ich habe Kurse gebucht, mich
-          vorbereitet — und irgendwie nie gefunden, was ich brauchte. Jedenfalls nicht an einem
-          Ort.
+        {introParagraphs.map((paragraph) => (
+          <p class="mb-4 text-[15px] font-light leading-[1.9] text-subtle">
+            {paragraph}
+          </p>
+        ))}
+
+        {finalParagraph && (
+          <p class="mb-4 text-[15px] font-light leading-[1.9] text-subtle">
+            {finalParagraph}{' '}
+            <em class="italic text-terra">{content.practiceName}</em>
+          </p>
+        )}
+
+        <p class="mb-6 text-[15px] font-normal leading-[1.9] text-deep">
+          {content.closing}
         </p>
 
-        <p class="text-[15px] leading-[1.9] text-subtle font-light mb-4">
-          Zwischen Gynäkologin und Hebamme - die beide unerlässlich sind - gibt es eine Lücke.
-          Einen Ort, an dem du als Mama im Mittelpunkt stehst. Mit all deinen Bedürfnissen.
-          Deinen Blutwerten. Deinen Ängsten.
-        </p>
-
-        <p class="text-[15px] leading-[1.9] text-subtle font-light mb-4">
-          Elf Jahre später habe ich diesen Ort selbst erschaffen. Meine Praxis.
-          <em class="text-terra italic">Yaya.</em>
-        </p>
-
-        <p class="text-[15px] leading-[1.9] text-deep font-normal mb-6">
-          Für mich seid ihr Mamas die beeindruckendsten und schönsten Lebewesen auf diesem
-          Planeten. Ihr habt alles verdient. Alles. Ich freue mich, euch durch diese besondere
-          Zeit zu begleiten.
-        </p>
-
-        <!-- Credentials box -->
-        <div class="p-4 md:p-5 bg-cream rounded-md">
-          <p class="text-[12px] font-medium text-deep mb-2">Nina ist:</p>
-          <p class="text-[13px] leading-[1.8] text-subtle font-light">
-            Heilpraktikerin<br />
-            Zertifizierte Ernährungsberaterin<br />
-            Ausgebildet im Systemischen Coaching
+        <div class="rounded-md bg-cream p-4 md:p-5">
+          <p class="mb-2 text-[12px] font-medium text-deep">{content.credentialsLabel}</p>
+          <p class="text-[13px] font-light leading-[1.8] text-subtle">
+            {content.credentials.map((credential) => (
+              <>
+                {credential}
+                <br />
+              </>
+            ))}
           </p>
         </div>
       </div>

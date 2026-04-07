@@ -1,27 +1,56 @@
 ---
 import '../styles/global.css';
 import { site } from '../data/site';
+import { localeInfo, type Locale } from '../data/i18n';
 
 interface Props {
+  locale: Locale;
   title?: string;
   description?: string;
+  alternates?: Array<{
+    hreflang: string;
+    href: string;
+  }>;
 }
 
 const {
+  locale,
   title = 'Yaya Prenatal — Ganzheitliche Schwangerschaftsbegleitung Berlin',
   description = 'Blutanalysen, systemisches Coaching und persönliche Begleitung für deine Schwangerschaft. Heilpraktiker-Praxis in Friedrichshain, Berlin.',
+  alternates = [],
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(site.socialImage.path, site.url);
+const language = localeInfo[locale];
+const ogAlternateLocales = alternates
+  .filter((alternate) => alternate.hreflang !== 'x-default' && alternate.href !== Astro.url.pathname)
+  .map((alternate) => {
+    if (alternate.hreflang === 'de-DE') {
+      return 'de_DE';
+    }
+
+    if (alternate.hreflang === 'en') {
+      return localeInfo.en.ogLocale;
+    }
+
+    return alternate.hreflang.replace('-', '_');
+  });
 ---
 
 <!doctype html>
-<html lang={site.language}>
+<html lang={language.lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="canonical" href={canonicalURL} />
+    {alternates.map((alternate) => (
+      <link
+        rel="alternate"
+        hreflang={alternate.hreflang}
+        href={new URL(alternate.href, site.url)}
+      />
+    ))}
 
     <!-- Favicons -->
     <link rel="icon" href="/favicon.ico" />
@@ -42,7 +71,7 @@ const socialImageURL = new URL(site.socialImage.path, site.url);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:locale" content={site.locale} />
+    <meta property="og:locale" content={language.ogLocale} />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:image" content={socialImageURL} />
     <meta property="og:image:secure_url" content={socialImageURL} />
@@ -50,6 +79,9 @@ const socialImageURL = new URL(site.socialImage.path, site.url);
     <meta property="og:image:width" content={String(site.socialImage.width)} />
     <meta property="og:image:height" content={String(site.socialImage.height)} />
     <meta property="og:image:alt" content={site.socialImage.alt} />
+    {ogAlternateLocales.map((alternate) => (
+      <meta property="og:locale:alternate" content={alternate} />
+    ))}
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -63,8 +95,9 @@ const socialImageURL = new URL(site.socialImage.path, site.url);
       "@context": "https://schema.org",
       "@type": "MedicalBusiness",
       "name": site.name,
-      "description": "Ganzheitliche Schwangerschaftsbegleitung mit Blutanalysen und systemischem Coaching",
+      "description": description,
       "url": site.url,
+      "inLanguage": language.lang,
       "address": {
         "@type": "PostalAddress",
         "streetAddress": site.legalContact.street,

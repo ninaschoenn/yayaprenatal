@@ -1,90 +1,74 @@
 ---
-const dialogues = [
-  {
-    thought: "Ich habe Angst vor der Geburt.",
-    response: "Was genau macht dir Angst? Lass uns das gemeinsam anschauen.",
-  },
-  {
-    thought: "Alle sagen, ich soll mich freuen. Aber ich fühle mich nur überfordert.",
-    response: "Was wäre, wenn beides gleichzeitig da sein darf?",
-  },
-  {
-    thought: "Mein Partner und ich streiten mehr.",
-    response: "Was hat sich zwischen euch verändert? Was brauchst du gerade von ihm?",
-  },
-  {
-    thought: "Ich habe das Gefühl, ich verliere mich selbst.",
-    response: "Was von dir möchtest du unbedingt behalten?",
-  },
-  {
-    thought: "Ich weiß nicht, ob ich bereit bin, Mutter zu sein.",
-    response: "Wer warst du bisher — und wer möchtest du als Mutter sein?",
-  },
-  {
-    thought: "Meine Mutter mischt sich ständig ein.",
-    response: "Was davon ist Fürsorge — und was ist Grenzüberschreitung?",
-  },
-  {
-    thought: "Was, wenn ich es nicht schaffe?",
-    response: "Was genau bedeutet ‚schaffen' für dich? Und wer hat das definiert?",
-  },
-];
+import type { HomeContent } from '../data/home-content';
+
+interface Props {
+  content: HomeContent['coaching'];
+}
+
+const { content } = Astro.props;
 ---
 
-<section class="bg-cream py-16 md:py-24 px-4 md:px-12">
-  <div class="max-w-3xl mx-auto">
-    <p class="text-terra text-xs uppercase tracking-widest font-sans mb-4">
-      Systemisches Coaching
+<section class="bg-cream px-4 py-16 md:px-12 md:py-24">
+  <div class="mx-auto max-w-3xl">
+    <p class="mb-4 font-sans text-xs uppercase tracking-widest text-terra">
+      {content.eyebrow}
     </p>
 
-    <h2 class="font-serif text-3xl md:text-5xl text-ink leading-tight mb-6">
-      Der Termin endet.<br />
-      <em class="text-terra italic">Die Frage bleibt.</em>
+    <h2 class="mb-6 font-serif text-3xl leading-tight text-ink md:text-5xl">
+      {content.titlePrefix}<br />
+      <em class="italic text-terra">{content.titleAccent}</em>
     </h2>
 
-    <p class="text-subtle text-base md:text-lg leading-relaxed mb-12 max-w-[700px]">
-      Schwangerschaft verändert alles — Beziehung, Identität, Ängste, Träume.
-      Das verdient einen Raum, der nur dir gehört.
+    <p class="mb-12 max-w-[700px] text-base leading-relaxed text-subtle md:text-lg">
+      {content.intro}
     </p>
 
-    <!-- Chat carousel with arrows -->
-    <div class="max-w-[600px] mb-10 relative" id="coaching-carousel">
-      <!-- Left arrow -->
-      <button type="button" id="carousel-prev" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-10 z-10 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center text-subtle/40 hover:text-terra transition-colors duration-300" aria-label="Vorherige Frage">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 md:w-6 md:h-6">
+    <div class="relative mb-10 max-w-[600px]" id="coaching-carousel">
+      <button
+        type="button"
+        id="carousel-prev"
+        class="absolute top-1/2 left-0 z-10 flex h-8 w-8 -translate-x-2 -translate-y-1/2 items-center justify-center text-subtle/40 transition-colors duration-300 hover:text-terra md:h-10 md:w-10 md:-translate-x-10"
+        aria-label={content.labels.previous}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 md:h-6 md:w-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
         </svg>
       </button>
 
-      <!-- Right arrow -->
-      <button type="button" id="carousel-next" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-10 z-10 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center text-subtle/40 hover:text-terra transition-colors duration-300" aria-label="Nächste Frage">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 md:w-6 md:h-6">
+      <button
+        type="button"
+        id="carousel-next"
+        class="absolute top-1/2 right-0 z-10 flex h-8 w-8 translate-x-2 -translate-y-1/2 items-center justify-center text-subtle/40 transition-colors duration-300 hover:text-terra md:h-10 md:w-10 md:translate-x-10"
+        aria-label={content.labels.next}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 md:h-6 md:w-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
         </svg>
       </button>
 
-      <!-- Slides container -->
-      <div class="overflow-hidden min-h-[320px] md:min-h-[220px] px-6 md:px-0" role="region" aria-label="Beispiele für Coaching-Fragen">
-        {dialogues.map((item, i) => (
+      <div class="overflow-hidden px-6 min-h-[320px] md:min-h-[220px] md:px-0" role="region" aria-label={content.labels.region}>
+        {content.dialogues.map((item, i) => (
           <div
-            class={`coaching-slide flex flex-col gap-2 absolute inset-x-6 md:inset-x-0 transition-all duration-700 ease-in-out ${i === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            class={`coaching-slide absolute inset-x-6 flex flex-col gap-2 transition-all duration-700 ease-in-out md:inset-x-0 ${i === 0 ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
             data-index={i}
             aria-hidden={i === 0 ? 'false' : 'true'}
           >
-            <!-- Thought bubble (left) -->
             <div class="flex justify-start">
-              <div class="bg-deep text-cream px-5 py-4 rounded-2xl rounded-bl-sm max-w-[85%] shadow-sm">
-                <p class="text-[10px] uppercase tracking-widest text-cream/50 font-sans mb-1.5">Du denkst</p>
+              <div class="max-w-[85%] rounded-2xl rounded-bl-sm bg-deep px-5 py-4 text-cream shadow-sm">
+                <p class="mb-1.5 font-sans text-[10px] uppercase tracking-widest text-cream/50">
+                  {content.labels.thought}
+                </p>
                 <p class="font-serif text-[17px] italic leading-snug">
                   &bdquo;{item.thought}&ldquo;
                 </p>
               </div>
             </div>
 
-            <!-- Response bubble (right) -->
             <div class="flex justify-end">
-              <div class="bg-terra text-pearl px-5 py-4 rounded-2xl rounded-br-sm max-w-[85%] shadow-sm">
-                <p class="text-[10px] uppercase tracking-widest text-pearl/50 font-sans mb-1.5">Nina</p>
+              <div class="max-w-[85%] rounded-2xl rounded-br-sm bg-terra px-5 py-4 text-pearl shadow-sm">
+                <p class="mb-1.5 font-sans text-[10px] uppercase tracking-widest text-pearl/50">
+                  {content.labels.coach}
+                </p>
                 <p class="text-[15px] leading-relaxed">
                   {item.response}
                 </p>
@@ -94,27 +78,22 @@ const dialogues = [
         ))}
       </div>
 
-      <!-- Navigation dots -->
-      <div class="flex justify-center gap-2 mt-6">
-        {dialogues.map((_, i) => (
+      <div class="mt-6 flex justify-center gap-2">
+        {content.dialogues.map((_, i) => (
           <button
             type="button"
-            class={`coaching-dot w-2 h-2 rounded-full transition-colors duration-300 ${i === 0 ? 'bg-terra' : 'bg-warm'}`}
+            class={`coaching-dot h-2 w-2 rounded-full transition-colors duration-300 ${i === 0 ? 'bg-terra' : 'bg-warm'}`}
             data-index={i}
-            aria-label={`Frage ${i + 1}`}
+            aria-label={`${content.labels.dotPrefix} ${i + 1}`}
             aria-current={i === 0 ? 'true' : 'false'}
           />
         ))}
       </div>
     </div>
 
-    <!-- Bottom info box -->
-    <div class="max-w-[700px] bg-pearl border-l-[3px] border-terra px-6 py-6 rounded-r-lg">
-      <p class="text-ink text-base leading-relaxed mb-4">
-        Systemisches Coaching ist keine Therapie und keine Beratung. Es ist ein Raum, in dem du
-        deine eigenen Antworten findest. Nina gibt keine Ratschläge — sie stellt die Fragen, die
-        dich weiterbringen. Geburtsängste, Identitätswandel, Partnerschaftsdynamik,
-        Entscheidungen, Selbstvertrauen — innere Arbeit, die dich stärkt, bevor das Baby da ist.
+    <div class="max-w-[700px] rounded-r-lg border-l-[3px] border-terra bg-pearl px-6 py-6">
+      <p class="text-base leading-relaxed text-ink">
+        {content.note}
       </p>
     </div>
   </div>
@@ -156,31 +135,44 @@ const dialogues = [
     showSlide((current - 1 + slides.length) % slides.length);
   }
 
-  // Arrow navigation
-  nextBtn?.addEventListener('click', () => { nextSlide(); });
-  prevBtn?.addEventListener('click', () => { prevSlide(); });
+  nextBtn?.addEventListener('click', () => {
+    nextSlide();
+  });
+  prevBtn?.addEventListener('click', () => {
+    prevSlide();
+  });
 
-  // Dot navigation
   dots.forEach((dot) => {
     dot.addEventListener('click', () => {
       showSlide(Number((dot as HTMLElement).dataset.index));
     });
   });
 
-  // Touch/swipe navigation
   const carousel = document.getElementById('coaching-carousel');
   let touchStartX = 0;
   let touchEndX = 0;
 
-  carousel?.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
+  carousel?.addEventListener(
+    'touchstart',
+    (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    },
+    { passive: true },
+  );
 
-  carousel?.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    const diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) { nextSlide(); } else { prevSlide(); }
-    }
-  }, { passive: true });
+  carousel?.addEventListener(
+    'touchend',
+    (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    },
+    { passive: true },
+  );
 </script>
