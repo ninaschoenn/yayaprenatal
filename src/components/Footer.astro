@@ -1,4 +1,7 @@
 ---
+import { site } from '../data/site';
+
+const year = new Date().getFullYear();
 ---
 
 <footer class="bg-deep px-4 md:px-12 py-8 md:py-10">
@@ -16,7 +19,7 @@
 
     <!-- Copyright -->
     <div class="text-[12px] text-blush">
-      &copy; 2026 Yaya Prenatal &middot; Friedrichshain, Berlin
+      &copy; {year} {site.name} &middot; {site.business.neighborhood}, Berlin
     </div>
   </div>
 </footer>

@@ -1,0 +1,388 @@
+---
+import { bodyMapCategories, bodyMapMarkers } from '../data/body-map';
+---
+
+<section class="relative overflow-hidden py-20 px-4 md:py-30 md:px-12">
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-15 h-[3px] rounded-full bg-terra" />
+
+  <div class="text-center mb-8 md:mb-12">
+    <p class="text-xs tracking-[3px] uppercase text-terra mb-4 font-medium">
+      Dein Körper-Check
+    </p>
+    <h2 class="font-serif text-3xl md:text-5xl font-light leading-tight text-deep mb-3">
+      Was wir in deinem Blut lesen.
+    </h2>
+    <p class="font-serif text-lg md:text-xl text-deep font-light max-w-lg mx-auto leading-relaxed mb-4 opacity-80">
+      Wir schauen nicht einfach auf Werte — wir verstehen, was sie für dich und dein Baby bedeuten.
+    </p>
+    <p class="text-sm md:text-base text-subtle font-light max-w-lg mx-auto leading-relaxed">
+      22 Marker. 18 davon testet deine Frauenärztin nicht. Die anderen 4 schon — aber isoliert,
+      ohne das volle Bild. Klick auf einen Bereich und erfahre, warum er wichtig ist.
+    </p>
+  </div>
+
+  <div class="flex gap-3 md:gap-6 mb-6 md:mb-10 flex-wrap justify-center">
+    {Object.values(bodyMapCategories).map((category) => (
+      <div class="flex items-center gap-1.5">
+        <div
+          class="w-2.5 h-2.5 rounded-full"
+          style={`background:${category.color}; box-shadow: 0 0 6px ${category.color}44;`}
+        />
+        <span class="text-xs text-subtle font-medium tracking-wide">{category.label}</span>
+      </div>
+    ))}
+  </div>
+
+  <div data-body-map-root class="relative w-full max-w-sm md:max-w-2xl mx-auto">
+    <svg
+      viewBox="0 0 100 105"
+      class="body-map-figure w-full h-auto transition-opacity duration-300"
+      aria-labelledby="body-map-title body-map-description"
+      role="img"
+    >
+      <title id="body-map-title">Interaktive Körperkarte</title>
+      <desc id="body-map-description">
+        Wähle einen Marker, um mehr über relevante Blutwerte und deren Bedeutung für Mutter und Baby zu lesen.
+      </desc>
+      <defs>
+        <radialGradient id="bodyGlow" cx="50%" cy="45%" r="35%">
+          <stop offset="0%" stop-color="#C4856C" stop-opacity="0.12" />
+          <stop offset="100%" stop-color="#C4856C" stop-opacity="0" />
+        </radialGradient>
+        <radialGradient id="bellyGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#C4856C" stop-opacity="0.15" />
+          <stop offset="100%" stop-color="#C4856C" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+
+      <ellipse cx="50" cy="48" rx="16" ry="32" fill="url(#bodyGlow)" />
+      <ellipse cx="50" cy="7.5" rx="3.8" ry="4.5" fill="none" stroke="#5C3D2E" stroke-width="0.35" opacity="0.25" />
+      <path d="M46.5 6 Q47 3 50 2.5 Q53 3 53.5 6" fill="none" stroke="#5C3D2E" stroke-width="0.25" opacity="0.15" />
+      <path d="M48.5 12 L48.8 15 M51.5 12 L51.2 15" fill="none" stroke="#5C3D2E" stroke-width="0.25" opacity="0.15" />
+      <path d="M42 18 Q46 15 50 15 Q54 15 58 18" fill="none" stroke="#5C3D2E" stroke-width="0.35" opacity="0.22" />
+      <path d="M39 21 Q37 27 36 33 Q35.5 36 36 38" fill="none" stroke="#5C3D2E" stroke-width="0.28" opacity="0.15" />
+      <path d="M61 21 Q63 27 62 33 Q60 38 57 42" fill="none" stroke="#5C3D2E" stroke-width="0.28" opacity="0.15" />
+      <path d="M39 21 L38 28 Q37 35 37.5 42 Q38 50 40 56 Q41 60 42 65" fill="none" stroke="#5C3D2E" stroke-width="0.35" opacity="0.22" />
+      <path d="M61 21 L60 28 Q59 32 58 36" fill="none" stroke="#C4856C" stroke-width="0.35" opacity="0.22" />
+      <path d="M38 28 Q39 36 43 44 Q47 52 50 54 Q53 52 57 44 Q61 36 60 28" fill="none" stroke="#C4856C" stroke-width="0.3" opacity="0.25" stroke-dasharray="1.2 0.8" />
+      <path d="M58 36 Q60 44 60 50 Q59 56 57 62 Q56 65 55 68" fill="none" stroke="#5C3D2E" stroke-width="0.35" opacity="0.22" />
+      <path d="M42 65 Q43 68 44 72 Q44.5 78 45 85 Q45 90 45 95" fill="none" stroke="#5C3D2E" stroke-width="0.3" opacity="0.18" />
+      <path d="M55 68 Q55 72 54.5 78 Q54 85 54 90 Q54 93 54 95" fill="none" stroke="#5C3D2E" stroke-width="0.3" opacity="0.18" />
+      <ellipse cx="50" cy="44" rx="6.5" ry="7" fill="url(#bellyGlow)" stroke="#C4856C" stroke-width="0.25" opacity="0.18" stroke-dasharray="1.5 1" />
+      <circle cx="49" cy="42" r="2.5" fill="none" stroke="#C4856C" stroke-width="0.2" opacity="0.25" />
+      <path d="M50.5 44 Q52 46 51 48" fill="none" stroke="#C4856C" stroke-width="0.15" opacity="0.2" />
+
+      {bodyMapMarkers.map((marker) => {
+        const category = bodyMapCategories[marker.cat];
+        const labelX = marker.side === 'L' ? 2 : 98;
+        const elbowX = marker.side === 'L' ? 22 : 78;
+        const textAnchor = marker.side === 'L' ? 'start' : 'end';
+        const dotX = marker.side === 'L' ? 1 : 99;
+
+        return (
+          <g
+            class="body-marker transition-opacity duration-200 focus:outline-none"
+            data-marker-id={marker.id}
+            tabindex="0"
+            role="button"
+            aria-controls={`body-map-panel-${marker.id}`}
+            aria-pressed="false"
+            aria-label={`${marker.label}: Details anzeigen`}
+            style="cursor:pointer"
+          >
+            <rect
+              x={marker.side === 'L' ? 0 : 60}
+              y={marker.y - 4}
+              width="40"
+              height="9"
+              fill="transparent"
+            />
+            <circle
+              class="body-marker-ring transition-all duration-200"
+              data-marker-ring
+              cx={marker.x}
+              cy={marker.y}
+              r="4"
+              fill={category.color}
+              opacity="0.08"
+            />
+            <circle
+              class="body-marker-dot transition-all duration-200"
+              data-marker-dot
+              cx={marker.x}
+              cy={marker.y}
+              r="1.4"
+              fill={category.color}
+              opacity="0.5"
+            />
+            <path
+              class="body-marker-line transition-all duration-200"
+              data-marker-line
+              d={`M${marker.x} ${marker.y} L${elbowX} ${marker.y}`}
+              fill="none"
+              stroke="#7A6B60"
+              stroke-width="0.18"
+              opacity="0.25"
+            />
+            <path
+              class="body-marker-line transition-all duration-200"
+              data-marker-line
+              d={`M${elbowX} ${marker.y} L${labelX} ${marker.y}`}
+              fill="none"
+              stroke="#7A6B60"
+              stroke-width="0.12"
+              opacity="0.15"
+            />
+            <circle
+              class="body-marker-label-dot transition-all duration-200"
+              data-marker-label-dot
+              cx={dotX}
+              cy={marker.y}
+              r="1"
+              fill={category.color}
+              opacity="0.6"
+            />
+            <text
+              x={marker.side === 'L' ? 4 : 96.5}
+              y={marker.y - 1.2}
+              text-anchor={textAnchor}
+              fill="#7A6B60"
+              font-size="2.8"
+              font-weight="400"
+              font-family="DM Sans, sans-serif"
+              opacity="0.8"
+              data-marker-title
+            >
+              {marker.label}
+            </text>
+            <text
+              x={marker.side === 'L' ? 4 : 96.5}
+              y={marker.y + 2}
+              text-anchor={textAnchor}
+              fill="#7A6B60"
+              font-size="1.9"
+              font-family="DM Sans, sans-serif"
+              opacity="0.5"
+              data-marker-subtitle
+            >
+              {marker.sub}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+
+    {bodyMapMarkers.map((marker) => {
+      const category = bodyMapCategories[marker.cat];
+      return (
+        <div
+          id={`body-map-panel-${marker.id}`}
+          class="body-map-panel hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] md:w-[85%] max-w-lg bg-pearl rounded-xl p-5 md:p-7 z-10 animate-fade-in"
+          data-panel-id={marker.id}
+          role="dialog"
+          aria-modal="false"
+          aria-hidden="true"
+          aria-labelledby={`body-map-panel-title-${marker.id}`}
+          style={`box-shadow: 0 8px 40px rgba(92,61,46,0.18); border-left: 4px solid ${category.color};`}
+        >
+          <div class="flex justify-between items-start mb-3.5">
+            <div>
+              <div class="flex items-center gap-2.5 mb-1">
+                <div class="w-2.5 h-2.5 rounded-full" style={`background:${category.color};`} />
+                <span
+                  class="text-[10px] tracking-[1.5px] uppercase font-medium"
+                  style={`color:${category.color};`}
+                >
+                  {category.label}
+                </span>
+              </div>
+              <h3
+                id={`body-map-panel-title-${marker.id}`}
+                class="font-serif text-xl md:text-2xl font-light text-deep"
+              >
+                {marker.label}
+              </h3>
+              <p class="text-xs text-terra mt-0.5">{marker.sub}</p>
+            </div>
+            <button
+              type="button"
+              class="body-map-close text-subtle text-xl leading-none px-2 py-1 rounded bg-black/[0.04] hover:bg-black/[0.08] transition-colors cursor-pointer"
+              data-close-panel
+              aria-label="Details schließen"
+            >
+              &times;
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+            <div class="p-3.5 rounded-md" style="background: rgba(196,133,108,0.1);">
+              <p class="text-[10px] tracking-[2px] uppercase text-terra mb-1.5 font-semibold">
+                Für dich
+              </p>
+              <p class="text-xs leading-relaxed text-subtle font-light">
+                {marker.mother}
+              </p>
+            </div>
+            <div class="p-3.5 rounded-md" style="background: rgba(212,168,154,0.1);">
+              <p class="text-[10px] tracking-[2px] uppercase text-terra mb-1.5 font-semibold">
+                Für dein Baby
+              </p>
+              <p class="text-xs leading-relaxed text-subtle font-light">
+                {marker.baby}
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="mt-3 p-2.5 px-3.5 rounded-md"
+            style="background: rgba(220,38,38,0.06); border-left: 2px solid rgba(220,38,38,0.4);"
+          >
+            <p class="text-[10px] tracking-[2px] uppercase text-red-800 mb-1 font-semibold">
+              Die Lücke
+            </p>
+            <p class="text-xs leading-snug text-red-900 font-light">{marker.gap}</p>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+
+  <p data-body-map-hint class="text-center mt-6 text-sm text-subtle font-light opacity-70">
+    Klick auf einen Marker
+  </p>
+</section>
+
+<script is:inline>
+  const roots = document.querySelectorAll('[data-body-map-root]');
+
+  roots.forEach((root) => {
+    const figure = root.querySelector('.body-map-figure');
+    const markers = Array.from(root.querySelectorAll('[data-marker-id]'));
+    const panels = Array.from(root.querySelectorAll('[data-panel-id]'));
+    const hint = root.parentElement?.querySelector('[data-body-map-hint]');
+    let activeId = null;
+
+    const applyMarkerState = (marker, isActive) => {
+      const ring = marker.querySelector('[data-marker-ring]');
+      const dot = marker.querySelector('[data-marker-dot]');
+      const lines = marker.querySelectorAll('[data-marker-line]');
+      const labelDot = marker.querySelector('[data-marker-label-dot]');
+      const title = marker.querySelector('[data-marker-title]');
+      const subtitle = marker.querySelector('[data-marker-subtitle]');
+      const activeColor = ring?.getAttribute('fill') ?? '#C4856C';
+
+      marker.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+
+      if (ring) {
+        ring.setAttribute('opacity', isActive ? '0.12' : '0.08');
+        ring.setAttribute('r', isActive ? '5' : '4');
+      }
+
+      if (dot) {
+        dot.setAttribute('opacity', isActive ? '1' : '0.5');
+        dot.setAttribute('r', isActive ? '2' : '1.4');
+      }
+
+      lines.forEach((line, index) => {
+        line.setAttribute('stroke', isActive ? activeColor : '#7A6B60');
+        line.setAttribute('opacity', isActive ? (index === 0 ? '0.9' : '0.6') : index === 0 ? '0.25' : '0.15');
+        line.setAttribute('stroke-width', isActive ? (index === 0 ? '0.4' : '0.25') : index === 0 ? '0.18' : '0.12');
+      });
+
+      if (labelDot) {
+        labelDot.setAttribute('opacity', isActive ? '1' : '0.6');
+      }
+
+      if (title) {
+        title.setAttribute('fill', isActive ? '#5C3D2E' : '#7A6B60');
+        title.setAttribute('font-size', isActive ? '3.2' : '2.8');
+        title.setAttribute('font-weight', isActive ? '600' : '400');
+        title.setAttribute('opacity', isActive ? '1' : '0.8');
+      }
+
+      if (subtitle) {
+        subtitle.setAttribute('fill', isActive ? activeColor : '#7A6B60');
+        subtitle.setAttribute('opacity', isActive ? '0.9' : '0.5');
+      }
+    };
+
+    const closePanels = () => {
+      activeId = null;
+      if (figure) {
+        figure.style.opacity = '1';
+      }
+      hint?.classList.remove('hidden');
+
+      markers.forEach((marker) => applyMarkerState(marker, false));
+      panels.forEach((panel) => {
+        panel.classList.add('hidden');
+        panel.setAttribute('aria-hidden', 'true');
+      });
+    };
+
+    const openPanel = (id) => {
+      const selectedMarker = markers.find((marker) => marker.getAttribute('data-marker-id') === id);
+      const selectedPanel = panels.find((panel) => panel.getAttribute('data-panel-id') === id);
+
+      if (!selectedMarker || !selectedPanel) {
+        closePanels();
+        return;
+      }
+
+      activeId = id;
+      if (figure) {
+        figure.style.opacity = '0.15';
+      }
+      hint?.classList.add('hidden');
+
+      markers.forEach((marker) => {
+        applyMarkerState(marker, marker === selectedMarker);
+      });
+
+      panels.forEach((panel) => {
+        const isSelected = panel === selectedPanel;
+        panel.classList.toggle('hidden', !isSelected);
+        panel.setAttribute('aria-hidden', isSelected ? 'false' : 'true');
+      });
+
+      selectedPanel.querySelector('[data-close-panel]')?.focus();
+    };
+
+    markers.forEach((marker) => {
+      marker.addEventListener('click', () => {
+        const id = marker.getAttribute('data-marker-id');
+        if (!id) {
+          return;
+        }
+
+        if (activeId === id) {
+          closePanels();
+          return;
+        }
+
+        openPanel(id);
+      });
+
+      marker.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') {
+          return;
+        }
+
+        event.preventDefault();
+        marker.dispatchEvent(new Event('click'));
+      });
+    });
+
+    panels.forEach((panel) => {
+      panel.querySelector('[data-close-panel]')?.addEventListener('click', () => {
+        closePanels();
+      });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && activeId) {
+        closePanels();
+      }
+    });
+  });
+</script>

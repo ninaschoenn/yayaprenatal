@@ -1,4 +1,5 @@
 ---
+import { introOffer, oneOffOffers, primaryOffer } from '../data/offers';
 ---
 
 <section id="paket" class="bg-deep py-16 md:py-24 px-4 md:px-12">
@@ -13,14 +14,16 @@
 
     <!-- Erstgespräch -->
     <div class="bg-white/[0.05] rounded-lg p-6 md:p-7 border-t-[3px] border-blush mb-5 max-w-md">
-      <p class="text-blush text-[10px] uppercase tracking-widest font-sans mb-3">Kennenlernen</p>
-      <h3 class="font-serif text-cream text-2xl md:text-[28px] font-light mb-1">Erstgespräch</h3>
-      <p class="text-terra text-2xl font-light mb-4">Kostenlos</p>
+      <p class="text-blush text-[10px] uppercase tracking-widest font-sans mb-3">{introOffer.label}</p>
+      <h3 class="font-serif text-cream text-2xl md:text-[28px] font-light mb-1">{introOffer.title}</h3>
+      <p class="text-terra text-2xl font-light mb-4">{introOffer.price}</p>
       <p class="text-blush text-[13px] leading-[1.8] font-light">
-        20 Minuten, die Klarheit schaffen.<br />
-        Wir lernen uns kennen.<br />
-        Deine Fragen, deine Situation.<br />
-        Kein Verkaufsgespräch. Versprochen.
+        {introOffer.details.map((detail) => (
+          <>
+            {detail}
+            <br />
+          </>
+        ))}
       </p>
     </div>
 
@@ -40,20 +43,23 @@
         </span>
       </div>
 
-      <p class="text-terra text-[10px] uppercase tracking-widest font-sans mb-3 mt-1">Blut + Coaching + Begleitung</p>
-      <h3 class="font-serif text-cream text-2xl md:text-[28px] font-light mb-1">Complete Care</h3>
-      <p class="text-terra text-3xl md:text-4xl font-light mb-1">&euro;495 <span class="text-lg">/ Monat</span></p>
-      <p class="text-cream/60 text-[13px] font-light mb-1">6 Monate &middot; 12 Termine à 75 Min.</p>
-      <p class="text-cream/40 text-[12px] font-light mb-4">Oder &euro;2.790 bei Einmalzahlung (spare &euro;180).</p>
+      <p class="text-terra text-[10px] uppercase tracking-widest font-sans mb-3 mt-1">{primaryOffer.label}</p>
+      <h3 class="font-serif text-cream text-2xl md:text-[28px] font-light mb-1">{primaryOffer.title}</h3>
+      <p class="text-terra text-3xl md:text-4xl font-light mb-1">
+        {primaryOffer.price} <span class="text-lg">{primaryOffer.priceSuffix}</span>
+      </p>
+      <p class="text-cream/60 text-[13px] font-light mb-1">{primaryOffer.duration}</p>
+      <p class="text-cream/40 text-[12px] font-light mb-4">{primaryOffer.savings}</p>
       <p class="text-cream/90 text-[13px] leading-[1.8] font-light flex-1">
-        3 Blutanalysen: Basis-Check + 2 Verlaufs-Checks (22 Marker).<br />
-        Systemisches Coaching.<br />
-        Chat-Zugang zwischen Terminen.<br />
-        Welcome Kit.<br />
-        Partner-Session optional.
+        {primaryOffer.details.map((detail) => (
+          <>
+            {detail}
+            <br />
+          </>
+        ))}
       </p>
       <p class="text-cream/50 text-[12px] font-light italic mt-4 pt-4 border-t border-cream/10">
-        Diese Begleitung ist kein einmaliger Termin — sondern ein gemeinsamer Prozess.
+        {primaryOffer.note}
       </p>
     </div>
 
@@ -63,50 +69,20 @@
     </p>
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-      <!-- Blutanalyse Basis -->
-      <div class="bg-white/[0.03] rounded-lg p-4 md:p-5 border-t-2 border-terra/60 flex flex-col">
-        <h3 class="font-serif text-cream text-lg md:text-xl font-light mb-1">Blutanalyse Basis</h3>
-        <p class="text-terra text-lg font-light mb-3">&euro;270</p>
-        <p class="text-blush/70 text-[12px] leading-[1.7] font-light flex-1">
-          1 Termin &middot; 45 Minuten.<br />
-          9 Marker, die deine Ärztin nicht testet.<br />
-          Schilddrüse, Eisen, Vitamin D & mehr.<br />
-          Ausführliche Besprechung + Bericht.
-        </p>
-      </div>
-
-      <!-- Blutanalyse Basis + Erweitert -->
-      <div class="bg-white/[0.03] rounded-lg p-4 md:p-5 border-t-2 border-terra/60 flex flex-col">
-        <h3 class="font-serif text-cream text-lg md:text-xl font-light mb-1">Basis + Erweitert</h3>
-        <p class="text-terra text-lg font-light mb-3">&euro;490</p>
-        <p class="text-blush/70 text-[12px] leading-[1.7] font-light flex-1">
-          2 Termine über deine Schwangerschaft verteilt.<br />
-          22 Marker — Mikronährstoffe, Spurenelemente, Schilddrüse, Leber & mehr.<br />
-          Wir testen genau die Nährstoffe, die dein Körper in der jeweiligen SSW besonders braucht.
-        </p>
-      </div>
-
-      <!-- Coaching-Session -->
-      <div class="bg-white/[0.03] rounded-lg p-4 md:p-5 border-t-2 border-blush/60 flex flex-col">
-        <h3 class="font-serif text-cream text-lg md:text-xl font-light mb-1">Coaching-Session</h3>
-        <p class="text-terra text-lg font-light mb-3">&euro;190</p>
-        <p class="text-blush/70 text-[12px] leading-[1.7] font-light flex-1">
-          60 Minuten nur für dich.<br />
-          Systemisches Coaching für alles, was dich bewegt.<br />
-          Kein Ratgeber-Gespräch. Echte Begleitung.
-        </p>
-      </div>
-
-      <!-- Paarsession -->
-      <div class="bg-white/[0.03] rounded-lg p-4 md:p-5 border-t-2 border-blush/60 flex flex-col">
-        <h3 class="font-serif text-cream text-lg md:text-xl font-light mb-1">Paarsession</h3>
-        <p class="text-terra text-lg font-light mb-3">&euro;220</p>
-        <p class="text-blush/70 text-[12px] leading-[1.7] font-light flex-1">
-          60 Minuten für euch beide.<br />
-          Erwartungen, Rollen, Unsicherheiten.<br />
-          Damit ihr als Team in diese neue Zeit geht.
-        </p>
-      </div>
+      {oneOffOffers.map((offer) => (
+        <div class={`bg-white/[0.03] rounded-lg p-4 md:p-5 border-t-2 ${offer.accent} flex flex-col`}>
+          <h3 class="font-serif text-cream text-lg md:text-xl font-light mb-1">{offer.title}</h3>
+          <p class="text-terra text-lg font-light mb-3">{offer.price}</p>
+          <p class="text-blush/70 text-[12px] leading-[1.7] font-light flex-1">
+            {offer.details.map((detail) => (
+              <>
+                {detail}
+                <br />
+              </>
+            ))}
+          </p>
+        </div>
+      ))}
     </div>
   </div>
 </section>

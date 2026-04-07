@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
 ---
 
 <BaseLayout
@@ -28,14 +29,14 @@ import Footer from '../components/Footer.astro';
             Angaben gemäß &sect; 5 TMG
           </h2>
           <p>
-            Janina Schönn<br />
-            Heilpraktikerin<br />
-            Yaya Prenatal
+            {site.legalContact.displayName}<br />
+            {site.legalContact.title}<br />
+            {site.legalContact.brand}
           </p>
           <p class="mt-3">
-            Krossener Straße 2<br />
-            10245 Berlin<br />
-            Deutschland
+            {site.legalContact.street}<br />
+            {site.legalContact.postalCode} {site.legalContact.city}<br />
+            {site.legalContact.country}
           </p>
         </section>
 
@@ -46,8 +47,14 @@ import Footer from '../components/Footer.astro';
             Kontakt
           </h2>
           <p>
-            Telefon: 0172 3479464<br />
-            E-Mail: janina.schoenn@gmail.com
+            Telefon:
+            <a href={site.legalContact.phoneHref} class="text-terra hover:text-deep transition-colors underline">
+              {site.legalContact.phone}
+            </a><br />
+            E-Mail:
+            <a href={site.legalContact.emailHref} class="text-terra hover:text-deep transition-colors underline">
+              {site.legalContact.email}
+            </a>
           </p>
         </section>
 
@@ -107,9 +114,9 @@ import Footer from '../components/Footer.astro';
             Verantwortlich für den Inhalt nach &sect; 18 Abs. 2 MStV
           </h2>
           <p>
-            Janina Schönn<br />
-            Krossener Straße 2<br />
-            10245 Berlin
+            {site.legalContact.displayName}<br />
+            {site.legalContact.street}<br />
+            {site.legalContact.postalCode} {site.legalContact.city}
           </p>
         </section>
 

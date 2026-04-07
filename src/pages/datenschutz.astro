@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
 ---
 
 <BaseLayout
@@ -46,11 +47,14 @@ import Footer from '../components/Footer.astro';
             Die Datenverarbeitung auf dieser Website erfolgt durch die Websitebetreiberin:
           </p>
           <p class="mt-3">
-            Janina Schönn<br />
-            Yaya Prenatal<br />
-            Krossener Straße 2<br />
-            10245 Berlin<br />
-            E-Mail: janina.schoenn@gmail.com
+            {site.legalContact.displayName}<br />
+            {site.legalContact.brand}<br />
+            {site.legalContact.street}<br />
+            {site.legalContact.postalCode} {site.legalContact.city}<br />
+            E-Mail:
+            <a href={site.legalContact.emailHref} class="text-terra hover:text-deep transition-colors underline">
+              {site.legalContact.email}
+            </a>
           </p>
 
           <h3 class="font-sans font-medium text-ink text-sm mt-6 mb-2">Wie erfassen wir Ihre Daten?</h3>
@@ -117,12 +121,18 @@ import Footer from '../components/Footer.astro';
             Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:
           </p>
           <p class="mt-3">
-            Janina Schönn<br />
-            Yaya Prenatal<br />
-            Krossener Straße 2<br />
-            10245 Berlin<br />
-            Telefon: 0172 3479464<br />
-            E-Mail: janina.schoenn@gmail.com
+            {site.legalContact.displayName}<br />
+            {site.legalContact.brand}<br />
+            {site.legalContact.street}<br />
+            {site.legalContact.postalCode} {site.legalContact.city}<br />
+            Telefon:
+            <a href={site.legalContact.phoneHref} class="text-terra hover:text-deep transition-colors underline">
+              {site.legalContact.phone}
+            </a><br />
+            E-Mail:
+            <a href={site.legalContact.emailHref} class="text-terra hover:text-deep transition-colors underline">
+              {site.legalContact.email}
+            </a>
           </p>
           <p class="mt-3">
             Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder
@@ -237,41 +247,28 @@ import Footer from '../components/Footer.astro';
           </p>
         </section>
 
-        <!-- 5. Externe Dienste -->
+        <!-- 5. Schriftarten -->
         <section class="mt-12">
           <hr class="border-warm" />
           <div class="flex items-center gap-4 mt-8 mb-2">
             <span class="font-serif text-[40px] md:text-[56px] font-light text-terra/40 leading-none">05</span>
             <h2 class="font-serif text-xl md:text-2xl text-ink">
-              Externe Dienste und Drittanbieter
+              Lokal gehostete Schriftarten
             </h2>
           </div>
 
-          <h3 class="font-sans font-medium text-ink text-sm mt-6 mb-2">Google Fonts</h3>
+          <h3 class="font-sans font-medium text-ink text-sm mt-6 mb-2">Schriftarten</h3>
           <p>
-            Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten so genannte Google
-            Fonts, die von Google bereitgestellt werden. Beim Aufruf einer Seite lädt Ihr Browser
-            die benötigten Fonts in Ihren Browsercache, um Texte und Schriftarten korrekt
-            anzuzeigen.
+            Diese Website nutzt lokal gehostete Schriftarten. Beim Aufruf der Seite werden keine
+            Schriftarten von externen Anbietern wie Google geladen.
           </p>
           <p class="mt-3">
-            Zu diesem Zweck muss der von Ihnen verwendete Browser Verbindung zu den Servern von
-            Google aufnehmen. Hierdurch erlangt Google Kenntnis darüber, dass über Ihre IP-Adresse
-            diese Website aufgerufen wurde. Die Nutzung von Google Fonts erfolgt auf Grundlage
-            von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse
-            an der einheitlichen Darstellung des Schriftbildes auf seinem Webangebot. Sofern eine
-            entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich
-            auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO.
+            Dadurch werden beim Besuch dieser Website keine personenbezogenen Daten allein für den
+            Abruf von Schriftarten an Dritte übermittelt.
           </p>
           <p class="mt-3">
-            Wenn Ihr Browser Google Fonts nicht unterstützt, wird eine Standardschrift von Ihrem
-            Computer genutzt.
-          </p>
-          <p class="mt-3">
-            Weitere Informationen zu Google Fonts finden Sie unter
-            <a href="https://developers.google.com/fonts/faq" target="_blank" rel="noopener noreferrer" class="text-terra hover:text-deep transition-colors underline">https://developers.google.com/fonts/faq</a>
-            und in der Datenschutzerklärung von Google:
-            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-terra hover:text-deep transition-colors underline">https://policies.google.com/privacy</a>.
+            Die Darstellung der Website stützt sich damit ausschließlich auf Dateien, die zusammen
+            mit dieser Website ausgeliefert werden.
           </p>
         </section>
 
@@ -324,7 +321,7 @@ import Footer from '../components/Footer.astro';
         <section class="mt-12">
           <hr class="border-warm" />
           <p class="text-sm text-subtle mt-8">
-            Stand: März 2026
+            Stand: April 2026
           </p>
         </section>
 

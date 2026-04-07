@@ -1,21 +1,30 @@
 ---
+import { navLinks } from '../data/site';
 ---
 
 <header class="sticky top-0 z-50 backdrop-blur-md bg-cream/90 border-b border-warm/50">
   <nav class="flex items-center justify-between px-4 md:px-12 py-4 md:py-6 max-w-7xl mx-auto">
     <!-- Logo -->
     <a href="/" class="no-underline">
-      <img src="/Logo/YAYA Prenatal transparent.png" alt="Yaya Prenatal" class="h-[55px] md:h-[70px] w-auto" />
+      <img
+        src="/Logo/YAYA Prenatal transparent.png"
+        alt="Yaya Prenatal"
+        width="2000"
+        height="2000"
+        loading="eager"
+        decoding="async"
+        class="h-[55px] md:h-[70px] w-auto"
+      />
     </a>
 
     <!-- Desktop nav links -->
     <div class="hidden md:flex items-center gap-9">
-      {["Paket", "Über mich", "Kontakt"].map((link) => (
+      {navLinks.map((link) => (
         <a
-          href={`/${link === "Paket" ? "#paket" : link === "Über mich" ? "#ueber" : "#kontakt"}`}
+          href={link.href}
           class="text-[14px] text-subtle tracking-wider uppercase no-underline hover:text-terra transition-colors duration-200"
         >
-          {link}
+          {link.label}
         </a>
       ))}
     </div>
@@ -23,8 +32,11 @@
     <!-- Mobile menu button -->
     <button
       id="mobile-menu-btn"
+      type="button"
       class="md:hidden flex flex-col gap-1.5 p-2 -mr-2"
       aria-label="Menü öffnen"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
     >
       <span class="w-5 h-[1.5px] bg-deep block transition-transform duration-200"></span>
       <span class="w-5 h-[1.5px] bg-deep block transition-opacity duration-200"></span>
@@ -37,32 +49,64 @@
 <div
   id="mobile-menu"
   class="md:hidden hidden fixed inset-0 top-[57px] z-[60]"
+  aria-hidden="true"
   style="background-color: #C4856C;"
 >
   <div class="flex flex-col items-center justify-center gap-10 h-full pb-20">
-    {["Paket", "Über mich", "Kontakt"].map((link) => (
+    {navLinks.map((link) => (
       <a
-        href={`/${link === "Paket" ? "#paket" : link === "Über mich" ? "#ueber" : "#kontakt"}`}
+        href={link.href}
         class="mobile-nav-link font-serif text-[28px] text-cream tracking-wider no-underline font-light"
       >
-        {link}
+        {link.label}
       </a>
     ))}
   </div>
 </div>
 
-<script>
+<script is:inline>
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
   const links = document.querySelectorAll('.mobile-nav-link');
+  const closeMenu = () => {
+    menu?.classList.add('hidden');
+    menu?.setAttribute('aria-hidden', 'true');
+    btn?.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('overflow-hidden');
+  };
+
+  const openMenu = () => {
+    menu?.classList.remove('hidden');
+    menu?.setAttribute('aria-hidden', 'false');
+    btn?.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('overflow-hidden');
+  };
 
   btn?.addEventListener('click', () => {
-    menu?.classList.toggle('hidden');
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+    if (isOpen) {
+      closeMenu();
+      return;
+    }
+
+    openMenu();
   });
 
   links.forEach(link => {
     link.addEventListener('click', () => {
-      menu?.classList.add('hidden');
+      closeMenu();
     });
+  });
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeMenu();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+      closeMenu();
+    }
   });
 </script>

@@ -6,7 +6,7 @@ import ForYou from '../components/ForYou.astro';
 import USPBridge from '../components/USPBridge.astro';
 import GapStats from '../components/GapStats.astro';
 import BabyFirst from '../components/BabyFirst.astro';
-import BodyMap from '../components/BodyMap.tsx';
+import BodyMap from '../components/BodyMap.astro';
 import CoachingSection from '../components/CoachingSection.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import Packages from '../components/Packages.astro';
@@ -27,8 +27,7 @@ import Footer from '../components/Footer.astro';
     <GapStats />
     <BabyFirst />
 
-    <!-- Body Map: React island with client-side hydration -->
-    <BodyMap client:visible />
+    <BodyMap />
 
     <CoachingSection />
     <HowItWorks />

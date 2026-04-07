@@ -14,11 +14,24 @@
     <div class="flex flex-col md:flex-row gap-8 md:gap-16">
       <!-- Portrait -->
       <div class="w-full md:w-[300px] h-[400px] md:h-[520px] rounded-lg overflow-hidden shrink-0">
-        <img
-          src="/images/20260313_Nina_00353_Ed Mehravaran.jpg"
-          alt="Nina – Yaya Prenatal"
-          class="w-full h-full object-cover object-center scale-[1.0] brightness-[1.05] saturate-[0.95] contrast-[0.85] sepia-[0.08]"
-        />
+        <picture>
+          <source
+            type="image/webp"
+            srcset="/images/optimized/about-nina-640.webp 640w, /images/optimized/about-nina-960.webp 960w"
+            sizes="(min-width: 768px) 300px, 100vw"
+          />
+          <img
+            src="/images/optimized/about-nina-960.jpg"
+            srcset="/images/optimized/about-nina-640.jpg 640w, /images/optimized/about-nina-960.jpg 960w"
+            sizes="(min-width: 768px) 300px, 100vw"
+            alt="Nina – Yaya Prenatal"
+            width="960"
+            height="1290"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover object-center scale-[1.0] brightness-[1.05] saturate-[0.95] contrast-[0.85] sepia-[0.08]"
+          />
+        </picture>
       </div>
 
       <!-- Text content -->

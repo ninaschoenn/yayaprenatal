@@ -50,23 +50,27 @@ const dialogues = [
     <!-- Chat carousel with arrows -->
     <div class="max-w-[600px] mb-10 relative" id="coaching-carousel">
       <!-- Left arrow -->
-      <button id="carousel-prev" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-10 z-10 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center text-subtle/40 hover:text-terra transition-colors duration-300" aria-label="Vorherige Frage">
+      <button type="button" id="carousel-prev" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-10 z-10 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center text-subtle/40 hover:text-terra transition-colors duration-300" aria-label="Vorherige Frage">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 md:w-6 md:h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
         </svg>
       </button>
 
       <!-- Right arrow -->
-      <button id="carousel-next" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-10 z-10 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center text-subtle/40 hover:text-terra transition-colors duration-300" aria-label="Nächste Frage">
+      <button type="button" id="carousel-next" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-10 z-10 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center text-subtle/40 hover:text-terra transition-colors duration-300" aria-label="Nächste Frage">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 md:w-6 md:h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
         </svg>
       </button>
 
       <!-- Slides container -->
-      <div class="overflow-hidden min-h-[320px] md:min-h-[220px] px-6 md:px-0">
+      <div class="overflow-hidden min-h-[320px] md:min-h-[220px] px-6 md:px-0" role="region" aria-label="Beispiele für Coaching-Fragen">
         {dialogues.map((item, i) => (
-          <div class={`coaching-slide flex flex-col gap-2 absolute inset-x-6 md:inset-x-0 transition-all duration-700 ease-in-out ${i === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} data-index={i}>
+          <div
+            class={`coaching-slide flex flex-col gap-2 absolute inset-x-6 md:inset-x-0 transition-all duration-700 ease-in-out ${i === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            data-index={i}
+            aria-hidden={i === 0 ? 'false' : 'true'}
+          >
             <!-- Thought bubble (left) -->
             <div class="flex justify-start">
               <div class="bg-deep text-cream px-5 py-4 rounded-2xl rounded-bl-sm max-w-[85%] shadow-sm">
@@ -94,9 +98,11 @@ const dialogues = [
       <div class="flex justify-center gap-2 mt-6">
         {dialogues.map((_, i) => (
           <button
+            type="button"
             class={`coaching-dot w-2 h-2 rounded-full transition-colors duration-300 ${i === 0 ? 'bg-terra' : 'bg-warm'}`}
             data-index={i}
             aria-label={`Frage ${i + 1}`}
+            aria-current={i === 0 ? 'true' : 'false'}
           />
         ))}
       </div>
@@ -120,7 +126,6 @@ const dialogues = [
   const prevBtn = document.getElementById('carousel-prev');
   const nextBtn = document.getElementById('carousel-next');
   let current = 0;
-  let interval: ReturnType<typeof setInterval>;
 
   function showSlide(index: number) {
     slides.forEach((slide, i) => {
@@ -128,14 +133,17 @@ const dialogues = [
       if (i === index) {
         el.classList.remove('opacity-0', 'pointer-events-none');
         el.classList.add('opacity-100');
+        el.setAttribute('aria-hidden', 'false');
       } else {
         el.classList.remove('opacity-100');
         el.classList.add('opacity-0', 'pointer-events-none');
+        el.setAttribute('aria-hidden', 'true');
       }
     });
     dots.forEach((dot, i) => {
       dot.classList.toggle('bg-terra', i === index);
       dot.classList.toggle('bg-warm', i !== index);
+      dot.setAttribute('aria-current', i === index ? 'true' : 'false');
     });
     current = index;
   }
@@ -148,23 +156,14 @@ const dialogues = [
     showSlide((current - 1 + slides.length) % slides.length);
   }
 
-  function resetInterval() {
-    clearInterval(interval);
-    interval = setInterval(nextSlide, 7000);
-  }
-
-  // Auto-advance every 7 seconds
-  interval = setInterval(nextSlide, 7000);
-
   // Arrow navigation
-  nextBtn?.addEventListener('click', () => { nextSlide(); resetInterval(); });
-  prevBtn?.addEventListener('click', () => { prevSlide(); resetInterval(); });
+  nextBtn?.addEventListener('click', () => { nextSlide(); });
+  prevBtn?.addEventListener('click', () => { prevSlide(); });
 
   // Dot navigation
   dots.forEach((dot) => {
     dot.addEventListener('click', () => {
       showSlide(Number((dot as HTMLElement).dataset.index));
-      resetInterval();
     });
   });
 
@@ -182,7 +181,6 @@ const dialogues = [
     const diff = touchStartX - touchEndX;
     if (Math.abs(diff) > 50) {
       if (diff > 0) { nextSlide(); } else { prevSlide(); }
-      resetInterval();
     }
   }, { passive: true });
 </script>
