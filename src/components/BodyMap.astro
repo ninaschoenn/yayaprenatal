@@ -11,34 +11,35 @@ const { content } = Astro.props;
 <section class="relative overflow-hidden px-4 py-20 md:px-12 md:py-30">
   <div class="absolute top-0 left-1/2 h-[3px] w-15 -translate-x-1/2 rounded-full bg-terra" />
 
-  <div class="mb-8 text-center md:mb-12">
-    <p class="mb-4 text-xs font-medium uppercase tracking-[3px] text-terra">
-      {content.eyebrow}
-    </p>
-    <h2 class="mb-3 font-serif text-3xl font-light leading-tight text-deep md:text-5xl">
-      {content.title}
-    </h2>
-    <p class="mx-auto mb-4 max-w-lg font-serif text-lg font-light leading-relaxed text-deep opacity-80 md:text-xl">
-      {content.intro}
-    </p>
-    <p class="mx-auto max-w-lg text-sm font-light leading-relaxed text-subtle md:text-base">
-      {content.description}
-    </p>
-  </div>
+  <div class="mx-auto max-w-5xl">
+    <div class="mb-8 text-center md:mb-12">
+      <p class="mb-4 text-xs font-medium uppercase tracking-[3px] text-terra">
+        {content.eyebrow}
+      </p>
+      <h2 class="mb-3 font-serif text-3xl font-light leading-tight text-deep md:text-5xl">
+        {content.title}
+      </h2>
+      <p class="mx-auto mb-4 max-w-lg font-serif text-lg font-light leading-relaxed text-deep opacity-80 md:text-xl">
+        {content.intro}
+      </p>
+      <p class="mx-auto max-w-lg text-sm font-light leading-relaxed text-subtle md:text-base">
+        {content.description}
+      </p>
+    </div>
 
-  <div class="mb-6 flex flex-wrap justify-center gap-3 md:mb-10 md:gap-6">
-    {Object.values(content.categories).map((category) => (
-      <div class="flex items-center gap-1.5">
-        <div
-          class="h-2.5 w-2.5 rounded-full"
-          style={`background:${category.color}; box-shadow: 0 0 6px ${category.color}44;`}
-        />
-        <span class="text-xs font-medium tracking-wide text-subtle">{category.label}</span>
-      </div>
-    ))}
-  </div>
+    <div class="mb-6 flex flex-wrap justify-center gap-3 md:mb-10 md:gap-6">
+      {Object.values(content.categories).map((category) => (
+        <div class="flex items-center gap-1.5">
+          <div
+            class="h-2.5 w-2.5 rounded-full"
+            style={`background:${category.color}; box-shadow: 0 0 6px ${category.color}44;`}
+          />
+          <span class="text-xs font-medium tracking-wide text-subtle">{category.label}</span>
+        </div>
+      ))}
+    </div>
 
-  <div data-body-map-root class="relative mx-auto w-full max-w-sm md:max-w-2xl">
+    <div data-body-map-root class="relative mx-auto w-full max-w-sm md:max-w-2xl">
     <svg
       viewBox="0 0 100 105"
       class="body-map-figure h-auto w-full transition-opacity duration-300"
@@ -248,11 +249,12 @@ const { content } = Astro.props;
         </div>
       );
     })}
-  </div>
+    </div>
 
-  <p data-body-map-hint class="mt-6 text-center text-sm font-light text-subtle opacity-70">
-    {content.hint}
-  </p>
+    <p data-body-map-hint class="mt-6 text-center text-sm font-light text-subtle opacity-70">
+      {content.hint}
+    </p>
+  </div>
 </section>
 
 <script is:inline>

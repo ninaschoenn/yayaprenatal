@@ -19,7 +19,7 @@ const { content } = Astro.props;
       <em class="italic text-terra">{content.titleAccent}</em>
     </h2>
 
-    <p class="mb-10 max-w-[540px] text-sm font-light leading-[1.7] text-subtle md:mb-14 md:text-base">
+    <p class="mb-10 max-w-[700px] text-sm font-light leading-[1.7] text-subtle md:mb-14 md:text-base">
       {content.intro}
     </p>
 
@@ -39,7 +39,7 @@ const { content } = Astro.props;
       ))}
     </div>
 
-    <div class="max-w-[540px] space-y-6">
+    <div class="max-w-[700px] space-y-6">
       {content.steps.map((step) => (
         <div class="flex items-start gap-4">
           <span class={`mt-1 shrink-0 font-serif text-lg leading-none ${step.numberClass}`}>
