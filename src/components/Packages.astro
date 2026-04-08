@@ -19,7 +19,7 @@ const { id, content } = Astro.props;
       {content.titlePrefix} <em class="italic text-terra">{content.titleAccent}</em>
     </h2>
 
-    <div class="mb-5 max-w-md rounded-lg border-t-[3px] border-blush bg-white/[0.05] p-6 md:p-7">
+    <div class="mb-5 max-w-md rounded-[1.8rem] border-t-[3px] border-blush bg-white/[0.05] p-6 md:p-7">
       <p class="mb-3 font-sans text-[10px] uppercase tracking-widest text-blush">{content.introOffer.label}</p>
       <h3 class="mb-1 font-serif text-2xl font-light text-cream md:text-[28px]">{content.introOffer.title}</h3>
       <p class="mb-4 text-2xl font-light text-terra">{content.introOffer.price}</p>
@@ -41,7 +41,7 @@ const { id, content } = Astro.props;
       {content.introText}
     </p>
 
-    <div class="relative flex max-w-[700px] flex-col rounded-lg border-t-[3px] border-terra bg-terra/20 p-6 ring-1 ring-terra/40 md:p-7">
+    <div class="relative flex max-w-[700px] flex-col rounded-[2rem] border-t-[3px] border-terra bg-terra/20 p-6 ring-1 ring-terra/40 md:p-7">
       <div class="absolute -top-3 right-4">
         <span class="rounded-full bg-terra px-3 py-1 text-[9px] font-semibold uppercase tracking-[1.5px] text-pearl">
           {content.featuredBadge}
@@ -74,7 +74,7 @@ const { id, content } = Astro.props;
 
     <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
       {content.oneOffOffers.map((offer) => (
-        <div class={`flex flex-col rounded-lg border-t-2 bg-white/[0.03] p-4 md:p-5 ${offer.accent}`}>
+        <div class={`flex flex-col rounded-[1.65rem] border-t-2 bg-white/[0.03] p-4 md:p-5 ${offer.accent}`}>
           <h3 class="mb-1 font-serif text-lg font-light text-cream md:text-xl">{offer.title}</h3>
           <p class="mb-3 text-lg font-light text-terra">{offer.price}</p>
           <p class="flex-1 text-[12px] font-light leading-[1.7] text-blush/70">

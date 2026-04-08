@@ -25,7 +25,7 @@ const { content } = Astro.props;
 
     <div class="mb-10 grid grid-cols-1 gap-4 md:mb-14 md:grid-cols-3 md:gap-6">
       {content.stats.map((stat) => (
-        <div class={`rounded bg-cream p-6 border-t-[3px] md:p-8 ${stat.accent}`}>
+        <div class={`rounded-[1.75rem] border-t-[3px] bg-cream p-6 md:p-8 ${stat.accent}`}>
           <div class={`font-serif text-[48px] font-light leading-none md:text-[56px] ${stat.numColor}`}>
             {stat.num}
           </div>
