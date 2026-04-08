@@ -9,62 +9,72 @@ interface Props {
 const { content, contactId } = Astro.props;
 ---
 
-<section class="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 py-12 md:min-h-[80vh] md:flex-row md:gap-12 md:px-12 md:py-20">
-  <div class="max-w-full flex-1 text-center md:max-w-[600px] md:text-left">
-    <p class="mb-6 text-[12px] font-medium uppercase tracking-[3px] text-terra">
-      {content.eyebrow}
-    </p>
+<section class="relative overflow-hidden bg-deep">
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,168,154,0.22),transparent_32%),radial-gradient(circle_at_78%_35%,rgba(196,133,108,0.28),transparent_28%),linear-gradient(135deg,rgba(255,252,249,0.04),transparent_32%),linear-gradient(180deg,#5C3D2E_0%,#4B3024_100%)]"></div>
+  <div class="pointer-events-none absolute inset-0 opacity-[0.07] mix-blend-screen" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 256 256%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noise%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noise)%27/%3E%3C/svg%3E'); background-size: 144px 144px;"></div>
+  <div class="pointer-events-none absolute right-[-10%] top-1/2 h-[360px] w-[360px] -translate-y-1/2 rounded-full bg-terra/18 blur-[110px] md:h-[620px] md:w-[620px]"></div>
 
-    <h1 class="mb-8 font-serif font-light leading-[1.1] text-deep">
-      <span class="block text-[32px] md:text-[52px]">{content.title.line1}</span>
-      <span class="block text-[32px] md:text-[52px]">
-        {content.title.line2Prefix && <>{content.title.line2Prefix} </>}
-        <em class="italic text-terra">{content.title.line2Accent}</em>
-        {content.title.line2Suffix}
-      </span>
-      <span class="mt-2 block text-[22px] font-light text-subtle md:text-[32px]">
-        {content.title.line3}
-      </span>
-    </h1>
+  <div class="relative mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 py-14 md:min-h-[82vh] md:flex-row md:gap-16 md:px-12 md:py-24">
+    <div class="max-w-full flex-1 text-center md:max-w-[620px] md:text-left">
+      <p class="mb-6 text-[12px] font-medium uppercase tracking-[4px] text-blush/85">
+        {content.eyebrow}
+      </p>
 
-    <div class="mb-4 max-w-[480px] text-base font-light leading-[1.8] text-subtle md:text-lg">
-      {content.bullets.map((bullet) => (
-        <p>{bullet}</p>
-      ))}
+      <h1 class="mb-8 font-serif font-light leading-[1.05] text-pearl">
+        <span class="block text-[36px] md:text-[60px]">{content.title.line1}</span>
+        <span class="block text-[36px] md:text-[60px]">
+          {content.title.line2Prefix && <>{content.title.line2Prefix} </>}
+          <em class="italic text-blush">{content.title.line2Accent}</em>
+          {content.title.line2Suffix}
+        </span>
+        <span class="mt-2 block text-[24px] font-light text-warm/80 md:text-[36px]">
+          {content.title.line3}
+        </span>
+      </h1>
+
+      <div class="mb-4 max-w-[500px] text-base font-light leading-[1.85] text-warm/80 md:text-lg">
+        {content.bullets.map((bullet) => (
+          <p>{bullet}</p>
+        ))}
+      </div>
+
+      <p class="mb-12 max-w-[500px] text-base font-medium leading-[1.8] text-pearl md:text-lg">
+        {content.lead}
+      </p>
+
+      <a
+        href={`#${contactId}`}
+        class="inline-block bg-terra px-12 py-[18px] text-[13px] font-medium uppercase tracking-[2px] text-pearl no-underline transition-all duration-300 hover:bg-blush hover:text-ink"
+      >
+        {content.ctaLabel}
+      </a>
     </div>
 
-    <p class="mb-12 max-w-[480px] text-base font-medium leading-[1.8] text-deep md:text-lg">
-      {content.lead}
-    </p>
-
-    <a
-      href={`#${contactId}`}
-      class="inline-block bg-terra px-12 py-[18px] text-[13px] font-medium uppercase tracking-[2px] text-pearl no-underline transition-colors duration-300 hover:bg-deep"
-    >
-      {content.ctaLabel}
-    </a>
-  </div>
-
-  <div class="relative h-[280px] w-full overflow-hidden rounded-[160px_160px_20px_20px] md:h-[50vh] md:w-[38%]">
-    <picture>
-      <source
-        type="image/webp"
-        srcset="/images/hero-nina-720.webp 720w, /images/hero-nina-1200.webp 1200w"
-        sizes="(min-width: 768px) 38vw, 100vw"
-      />
-      <img
-        src="/images/hero-nina-1200.jpg"
-        srcset="/images/hero-nina-720.jpg 720w, /images/hero-nina-1200.jpg 1200w"
-        sizes="(min-width: 768px) 38vw, 100vw"
-        alt={content.imageAlt}
-        width="1200"
-        height="1600"
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-        class="h-full w-full object-cover object-top brightness-[1.05] contrast-[0.85] saturate-[0.95] sepia-[0.08]"
-      />
-    </picture>
-    <div class="pointer-events-none absolute inset-0 opacity-[0.07] mix-blend-overlay" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 256 256%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noise%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noise)%27/%3E%3C/svg%3E'); background-size: 128px 128px;"></div>
+    <div class="relative w-full md:w-[42%] md:max-w-[520px] md:self-end">
+      <div class="absolute inset-x-[8%] inset-y-[6%] rounded-[220px_220px_34px_34px] bg-pearl/8 blur-3xl"></div>
+      <div class="relative overflow-hidden rounded-[190px_190px_26px_26px] md:rounded-[240px_240px_28px_28px]">
+        <picture>
+          <source
+            type="image/webp"
+            srcset="/images/hero-nina-720.webp 720w, /images/hero-nina-1200.webp 1200w"
+            sizes="(min-width: 768px) 42vw, 100vw"
+          />
+          <img
+            src="/images/hero-nina-1200.jpg"
+            srcset="/images/hero-nina-720.jpg 720w, /images/hero-nina-1200.jpg 1200w"
+            sizes="(min-width: 768px) 42vw, 100vw"
+            alt={content.imageAlt}
+            width="1200"
+            height="1600"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="h-[360px] w-full object-cover object-top brightness-[1.02] contrast-[0.9] saturate-[0.98] sepia-[0.04] md:h-[640px]"
+          />
+        </picture>
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,252,249,0.08),transparent_22%,transparent_72%,rgba(58,42,31,0.18))]"></div>
+        <div class="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 256 256%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noise%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noise)%27/%3E%3C/svg%3E'); background-size: 128px 128px;"></div>
+      </div>
+    </div>
   </div>
 </section>
