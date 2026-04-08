@@ -23,14 +23,14 @@ const { content } = Astro.props;
       {content.intro}
     </p>
 
-    <div class="relative mb-10 max-w-[600px]" id="coaching-carousel">
+    <div class="relative mb-10 w-full max-w-[700px]" id="coaching-carousel">
       <button
         type="button"
         id="carousel-prev"
-        class="absolute top-1/2 left-0 z-10 flex h-8 w-8 -translate-x-2 -translate-y-1/2 items-center justify-center text-subtle/40 transition-colors duration-300 hover:text-terra md:h-10 md:w-10 md:-translate-x-10"
+        class="group absolute top-1/2 left-0 z-10 flex h-9 w-9 -translate-x-2 -translate-y-1/2 items-center justify-center rounded-full bg-pearl/70 text-subtle/45 shadow-sm ring-1 ring-warm/70 backdrop-blur-sm transition-all duration-300 hover:bg-pearl hover:text-terra hover:shadow-md active:scale-95 md:h-11 md:w-11 md:-translate-x-14"
         aria-label={content.labels.previous}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 md:h-6 md:w-6">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition-transform duration-300 group-hover:-translate-x-0.5 md:h-6 md:w-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
         </svg>
       </button>
@@ -38,15 +38,15 @@ const { content } = Astro.props;
       <button
         type="button"
         id="carousel-next"
-        class="absolute top-1/2 right-0 z-10 flex h-8 w-8 translate-x-2 -translate-y-1/2 items-center justify-center text-subtle/40 transition-colors duration-300 hover:text-terra md:h-10 md:w-10 md:translate-x-10"
+        class="group absolute top-1/2 right-0 z-10 flex h-9 w-9 translate-x-2 -translate-y-1/2 items-center justify-center rounded-full bg-pearl/70 text-subtle/45 shadow-sm ring-1 ring-warm/70 backdrop-blur-sm transition-all duration-300 hover:bg-pearl hover:text-terra hover:shadow-md active:scale-95 md:h-11 md:w-11 md:translate-x-14"
         aria-label={content.labels.next}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 md:h-6 md:w-6">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5 md:h-6 md:w-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
         </svg>
       </button>
 
-      <div class="overflow-hidden px-6 min-h-[320px] md:min-h-[220px] md:px-0" role="region" aria-label={content.labels.region}>
+      <div class="min-h-[320px] overflow-hidden px-6 md:min-h-[220px] md:px-0" role="region" aria-label={content.labels.region}>
         {content.dialogues.map((item, i) => (
           <div
             class={`coaching-slide absolute inset-x-6 flex flex-col gap-2 transition-all duration-700 ease-in-out md:inset-x-0 ${i === 0 ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
@@ -91,7 +91,7 @@ const { content } = Astro.props;
       </div>
     </div>
 
-    <div class="max-w-[700px] rounded-r-lg border-l-[3px] border-terra bg-pearl px-6 py-6">
+    <div class="w-full max-w-[700px] rounded-r-lg border-l-[3px] border-terra bg-pearl px-6 py-6">
       <p class="text-base leading-relaxed text-ink">
         {content.note}
       </p>

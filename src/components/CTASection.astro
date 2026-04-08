@@ -10,9 +10,21 @@ interface Props {
 const { id, content } = Astro.props;
 
 const contacts = [
-  { label: content.labels.email, value: site.publicContact.email, href: site.publicContact.emailHref },
-  { label: content.labels.phone, value: site.publicContact.phone, href: site.publicContact.phoneHref },
-  { label: content.labels.address, value: site.publicContact.addressShort },
+  {
+    label: content.labels.email,
+    value: site.publicContact.email,
+    copyValue: site.publicContact.email,
+  },
+  {
+    label: content.labels.phone,
+    value: site.publicContact.phone,
+    copyValue: site.publicContact.phone,
+  },
+  {
+    label: content.labels.address,
+    value: site.publicContact.addressFull,
+    copyValue: site.publicContact.addressFull,
+  },
 ];
 ---
 
@@ -34,19 +46,64 @@ const contacts = [
     </a>
     <p class="mt-3 text-[13px] font-light text-subtle">{content.responseLabel}</p>
 
-    <div class="mt-12 flex flex-wrap justify-center gap-6 md:gap-12">
+    <div class="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-3 md:gap-10">
       {contacts.map((contact) => (
-        <div class="text-center">
-          <p class="mb-1 text-[10px] uppercase tracking-widest text-terra">{contact.label}</p>
-          {contact.href ? (
-            <a href={contact.href} class="text-[14px] text-ink no-underline transition-colors duration-200 hover:text-terra">
-              {contact.value}
-            </a>
-          ) : (
-            <p class="text-[14px] text-ink">{contact.value}</p>
-          )}
+        <div class="flex flex-col items-center text-center">
+          <p class="mb-2 text-[10px] uppercase tracking-widest text-terra">{contact.label}</p>
+          <button
+            type="button"
+            class="group relative inline-flex cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-[14px] text-ink transition-all duration-200 hover:text-terra focus:outline-none focus-visible:text-terra"
+            data-copy-target
+            data-copy-value={contact.copyValue}
+            aria-label={`${contact.label}: ${contact.value}. ${content.labels.copy}`}
+          >
+            <span data-copy-text>{contact.value}</span>
+            <span
+              aria-hidden="true"
+              data-copy-feedback
+              class="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 translate-y-0 whitespace-nowrap text-[10px] uppercase tracking-[1.5px] text-terra opacity-0 transition-all duration-200"
+            >
+              {content.labels.copied}
+            </span>
+          </button>
         </div>
       ))}
     </div>
   </div>
 </section>
+
+<script is:inline>
+  const copyTargets = document.querySelectorAll('[data-copy-target]');
+
+  copyTargets.forEach((button) => {
+    const feedback = button.querySelector('[data-copy-feedback]');
+    const text = button.querySelector('[data-copy-text]');
+    let resetTimer;
+
+    button.addEventListener('click', async () => {
+      const value = button.getAttribute('data-copy-value');
+
+      if (!value) {
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(value);
+        window.clearTimeout(resetTimer);
+        button.classList.add('text-terra', 'scale-[1.01]');
+        feedback?.classList.remove('opacity-0', 'translate-y-0');
+        feedback?.classList.add('opacity-100', 'translate-y-0.5');
+        text?.classList.add('underline', 'underline-offset-4');
+
+        resetTimer = window.setTimeout(() => {
+          button.classList.remove('text-terra', 'scale-[1.01]');
+          feedback?.classList.add('opacity-0', 'translate-y-0');
+          feedback?.classList.remove('opacity-100', 'translate-y-0.5');
+          text?.classList.remove('underline', 'underline-offset-4');
+        }, 1200);
+      } catch {
+        button.classList.remove('text-terra', 'scale-[1.01]');
+      }
+    });
+  });
+</script>

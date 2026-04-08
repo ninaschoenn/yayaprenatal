@@ -10,6 +10,7 @@ export const site = {
     phoneHref: 'tel:+491723479464',
     emailHref: 'mailto:nina@yayaprenatal.de',
     addressShort: 'Krossener Str. 2, Friedrichshain',
+    addressFull: 'Krossener Straße 2, 10245 Berlin',
   },
   legalContact: {
     name: 'Janina Schoenn',
