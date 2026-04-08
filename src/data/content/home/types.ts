@@ -200,7 +200,6 @@ export interface CtaContent {
   titleSuffix: string;
   body: string;
   buttonLabel: string;
-  responseLabel: string;
   labels: {
     email: string;
     phone: string;
