@@ -7,7 +7,7 @@ export const hero = {
       line1: 'Verstehen, was',
       line2Prefix: '',
       line2Accent: 'in dir',
-      line2Suffix: ' passiert —',
+      line2Suffix: ' passiert',
       line3: 'und was dein Körper wirklich braucht.',
     },
     bullets: [
@@ -25,7 +25,7 @@ export const hero = {
       line1: 'Understand what',
       line2Prefix: 'is happening',
       line2Accent: 'inside you',
-      line2Suffix: ' —',
+      line2Suffix: '',
       line3: 'and what your body truly needs.',
     },
     bullets: [
