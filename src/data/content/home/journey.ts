@@ -3,7 +3,7 @@ import type { JourneyContent, LocalizedHomeSection } from './types';
 export const journey = {
   de: {
     eyebrow: 'Deine Reise',
-    titlePrefix: '6 Monate mit Nina.',
+    titlePrefix: '6 Monate Complete Care.',
     titleAccent: 'Wann immer du bereit bist.',
     intro:
       'Die meisten Frauen starten zwischen der 12. und 20. Schwangerschaftswoche — aber du entscheidest, wann der richtige Zeitpunkt für dich ist.',
