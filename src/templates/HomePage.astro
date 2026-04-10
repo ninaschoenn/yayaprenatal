@@ -10,7 +10,6 @@ import ForYou from '../components/ForYou.astro';
 import GapStats from '../components/GapStats.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
-import HowItWorks from '../components/HowItWorks.astro';
 import Journey from '../components/Journey.astro';
 import Packages from '../components/Packages.astro';
 import Testimonials from '../components/Testimonials.astro';
@@ -43,8 +42,7 @@ const ids = sectionIds[locale];
     <BabyFirst content={content.babyFirst} />
     <BodyMap content={content.bodyMap} />
     <CoachingSection content={content.coaching} />
-    <HowItWorks content={content.howItWorks} />
-    <Packages id={ids.packages} content={content.packages} />
+    <Packages id={ids.packages} content={content.packages} howItWorks={content.howItWorks} />
     <Journey content={content.journey} />
     <AboutNina id={ids.about} content={content.about} />
     <Testimonials content={content.testimonials} />

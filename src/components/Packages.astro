@@ -4,9 +4,10 @@ import type { HomeContent } from '../data/home-content';
 interface Props {
   id: string;
   content: HomeContent['packages'];
+  howItWorks: HomeContent['howItWorks'];
 }
 
-const { id, content } = Astro.props;
+const { id, content, howItWorks } = Astro.props;
 ---
 
 <section id={id} class="bg-deep px-4 py-16 md:px-12 md:py-24">
@@ -63,9 +64,60 @@ const { id, content } = Astro.props;
           </>
         ))}
       </p>
-      <p class="mt-4 border-t border-cream/10 pt-4 text-[12px] font-light italic text-cream/50">
-        {content.primaryOffer.note}
-      </p>
+      {content.primaryOffer.note && (
+        <p class="mt-4 border-t border-cream/10 pt-4 text-[12px] font-light italic text-cream/50">
+          {content.primaryOffer.note}
+        </p>
+      )}
+
+      <details class="group mt-4 border-t border-cream/10 pt-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-[12px] font-medium uppercase tracking-[1.5px] text-terra transition-colors hover:text-cream">
+          <span>{howItWorks.eyebrow}</span>
+          <svg
+            class="h-4 w-4 shrink-0 transition-transform duration-300 group-open:rotate-180"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </summary>
+
+        <div class="mt-6">
+          <h4 class="mb-2 font-serif text-xl font-light text-cream md:text-2xl">
+            {howItWorks.title}
+          </h4>
+          <p class="mb-6 text-[13px] font-light text-cream/60">
+            {howItWorks.noteBefore}<span class="font-medium text-terra">{howItWorks.noteAccent}</span>{howItWorks.noteAfter}
+          </p>
+
+          <div class="relative">
+            <div class="absolute left-5 top-2 bottom-2 w-px bg-terra/30" aria-hidden="true"></div>
+            <div class="space-y-6">
+              {howItWorks.features.map((feature) => (
+                <div class="relative flex items-start gap-5">
+                  <span
+                    class="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-deep text-lg leading-none ring-1 ring-terra/40"
+                    aria-hidden="true"
+                  >
+                    {feature.icon}
+                  </span>
+                  <div class="pt-1.5">
+                    <h5 class="mb-1 font-serif text-base font-light text-cream md:text-lg">
+                      {feature.title}
+                    </h5>
+                    <p class="text-[13px] font-light leading-relaxed text-cream/70">{feature.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </details>
     </div>
 
     <p class="mt-12 mb-4 font-sans text-xs uppercase tracking-widest text-blush">

@@ -22,20 +22,27 @@ const { content } = Astro.props;
       {content.noteBefore}<span class="font-medium text-terra">{content.noteAccent}</span>{content.noteAfter}
     </p>
 
-    <div class="grid max-w-[700px] grid-cols-1 gap-5 md:grid-cols-2">
-      {content.features.map((feature) => (
-        <div class="flex items-start gap-4 rounded-[1.6rem] bg-cream p-6">
-          <span class="mt-0.5 shrink-0 text-2xl leading-none" aria-hidden="true">
-            {feature.icon}
-          </span>
-          <div>
-            <h3 class="mb-2 text-sm leading-snug font-semibold text-ink">
-              {feature.title}
-            </h3>
-            <p class="text-sm leading-relaxed text-subtle">{feature.text}</p>
+    <div class="relative max-w-[640px]">
+      <div class="absolute left-6 top-3 bottom-3 w-px bg-terra/25" aria-hidden="true"></div>
+
+      <div class="space-y-10">
+        {content.features.map((feature) => (
+          <div class="relative flex items-start gap-6">
+            <span
+              class="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cream text-xl leading-none ring-1 ring-terra/30"
+              aria-hidden="true"
+            >
+              {feature.icon}
+            </span>
+            <div class="pt-2.5">
+              <h3 class="mb-1.5 font-serif text-lg font-light leading-snug text-deep md:text-xl">
+                {feature.title}
+              </h3>
+              <p class="text-sm leading-relaxed text-subtle font-light">{feature.text}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   </div>
 </section>

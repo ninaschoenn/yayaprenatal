@@ -35,7 +35,7 @@ export const packages = {
         'Welcome Kit.',
         'Partner-Session optional.',
       ],
-      note: 'Diese Begleitung ist kein einmaliger Termin — sondern ein gemeinsamer Prozess.',
+      note: '',
     },
     oneOffOffers: [
       {
@@ -115,7 +115,7 @@ export const packages = {
         'Welcome kit.',
         'Optional partner session.',
       ],
-      note: 'This support is not a one-off appointment — it is a shared process.',
+      note: '',
     },
     oneOffOffers: [
       {
