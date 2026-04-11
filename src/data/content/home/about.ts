@@ -7,7 +7,6 @@ export const about = {
     subtitle: 'Schwanger — und jetzt?',
     paragraphs: [
       'Als ich in deiner Situation war, habe ich nächtelang gegoogelt. Was jetzt zu tun ist. Was normal ist und was nicht. Ich habe nach irgendwas gesucht, das mir Sicherheit gibt. Das mir beweist: alles ist gut, du machst das richtig. Ich habe Kurse gebucht, mich vorbereitet — und irgendwie nie gefunden, was ich brauchte. Jedenfalls nicht an einem Ort.',
-      'Zwischen Gynäkologin und Hebamme - die beide unerlässlich sind - gibt es eine Lücke. Einen Ort, an dem du als Mama im Mittelpunkt stehst. Mit all deinen Bedürfnissen. Deinen Blutwerten. Deinen Ängsten.',
       'Elf Jahre später habe ich diesen Ort selbst erschaffen. Meine Praxis.',
     ],
     practiceName: 'Yaya.',
@@ -27,7 +26,6 @@ export const about = {
     subtitle: 'Pregnant — and now what?',
     paragraphs: [
       'When I was in your position, I spent night after night searching online. What should I do now? What is normal and what is not? I was looking for something that would give me a sense of safety. Something that would reassure me that everything was okay and that I was doing this right. I booked courses, I prepared — and still I never found what I actually needed. At least not in one place.',
-      'Between the gynecologist and the midwife — both of whom are essential — there is a gap. A place where you, as the mother, are at the center. With all of your needs. Your blood values. Your fears.',
       'Eleven years later, I created that place myself. My practice.',
     ],
     practiceName: 'Yaya.',

@@ -28,6 +28,19 @@ export interface ForYouContent {
   titleAccent: string;
   items: string[];
   closing: string;
+  additions: {
+    eyebrow: string;
+    titlePrefix: string;
+    titleAccent: string;
+    intro: string;
+    steps: Array<{
+      number: string;
+      title: string;
+      text: string;
+      accent?: boolean;
+    }>;
+  };
+  bridge: string;
 }
 
 export interface UspBridgeContent {
@@ -57,11 +70,12 @@ export interface GapStatsContent {
 }
 
 export interface BabyFirstContent {
-  intro: string;
-  introAccent: string;
-  body: [string, string];
-  bodyAccent: string;
-  bodySuffix: string;
+  pullQuote: string;
+}
+
+export interface OfferContent {
+  eyebrow: string;
+  title: string;
 }
 
 export type BodyMapCategoryKey = 'blood' | 'vitamin' | 'organ' | 'safety';
@@ -128,6 +142,11 @@ export interface HowItWorksContent {
   }>;
 }
 
+export interface OfferCta {
+  label: string;
+  href: string;
+}
+
 export interface PackagesContent {
   eyebrow: string;
   titlePrefix: string;
@@ -136,27 +155,32 @@ export interface PackagesContent {
   introText: string;
   featuredBadge: string;
   oneOffEyebrow: string;
+  oneOffIntro: string;
   introOffer: {
     label: string;
     title: string;
     price: string;
     details: string[];
+    cta?: OfferCta;
   };
   primaryOffer: {
     label: string;
     title: string;
+    tagline: string;
     price: string;
     priceSuffix: string;
     duration: string;
     savings: string;
     details: string[];
     note: string;
+    cta?: OfferCta;
   };
   oneOffOffers: Array<{
     title: string;
     price: string;
     accent: string;
     details: string[];
+    cta?: OfferCta;
   }>;
 }
 
@@ -165,11 +189,23 @@ export interface JourneyContent {
   titlePrefix: string;
   titleAccent: string;
   intro: string;
-  chapters: Array<{
-    number: string;
-    theme: string;
-    body: string;
-  }>;
+  rhythm: {
+    heading: string;
+    features: Array<{
+      icon: string;
+      title: string;
+      text: string;
+    }>;
+  };
+  arc: {
+    heading: string;
+    phases: Array<{
+      number: string;
+      title: string;
+      body: string;
+    }>;
+  };
+  closing: string;
 }
 
 export interface AboutContent {
@@ -214,11 +250,10 @@ export interface HomeContent {
   hero: HeroContent;
   forYou: ForYouContent;
   uspBridge: UspBridgeContent;
-  gapStats: GapStatsContent;
+  offer: OfferContent;
   babyFirst: BabyFirstContent;
   bodyMap: BodyMapContent;
   coaching: CoachingContent;
-  howItWorks: HowItWorksContent;
   packages: PackagesContent;
   journey: JourneyContent;
   about: AboutContent;

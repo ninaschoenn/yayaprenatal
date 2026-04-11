@@ -10,6 +10,7 @@ export const packages = {
       'Die umfassendste Form der Begleitung — für Frauen, die tiefer schauen wollen.',
     featuredBadge: 'Empfehlung',
     oneOffEyebrow: 'Einzelleistungen',
+    oneOffIntro: 'Wenn Complete Care nicht passt — einzelne Bausteine für deinen Weg.',
     introOffer: {
       label: 'Kennenlernen',
       title: 'Erstgespräch',
@@ -24,6 +25,7 @@ export const packages = {
     primaryOffer: {
       label: 'Blut + Coaching + Begleitung',
       title: 'Complete Care',
+      tagline: 'Die volle Begleitung, die du gerade kennengelernt hast.',
       price: '€495',
       priceSuffix: '/ Monat',
       duration: '6 Monate · 12 Termine à 75 Min.',
@@ -90,6 +92,7 @@ export const packages = {
       'The most comprehensive form of support — for women who want to look deeper.',
     featuredBadge: 'Recommended',
     oneOffEyebrow: 'Single sessions',
+    oneOffIntro: 'If Complete Care is not the right fit — single building blocks for your path.',
     introOffer: {
       label: 'Introduction',
       title: 'Intro Call',
@@ -104,6 +107,7 @@ export const packages = {
     primaryOffer: {
       label: 'Blood + coaching + support',
       title: 'Complete Care',
+      tagline: 'The full journey you just read about.',
       price: '€495',
       priceSuffix: '/ month',
       duration: '6 months · 12 sessions of 75 min.',

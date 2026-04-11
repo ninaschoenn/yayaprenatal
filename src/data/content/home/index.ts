@@ -6,11 +6,10 @@ import { coaching } from './coaching';
 import { cta } from './cta';
 import { disclaimer } from './disclaimer';
 import { forYou } from './for-you';
-import { gapStats } from './gap-stats';
 import { hero } from './hero';
-import { howItWorks } from './how-it-works';
 import { journey } from './journey';
 import { meta } from './meta';
+import { offer } from './offer';
 import { packages } from './packages';
 import { testimonials } from './testimonials';
 import type { HomeContent } from './types';
@@ -22,11 +21,10 @@ export const homeContent = {
     hero: hero.de,
     forYou: forYou.de,
     uspBridge: uspBridge.de,
-    gapStats: gapStats.de,
+    offer: offer.de,
     babyFirst: babyFirst.de,
     bodyMap: bodyMap.de,
     coaching: coaching.de,
-    howItWorks: howItWorks.de,
     packages: packages.de,
     journey: journey.de,
     about: about.de,
@@ -39,11 +37,10 @@ export const homeContent = {
     hero: hero.en,
     forYou: forYou.en,
     uspBridge: uspBridge.en,
-    gapStats: gapStats.en,
+    offer: offer.en,
     babyFirst: babyFirst.en,
     bodyMap: bodyMap.en,
     coaching: coaching.en,
-    howItWorks: howItWorks.en,
     packages: packages.en,
     journey: journey.en,
     about: about.en,

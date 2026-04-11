@@ -69,6 +69,52 @@ const icons = [
         </div>
       </div>
     </div>
+
+    <div class="mt-16 border-t border-warm/60 pt-16 md:mt-24 md:pt-20">
+      <div class="mb-12 text-center md:mb-16">
+        <p class="mb-4 text-[12px] font-medium uppercase tracking-[3px] text-terra">
+          {content.additions.eyebrow}
+        </p>
+        <h2 class="mb-5 font-serif text-[28px] font-light leading-[1.2] text-deep md:text-[42px]">
+          {content.additions.titlePrefix}{' '}
+          <em class="italic text-terra">{content.additions.titleAccent}</em>
+        </h2>
+        <p class="mx-auto max-w-xl text-sm font-light leading-[1.8] text-subtle md:text-base">
+          {content.additions.intro}
+        </p>
+      </div>
+
+      <div class="grid gap-4 md:grid-cols-3 md:gap-6">
+        {content.additions.steps.map((step, index) => (
+          <div
+            class={`foryou-item relative flex flex-col rounded-2xl p-6 opacity-0 translate-y-4 transition-all duration-[900ms] ease-out md:p-7 ${
+              step.accent
+                ? 'bg-terra/10 ring-1 ring-terra/40'
+                : 'bg-warm/40 ring-1 ring-warm/60'
+            }`}
+            style={`transition-delay: ${index * 150}ms`}
+            data-foryou-item
+          >
+            <p class={`mb-3 font-serif text-[44px] font-light italic leading-none md:text-[56px] ${step.accent ? 'text-terra' : 'text-deep/40'}`}>
+              {step.number}
+            </p>
+            <h3 class={`mb-2 font-serif text-lg font-light leading-snug md:text-xl ${step.accent ? 'text-terra' : 'text-deep'}`}>
+              {step.title}
+            </h3>
+            <p class="text-[14px] font-light leading-[1.7] text-subtle md:text-[15px]">
+              {step.text}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <p
+        class="foryou-item mx-auto mt-16 max-w-xl text-center font-serif text-xl font-light italic leading-[1.5] text-deep opacity-0 translate-y-4 transition-all duration-[900ms] ease-out md:mt-20 md:text-2xl"
+        data-foryou-item
+      >
+        {content.bridge}
+      </p>
+    </div>
   </div>
 </section>
 

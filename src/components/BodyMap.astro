@@ -3,26 +3,32 @@ import type { HomeContent } from '../data/home-content';
 
 interface Props {
   content: HomeContent['bodyMap'];
+  step?: string;
 }
 
-const { content } = Astro.props;
+const { content, step } = Astro.props;
 ---
 
-<section class="relative overflow-hidden px-4 py-20 md:px-12 md:py-30">
+<section class="relative overflow-hidden bg-pearl px-4 py-20 md:px-12 md:py-30">
   <div class="absolute top-0 left-1/2 h-[3px] w-15 -translate-x-1/2 rounded-full bg-terra" />
 
-  <div class="mx-auto max-w-5xl">
-    <div class="mb-8 text-center md:mb-12">
-      <p class="mb-4 text-xs font-medium uppercase tracking-[3px] text-terra">
+  <div class="mx-auto max-w-3xl">
+    <div class="mb-8 md:mb-12">
+      {step && (
+        <p class="mb-2 font-serif text-[56px] font-light italic leading-none text-terra/55 md:text-[80px]">
+          {step}
+        </p>
+      )}
+      <p class="mb-3 text-xs font-medium uppercase tracking-[3px] text-terra">
         {content.eyebrow}
       </p>
-      <h2 class="mb-3 font-serif text-3xl font-light leading-tight text-deep md:text-5xl">
+      <h2 class="mb-3 font-serif text-[26px] font-light leading-tight text-deep md:text-4xl">
         {content.title}
       </h2>
-      <p class="mx-auto mb-4 max-w-lg font-serif text-lg font-light leading-relaxed text-deep opacity-80 md:text-xl">
+      <p class="mb-4 max-w-lg font-serif text-lg font-light leading-relaxed text-deep opacity-80 md:text-xl">
         {content.intro}
       </p>
-      <p class="mx-auto max-w-lg whitespace-pre-line text-sm font-light leading-relaxed text-subtle md:text-base">
+      <p class="max-w-lg whitespace-pre-line text-sm font-light leading-relaxed text-subtle md:text-base">
         {content.description}
       </p>
     </div>
@@ -401,3 +407,46 @@ const { content } = Astro.props;
     });
   });
 </script>
+
+<style>
+  @keyframes body-marker-pulse {
+    0%, 100% {
+      opacity: 0.08;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.18;
+      transform: scale(1.18);
+    }
+  }
+
+  .body-marker-ring {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: body-marker-pulse 4.5s ease-in-out infinite;
+  }
+
+  .body-marker:nth-of-type(2n) .body-marker-ring {
+    animation-delay: -0.7s;
+  }
+
+  .body-marker:nth-of-type(3n) .body-marker-ring {
+    animation-delay: -1.4s;
+  }
+
+  .body-marker:nth-of-type(5n) .body-marker-ring {
+    animation-delay: -2.1s;
+  }
+
+  .body-marker.active .body-marker-ring,
+  .body-marker:hover .body-marker-ring,
+  .body-marker:focus-visible .body-marker-ring {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .body-marker-ring {
+      animation: none;
+    }
+  }
+</style>

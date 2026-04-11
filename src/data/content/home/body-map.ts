@@ -3,7 +3,7 @@ import type { BodyMapContent, LocalizedHomeSection } from './types';
 export const bodyMap = {
   de: {
     eyebrow: 'Dein Körper-Check',
-    title: 'Was wir in deinem Blut lesen.',
+    title: 'Was uns dein Blut verrät.',
     intro:
       'Wir schauen nicht einfach auf Werte — wir verstehen, was sie für dich und dein Baby bedeuten.',
     description:
@@ -16,7 +16,7 @@ export const bodyMap = {
       gap: 'Die Lücke',
     },
     categories: {
-      blood: { color: '#E8A89A', label: 'Blut & Eisen' },
+      blood: { color: '#E07856', label: 'Blut & Eisen' },
       vitamin: { color: '#D4A856', label: 'Vitamine & Hormone' },
       organ: { color: '#7EA882', label: 'Organe' },
       safety: { color: '#8AAEC4', label: 'Sicherheit' },
@@ -192,7 +192,7 @@ export const bodyMap = {
   },
   en: {
     eyebrow: 'Your body check',
-    title: 'What we read in your blood.',
+    title: 'What your blood tells us.',
     intro:
       'We do not just look at numbers — we look at what they mean for you and for your baby.',
     description:
@@ -205,7 +205,7 @@ export const bodyMap = {
       gap: 'The gap',
     },
     categories: {
-      blood: { color: '#E8A89A', label: 'Blood & Iron' },
+      blood: { color: '#E07856', label: 'Blood & Iron' },
       vitamin: { color: '#D4A856', label: 'Vitamins & Hormones' },
       organ: { color: '#7EA882', label: 'Organs' },
       safety: { color: '#8AAEC4', label: 'Safety' },
