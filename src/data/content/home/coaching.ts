@@ -46,7 +46,7 @@ export const coaching = {
       },
     ],
     note:
-      'Systemisches Coaching ist keine Therapie und keine Beratung. Es ist ein Raum, in dem du deine eigenen Antworten findest. Nina gibt keine Ratschläge, sie stellt die Fragen, die dich weiterbringen. Denn kein Gefühl steht für sich allein — es ist immer Teil eines größeren Bildes.',
+      'Unser Coaching ist keine Therapie und keine Beratung. Es ist ein Raum, in dem du deine eigenen Antworten findest. Ohne Ratschläge, sondern mit den Fragen, die dich weiterbringen. Systemisch bedeutet: kein Gefühl steht für sich allein — es ist immer Teil eines größeren Bildes. Ein Ergebnis von Wechselwirkungen.',
   },
   en: {
     eyebrow: 'Systemic Coaching',
@@ -93,6 +93,6 @@ export const coaching = {
       },
     ],
     note:
-      'Systemic coaching is not therapy and not advice-giving. It is a space in which you find your own answers. Nina does not hand out instructions, she asks the questions that help you move forward. Because no feeling stands on its own — it is always part of a larger picture.',
+      'Our coaching is not therapy and not advice-giving. It is a space in which you find your own answers. No instructions, but the questions that help you move forward. Systemic means: no feeling stands on its own — it is always part of a larger picture. The result of interconnections.',
   },
 } satisfies LocalizedHomeSection<CoachingContent>;
