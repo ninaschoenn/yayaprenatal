@@ -2,7 +2,8 @@ export const site = {
   name: 'Yaya Prenatal',
   url: 'https://yayaprenatal.de',
   branding: {
-    logoPath: '/logo.png',
+    logoPath: '/logo.svg',
+    logoPathLight: '/logo-light.svg',
   },
   publicContact: {
     email: 'nina@yayaprenatal.de',
