@@ -70,13 +70,17 @@ After all the calm-care edits land, the page should read in this order:
 | 6 | About Nina | **Moved up here** — trust arrives before the pricing middle |
 | 7 | Coaching | 3 dialogues instead of 7, shorter note |
 | 8 | How It Works | Kept as a separate section, lightly tightened |
-| 9 | Packages | Same position; Complete Care and Intro Call stay prominent; 4 single sessions de-emphasized |
-| 10 | Journey | Collapsed from 6 chapters to 3 phases |
-| 11 | Testimonials | Unchanged |
-| 12 | CTA | Unchanged |
-| 13 | Disclaimer | Unchanged |
+| 9 | Journey | Collapsed from 6 chapters to 3 phases |
+| 10 | Testimonials | Unchanged |
+| 11 | Packages + Contact | **Merged into one final section.** Packages on top, contact options underneath — "book a call, write to me, or read more below" all live in one place |
+| 12 | Disclaimer | Unchanged |
 
-**USP Bridge is removed.** The page goes from 14 sections to 13.
+**Two sections are removed:** USP Bridge (deleted entirely) and the standalone CTA (merged into Packages). The page goes from 14 sections to 12.
+
+Why the merged Packages + Contact section sits at the end:
+- The story of the page (problem → proof → Nina → process) can finish on social proof (Testimonials) and then land on a single, gentle close.
+- The visitor never passes through a pricing zone and then back out into more content — the pricing *is* the close.
+- Calm-care shape: `story → social proof → gentle close`, instead of `sales → story → sales`.
 
 ---
 
@@ -135,10 +139,18 @@ The goal is to let each of these ideas live in **one** clearly owned section and
 - Keep as a separate section. Do not merge into Packages — in the calm-care direction, keeping them apart lets Packages stay visually lighter and less funnel-shaped.
 - Light copy pass to remove duplication with the Packages bullet list (don't re-list the same items in both places; let How It Works describe the rhythm and Packages describe the offer).
 
-### 9. Packages — `packages.ts`
-- Keep Complete Care and the free Intro Call visually prominent.
-- De-emphasize the 4 single-session options so they don't compete visually with Complete Care. A compact list, a collapsible section, or a quieter card style all work. Keep the prices visible — just quieter.
-- Position on the page stays the same.
+### 9. Packages + Contact — `packages.ts` + `cta.ts` (**merged**)
+- The standalone CTA section is removed. Its contact block (email, phone, address, "write to me" message) moves into the Packages section so that everything a visitor needs to take the next step lives in one place.
+- New position: **at the end of the page, just before Testimonials → Disclaimer.** Packages moves from its current section 9 to the final content section. See the "Proposed new page flow" table above.
+- Visual structure of the merged section (top to bottom):
+  1. A soft header in Nina's voice ("Bereit für mehr?" / "Ready for more?") — reused from the current CTA content.
+  2. The free Intro Call, visually prominent.
+  3. Complete Care, visually prominent.
+  4. The 4 single-session options, de-emphasized (compact list or collapsible card) so they don't compete with Complete Care.
+  5. The contact block — email, phone, address, with click-to-copy — as a soft footer to the section.
+- **Future roadmap (not part of this edit pass):** each package card will become clickable. The click will open a calendar link for the Intro Call and Complete Care, and a Stripe checkout for the single sessions. The merged section should be structured in a way that makes adding those buttons straightforward later (one call-to-action slot per card).
+- Keep the prices visible — just quieter than a conversion-shaped pricing page would show them.
+- All content from `cta.ts` (the title "Bereit für mehr?", the body, the labels for email/phone/address/copy) stays in the codebase and is rendered inside the new merged section.
 
 ### 10. Journey — `journey.ts`
 - Collapse from 6 chapters to 3 phases so it stops duplicating `how-it-works.ts` and `packages.ts` for a third time. Proposed phases:
@@ -156,18 +168,31 @@ The goal is to let each of these ideas live in **one** clearly owned section and
 - Keep as is. Three quotes, three angles (blood, coaching, time). Clean.
 
 ### 13. CTA — `cta.ts`
-- Keep as is. Warm and simple.
+- **Merged into Packages.** See section 9 above. The copy and labels inside `cta.ts` are not deleted from the codebase — they are reused inside the merged Packages + Contact section at the end of the new page flow.
 
 ### 14. Disclaimer — `disclaimer.ts`
 - Keep as is. Necessary closing note.
 
 ---
 
+## Beyond the home content: Footer
+
+One change sits outside `src/data/content/home/`. It fits this streamlining pass because it's part of making contact easier.
+
+### Footer — `src/components/Footer.astro`
+- Add Nina's contact email and phone number to the footer so a visitor can reach her from anywhere on the page, not only after scrolling to the Packages + Contact section.
+- Keep the footer calm and understated — a simple line like:
+  > *hello@yayaprenatal.de · +49 [phone] · Friedrichshain, Berlin*
+- Still link to the legal pages (Impressum / Datenschutz) as today.
+- Do not duplicate the full click-to-copy contact widget that lives inside the merged Packages + Contact section — the footer version should be lighter.
+
+---
+
 ## Still open for Nina
 
-The calm-care direction resolves most decisions, but one question remains:
+The calm-care direction resolves most decisions, but two questions remain:
 
-**Body Map — how many markers, and which ones?**
+### 1. Body Map — how many markers, and which ones?
 
 - Current: 12 markers (Thyroid, Vitamin D, Ferritin, B12, Folate, Minerals, Blood Count, Liver, Blood Sugar, Kidneys, Infections, Inflammation).
 - Nina's earlier proposal: 6 markers (Thyroid, Vitamin D, Ferritin, Blood Sugar, Infections/CMV, Liver).
@@ -180,15 +205,26 @@ Why the middle ground:
 
 If Nina prefers the tighter 6-marker version, that is also valid — the two dropped entries (Folate, Minerals) are simply the ones I'd flag as the most noticeable absences.
 
+### 2. Footer — confirm the contact details to show
+
+The footer currently does not show Nina's email and phone. To add them, I need:
+
+- The email address to display (I can check what's already in the codebase — if `hello@yayaprenatal.de` or similar is already used in the CTA section, I'll reuse it without asking).
+- **The phone number to show publicly.** If Nina wants to show it, tell me which number. If not, I will only add the email.
+- Whether the address ("Friedrichshain, Berlin" or a full street address) should appear in the footer too.
+
 ---
 
 ## Next step
 
 1. Work directly on the `main` branch. No feature branch, no pull request.
-2. Wait for Nina's answer on the Body Map marker count.
-3. Make all the calm-care edits listed above in one focused pass.
+2. Wait for Nina's answers on the two open questions above (Body Map marker count, footer contact details).
+3. Make all the calm-care edits listed above in one focused pass, including:
+   - Home content edits inside `src/data/content/home/*.ts`.
+   - Merging the Packages and CTA components in `src/components/` so the two sections render as one.
+   - Adding contact details to `src/components/Footer.astro`.
 4. Run `npm run build` to confirm nothing is broken.
 5. Start `npm run dev` for a local preview at http://localhost:4321 so Nina can see the new, quieter page.
 6. Only after Nina has seen and approved the preview do we push to the live website.
 
-No edits happen to any `.ts` file until Nina says the plan is ready to execute.
+No edits happen to any `.ts` or `.astro` file until Nina says the plan is ready to execute.
