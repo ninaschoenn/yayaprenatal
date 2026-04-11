@@ -7,7 +7,7 @@ export const bodyMap = {
     intro:
       'Wir schauen nicht einfach auf Werte — wir verstehen, was sie für dich und dein Baby bedeuten.',
     description:
-      '22 Marker. 18 davon testet deine Frauenärztin nicht. Die anderen 4 schon — aber isoliert, ohne das volle Bild. Klick auf einen Bereich und erfahre, warum er wichtig ist.',
+      '22 Marker. 18 davon testet die Standardvorsorge nicht.\nDie anderen 4 ohne das volle Bild.\nKlick auf einen Bereich und erfahre, warum er wichtig ist.',
     hint: 'Klick auf einen Marker',
     closeLabel: 'Details schließen',
     detailLabels: {
