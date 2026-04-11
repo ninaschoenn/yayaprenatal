@@ -23,7 +23,7 @@ After all the edits land, the page reads in this order:
 |---|---|---|---|
 | 1 | **Hero** | Unchanged | `hero.ts` |
 | 2 | **Why Yaya** | Audience recognition + the gap in standard care, **merged and softened** | `for-you.ts` + `gap-stats.ts` |
-| 3 | **The Offer: Blood** | Body Map (fewer markers), with the Baby First pull-quote as its emotional opener | `body-map.ts` + `baby-first.ts` |
+| 3 | **The Offer: Blood** | Body Map **kept exactly as it is today**, with a small Baby First pull-quote as its emotional opener | `body-map.ts` (untouched) + `baby-first.ts` |
 | 4 | **The Offer: Coaching** | 3 dialogues, shorter note | `coaching.ts` |
 | 5 | **The Journey** | The rhythm + the 6-month arc, **merged into one flow section** | `how-it-works.ts` + `journey.ts` |
 | 6 | **Packages** | Complete Care pushed harder as "the journey you just read about"; single sessions de-emphasized below | `packages.ts` |
@@ -41,8 +41,8 @@ After all the edits land, the page reads in this order:
 
 Five ideas repeat across multiple sections today. Each repetition weakens the next mention. The Option C merges fix most of this automatically.
 
-1. **"The standard care misses things"** — told in `gap-stats.ts`, implied in `baby-first.ts`, told again in `body-map.ts`, told again in `about.ts`. → Now told once inside **Why Yaya**, softened. Also softened inside the Body Map intro. Removed from About Nina.
-2. **"18 markers / 22 markers"** — told in `gap-stats.ts`, `body-map.ts`, and `packages.ts`. → Now lives only inside **The Offer: Blood** (Body Map).
+1. **"The standard care misses things"** — told in `gap-stats.ts`, implied in `baby-first.ts`, told again in `body-map.ts`, told again in `about.ts`. → Now softened inside **Why Yaya** and removed from About Nina. Body Map keeps its own framing because we are not touching that file.
+2. **"18 markers / 22 markers"** — told in `gap-stats.ts`, `body-map.ts`, and `packages.ts`. → Removed from `gap-stats.ts` during the Why Yaya merge. Body Map and Packages keep their current wording. The number goes from being told in three places to being told in two.
 3. **"75 minutes just for you"** — told in `how-it-works.ts` and echoed in `testimonials.ts`. Kept — a testimonial echoing a promise is good.
 4. **"Complete Care described from different angles"** — `how-it-works.ts` lists 4 features, `packages.ts` lists what's included, `journey.ts` walks through the same 6 months. → Now How It Works and Journey are merged into **The Journey**, and Packages explicitly ties Complete Care back to it ("This is the journey you just read about").
 5. **"Baby takes from your reserves"** — told in `baby-first.ts` and in `body-map.ts` under minerals. → Now only in the Baby First pull-quote at the top of The Offer: Blood.
@@ -64,14 +64,11 @@ The numbering below matches the new page flow, not the current one. For each sec
 - The "10 min / 18 markers / 0 min" stat block is removed — those numbers feel accusatory and are the most "the system is failing you" part of the page. The "18 markers" number now lives only inside The Offer: Blood.
 - Weave one soft sentence from Baby First into this section as a gentle bridge into the next one — something like *"Dein Körper schickt dir Botschaften. Yaya hilft dir, sie zu lesen."*
 
-### 3. The Offer: Blood — `body-map.ts` (+ Baby First pull-quote from `baby-first.ts`)
-- This is the first half of "what Yaya actually does." It gets a shared framing header ("Das Angebot" / "What Yaya does") with The Offer: Coaching below it.
-- **Baby First shrinks to a 2-sentence pull-quote** at the top of this section, serving as its emotional opener:
+### 3. The Offer: Blood — `body-map.ts` is **not touched** (+ Baby First pull-quote from `baby-first.ts`)
+- **`body-map.ts` stays exactly as it is today.** Nina's decision: no marker changes, no gap-label removals, no intro edits, no softening of the "18 markers" wording. The Body Map is one of the strongest sections on the site and it stays whole.
+- This section is still the first half of "what Yaya actually does." It gets a shared framing header ("Das Angebot" / "What Yaya does") with The Offer: Coaching below it — this framing lives in the page template, not inside `body-map.ts`.
+- **Baby First shrinks to a 2-sentence pull-quote** and is rendered *above* the Body Map as its emotional opener. The pull-quote is a separate element in the page template; it does not modify `body-map.ts`.
   > *"Dein Körper schickt dir Botschaften. Was er dir in diesen neun Monaten mitgibt, prägt dein Kind ein Leben lang — die Wissenschaft nennt das fetale Programmierung."*
-- Remove the "Gap" label from every marker. We explain the gap once (softly) in Why Yaya; repeating it inside every marker makes the tone cold and repetitive.
-- Drop the intro line ("Wir schauen nicht einfach auf Werte") — it repeats the hero's promise.
-- This is the single place on the page that names "22 markers" and "18 not in standard screening." Soften the phrasing: *"18 davon sind kein Teil der Standardvorsorge"* instead of *"testet deine Frauenärztin nicht"*.
-- **Marker count reduced.** See the Still Open section below. Recommended default: 8 markers.
 
 ### 4. The Offer: Coaching — `coaching.ts`
 - The second half of "what Yaya actually does." Sits directly under Blood, under the shared "Das Angebot" header.
@@ -119,32 +116,26 @@ The numbering below matches the new page flow, not the current one. For each sec
 
 ---
 
-## Beyond the home content: Footer
+## Footer
 
-One change sits outside `src/data/content/home/`. It fits this streamlining pass because it makes contact easier everywhere on the site.
-
-### Footer — `src/components/Footer.astro`
-- Add Nina's contact email (and optionally phone) so visitors can reach her from any scroll position, not only after reaching the Close section.
-- Keep the footer calm and understated — something like:
-  > *hello@yayaprenatal.de · Friedrichshain, Berlin*
-- Still link to the legal pages (Impressum / Datenschutz) as today.
-- Do not duplicate the full click-to-copy widget from the Close section — the footer version should be lighter.
+### Footer — `src/components/Footer.astro` — **no changes**
+- No contact details added to the footer. Reasoning:
+  1. The **Close section** at the bottom of the homepage already handles the warm contact moment (email, phone, address, click-to-copy, "write to me").
+  2. The **Impressum page** — legally required — already holds the full legal contact details and is linked from every footer on every page. Anyone on Impressum / Datenschutz is always one click from Nina's contact info.
+  3. Duplicating contact info in the footer adds visual weight without clear benefit. Calm care = less repetition.
+- The footer stays exactly as it is today: logo, legal links, location line.
+- If later Nina notices visitors getting stuck searching for contact info, adding a single email line to the footer is a one-minute follow-up change.
 
 ---
 
-## Still open for Nina
+## Decisions locked in
 
-Only two questions remain:
+Both previously-open questions are now resolved:
 
-### 1. Body Map — how many markers, and which ones?
-- Current: 12 markers.
-- Nina's earlier proposal: 6 markers (Thyroid, Vitamin D, Ferritin, Blood Sugar, Infections/CMV, Liver).
-- My recommendation: **8 markers** — same six, plus **Folate** (most famous pregnancy nutrient) and **Minerals** (covers calf cramps / sleep / palpitations, the most relatable symptoms).
+- **Body Map** — no changes at all. `body-map.ts` stays exactly as it is today.
+- **Footer** — no changes at all. Contact info lives in the Close section on the homepage and on the Impressum page, not in the footer.
 
-### 2. Footer — contact details
-- Email: I'll reuse whatever is already in `cta.ts` unless told otherwise.
-- **Phone number: show publicly in the footer, or only inside the Close section?** If only in Close, the footer stays email-only.
-- Address: short line ("Friedrichshain, Berlin") or full street address?
+The plan is ready to execute. There are no remaining open questions.
 
 ---
 
@@ -155,8 +146,8 @@ Only two questions remain:
 - `for-you.ts` — rewritten as Part 1 of Why Yaya
 - `usp-bridge.ts` — **deleted from `index.ts` and no longer imported**; file can stay on disk for now or be removed
 - `gap-stats.ts` — rewritten as Part 2 of Why Yaya (steps only, stats removed)
-- `baby-first.ts` — shrunk to a 2-sentence pull-quote, attached to the Body Map rendering
-- `body-map.ts` — marker list trimmed; "gap" labels removed; intro and description softened
+- `baby-first.ts` — shrunk to a 2-sentence pull-quote, rendered above the Body Map (does not modify `body-map.ts`)
+- `body-map.ts` — **not touched**. Kept exactly as it is today.
 - `coaching.ts` — dialogues cut from 7 to 3; note shortened
 - `how-it-works.ts` — content folded into the merged Journey section
 - `journey.ts` — collapsed from 6 chapters to 3 phases; receives the How It Works features
@@ -175,17 +166,16 @@ The `index.ts` file in the home content folder will need its import list updated
 - Update the render order of the sections to match the new 9-section flow.
 
 ### Footer (`src/components/Footer.astro`)
-- Add contact details as described above.
+- **Not touched.** Stays exactly as it is today.
 
 ---
 
 ## Next step
 
 1. Work directly on the `main` branch. No feature branch, no pull request.
-2. Wait for Nina's answers on the two remaining open questions (Body Map marker count, footer contact details).
-3. Make all the edits listed above in one focused pass.
-4. Run `npm run build` to confirm nothing is broken.
-5. Start `npm run dev` for a local preview at http://localhost:4321 so Nina can see the new, quieter page.
-6. Only after Nina has seen and approved the preview do we push to the live website.
+2. Make all the edits listed above in one focused pass.
+3. Run `npm run build` to confirm nothing is broken.
+4. Start `npm run dev` for a local preview at http://localhost:4321 so Nina can see the new, quieter page.
+5. Only after Nina has seen and approved the preview do we push to the live website.
 
-No edits happen to any `.ts` or `.astro` file until Nina says the plan is ready to execute.
+The plan is ready. Waiting for Nina's green light to start editing.
