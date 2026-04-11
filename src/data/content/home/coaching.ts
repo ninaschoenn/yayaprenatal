@@ -3,10 +3,10 @@ import type { CoachingContent, LocalizedHomeSection } from './types';
 export const coaching = {
   de: {
     eyebrow: 'Systemisches Coaching',
-    titlePrefix: 'Der Termin endet.',
-    titleAccent: 'Die Frage bleibt.',
+    titlePrefix: 'Manche Antworten finden wir nicht',
+    titleAccent: 'im Labor.',
     intro:
-      'Schwangerschaft verändert alles — Beziehung, Identität, Ängste, Träume. Das verdient einen Raum, der nur dir gehört.',
+      '…sondern in einem Gespräch, das deine leisen Themen erforscht. Denn Schwangerschaft verändert alles — Beziehung, Identität, Ängste, Träume. Systemisches Coaching ist innere Arbeit, die dich stärkt, bevor dein Baby da ist.',
     labels: {
       previous: 'Vorherige Frage',
       next: 'Nächste Frage',
@@ -46,14 +46,14 @@ export const coaching = {
       },
     ],
     note:
-      'Systemisches Coaching ist keine Therapie und keine Beratung. Es ist ein Raum, in dem du deine eigenen Antworten findest. Nina gibt keine Ratschläge — sie stellt die Fragen, die dich weiterbringen. Geburtsängste, Identitätswandel, Partnerschaftsdynamik, Entscheidungen, Selbstvertrauen — innere Arbeit, die dich stärkt, bevor das Baby da ist.',
+      'Systemisches Coaching ist keine Therapie und keine Beratung. Es ist ein Raum, in dem du deine eigenen Antworten findest. Nina gibt keine Ratschläge, sie stellt die Fragen, die dich weiterbringen. Denn kein Gefühl steht für sich allein — es ist immer Teil eines größeren Bildes.',
   },
   en: {
     eyebrow: 'Systemic Coaching',
-    titlePrefix: 'The appointment ends.',
-    titleAccent: 'The question stays.',
+    titlePrefix: 'Some answers are not found',
+    titleAccent: 'in the lab.',
     intro:
-      'Pregnancy changes everything — relationship, identity, fears, dreams. That deserves a space that belongs only to you.',
+      '…but in a conversation that listens to your quieter themes. Because pregnancy changes everything — relationship, identity, fears, dreams. Systemic coaching is inner work that strengthens you before your baby arrives.',
     labels: {
       previous: 'Previous question',
       next: 'Next question',
@@ -93,6 +93,6 @@ export const coaching = {
       },
     ],
     note:
-      'Systemic coaching is not therapy and not advice-giving. It is a space in which you find your own answers. Nina does not hand out instructions — she asks the questions that help you move forward. Birth fears, changing identity, relationship dynamics, decisions, self-trust — inner work that strengthens you before your baby arrives.',
+      'Systemic coaching is not therapy and not advice-giving. It is a space in which you find your own answers. Nina does not hand out instructions, she asks the questions that help you move forward. Because no feeling stands on its own — it is always part of a larger picture.',
   },
 } satisfies LocalizedHomeSection<CoachingContent>;
