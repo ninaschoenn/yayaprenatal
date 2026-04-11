@@ -6,7 +6,7 @@ export const journey = {
     titlePrefix: '6 Monate Complete Care.',
     titleAccent: 'Wann immer du bereit bist.',
     intro:
-      'Die meisten Frauen starten zwischen der 12. und 20. Schwangerschaftswoche — aber du entscheidest, wann der richtige Zeitpunkt für dich ist.',
+      'Die meisten Frauen starten zwischen der 12. und 20. Schwangerschaftswoche — aber du entscheidest, wann der richtige Zeitpunkt für dich ist. Wenn du in deiner Schwangerschaft schon weiter bist, passe ich das Angebot mit dir gerne individuell an.',
     chapters: [
       {
         number: 'Kapitel 1',
@@ -45,7 +45,7 @@ export const journey = {
     titlePrefix: '6 months with Nina.',
     titleAccent: 'Whenever you are ready.',
     intro:
-      'Most women begin between week 12 and week 20 of pregnancy — but you decide when the time feels right for you.',
+      'Most women begin between week 12 and week 20 of pregnancy — but you decide when the time feels right for you. If you are already further along in your pregnancy, I am happy to adapt the support individually with you.',
     chapters: [
       {
         number: 'Chapter 1',
