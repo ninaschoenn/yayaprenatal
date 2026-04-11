@@ -7,6 +7,16 @@ interface Props {
 }
 
 const { content, step } = Astro.props;
+
+const categoryTests = Object.fromEntries(
+  (Object.keys(content.categories) as Array<keyof typeof content.categories>).map((key) => {
+    const tests = new Set<string>();
+    content.markers
+      .filter((marker) => marker.cat === key)
+      .forEach((marker) => marker.tests.forEach((test) => tests.add(test)));
+    return [key, Array.from(tests)];
+  }),
+) as Record<keyof typeof content.categories, string[]>;
 ---
 
 <section class="relative overflow-hidden bg-pearl px-4 py-20 md:px-12 md:py-30">
@@ -34,8 +44,12 @@ const { content, step } = Astro.props;
     </div>
 
     <div class="mb-6 flex flex-wrap justify-center gap-3 md:mb-10 md:gap-6">
-      {Object.values(content.categories).map((category) => (
-        <div class="flex items-center gap-1.5">
+      {(Object.entries(content.categories) as Array<[keyof typeof content.categories, typeof content.categories[keyof typeof content.categories]]>).map(([key, category]) => (
+        <div
+          class="flex items-center gap-1.5"
+          data-legend-item
+          data-legend-tests={categoryTests[key].join(' ')}
+        >
           <div
             class="h-2.5 w-2.5 rounded-full"
             style={`background:${category.color}; box-shadow: 0 0 6px ${category.color}44;`}
@@ -93,6 +107,7 @@ const { content, step } = Astro.props;
           <g
             class="body-marker transition-opacity duration-200 focus:outline-none"
             data-marker-id={marker.id}
+            data-marker-tests={marker.tests.join(' ')}
             tabindex="0"
             role="button"
             aria-controls={`body-map-panel-${marker.id}`}
@@ -257,9 +272,54 @@ const { content, step } = Astro.props;
     })}
     </div>
 
-    <p data-body-map-hint class="mt-6 text-center text-sm font-light text-subtle opacity-70">
+    <p data-body-map-hint class="mx-auto mt-8 max-w-xl text-center text-sm font-light leading-relaxed text-subtle opacity-80 md:mt-10 md:text-base">
       {content.hint}
     </p>
+
+    <div class="mt-10 flex flex-col items-center md:mt-14">
+      <div
+        class="flex flex-wrap justify-center gap-2"
+        data-test-filter-group
+        role="tablist"
+        aria-label="Filter markers by blood test"
+      >
+        <button
+          type="button"
+          class="rounded-full border border-terra/40 bg-transparent px-5 py-2 text-[11px] font-medium uppercase tracking-[1.5px] text-terra transition-all duration-200 hover:bg-terra/10 md:text-xs"
+          data-test-filter="basis"
+          aria-pressed="false"
+          role="tab"
+        >
+          {content.testFilter.basis}
+        </button>
+        <button
+          type="button"
+          class="rounded-full border border-terra/40 bg-transparent px-5 py-2 text-[11px] font-medium uppercase tracking-[1.5px] text-terra transition-all duration-200 hover:bg-terra/10 md:text-xs"
+          data-test-filter="verlauf"
+          aria-pressed="false"
+          role="tab"
+        >
+          {content.testFilter.verlauf}
+        </button>
+      </div>
+
+      <div class="mx-auto mt-5 hidden max-w-lg text-center" data-test-description="basis">
+        <p class="text-sm font-light leading-relaxed text-subtle md:text-base">
+          {content.testDescriptions.basis}
+        </p>
+        <p class="mt-2 text-xs font-light italic text-terra/80 md:text-[13px]">
+          {content.testTimings.basis}
+        </p>
+      </div>
+      <div class="mx-auto mt-5 hidden max-w-lg text-center" data-test-description="verlauf">
+        <p class="text-sm font-light leading-relaxed text-subtle md:text-base">
+          {content.testDescriptions.verlauf}
+        </p>
+        <p class="mt-2 text-xs font-light italic text-terra/80 md:text-[13px]">
+          {content.testTimings.verlauf}
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -271,7 +331,59 @@ const { content, step } = Astro.props;
     const markers = Array.from(root.querySelectorAll('[data-marker-id]'));
     const panels = Array.from(root.querySelectorAll('[data-panel-id]'));
     const hint = root.parentElement?.querySelector('[data-body-map-hint]');
+    const filterGroup = root.parentElement?.querySelector('[data-test-filter-group]');
+    const filterButtons = Array.from(filterGroup?.querySelectorAll('[data-test-filter]') ?? []);
     let activeId = null;
+
+    const descriptions = Array.from(
+      root.parentElement?.querySelectorAll('[data-test-description]') ?? []
+    );
+    const legendItems = Array.from(
+      root.parentElement?.querySelectorAll('[data-legend-item]') ?? []
+    );
+    let activeFilter = null;
+
+    const applyTestFilter = (filter) => {
+      if (!figure) return;
+      activeFilter = filter;
+      figure.classList.remove('filter-basis', 'filter-verlauf');
+      if (filter) {
+        figure.classList.add(`filter-${filter}`);
+      }
+
+      filterButtons.forEach((btn) => {
+        const isActive = btn.getAttribute('data-test-filter') === filter;
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        if (isActive) {
+          btn.classList.remove('bg-transparent', 'text-terra');
+          btn.classList.add('bg-terra', 'text-pearl');
+        } else {
+          btn.classList.remove('bg-terra', 'text-pearl');
+          btn.classList.add('bg-transparent', 'text-terra');
+        }
+      });
+
+      descriptions.forEach((desc) => {
+        const match = desc.getAttribute('data-test-description') === filter;
+        desc.classList.toggle('hidden', !match);
+      });
+
+      legendItems.forEach((item) => {
+        if (!filter) {
+          item.classList.remove('hidden');
+          return;
+        }
+        const tests = (item.getAttribute('data-legend-tests') ?? '').split(' ');
+        item.classList.toggle('hidden', !tests.includes(filter));
+      });
+    };
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-test-filter');
+        applyTestFilter(activeFilter === filter ? null : filter);
+      });
+    });
 
     const applyMarkerState = (marker, isActive) => {
       const ring = marker.querySelector('[data-marker-ring]');
@@ -448,5 +560,15 @@ const { content, step } = Astro.props;
     .body-marker-ring {
       animation: none;
     }
+  }
+
+  .body-marker {
+    transition: opacity 400ms ease;
+  }
+
+  .body-map-figure.filter-basis .body-marker:not([data-marker-tests~="basis"]),
+  .body-map-figure.filter-verlauf .body-marker:not([data-marker-tests~="verlauf"]) {
+    opacity: 0;
+    pointer-events: none;
   }
 </style>

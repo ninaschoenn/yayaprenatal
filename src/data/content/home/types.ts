@@ -80,6 +80,8 @@ export interface OfferContent {
 
 export type BodyMapCategoryKey = 'blood' | 'vitamin' | 'organ' | 'safety';
 
+export type BodyMapTestId = 'basis' | 'verlauf';
+
 export interface BodyMapMarker {
   id: string;
   label: string;
@@ -88,6 +90,7 @@ export interface BodyMapMarker {
   y: number;
   side: 'L' | 'R';
   cat: BodyMapCategoryKey;
+  tests: BodyMapTestId[];
   mother: string;
   baby: string;
   gap: string;
@@ -100,6 +103,18 @@ export interface BodyMapContent {
   description: string;
   hint: string;
   closeLabel: string;
+  testFilter: {
+    basis: string;
+    verlauf: string;
+  };
+  testDescriptions: {
+    basis: string;
+    verlauf: string;
+  };
+  testTimings: {
+    basis: string;
+    verlauf: string;
+  };
   detailLabels: {
     mother: string;
     baby: string;

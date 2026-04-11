@@ -8,8 +8,23 @@ export const bodyMap = {
       'Wir schauen nicht einfach auf Werte — wir verstehen, was sie für dich und dein Baby bedeuten.',
     description:
       '22 Marker. 18 davon testet die Standardvorsorge nicht.\nDie anderen 4 ohne das volle Bild.\nKlick auf einen Bereich und erfahre, warum er wichtig ist.',
-    hint: 'Klick auf einen Marker',
+    hint:
+      'Wir bieten zwei Analyse-Pakete an. Je nachdem, in welcher SSW du bist. Klicke auf einen Button und erfahre, welche Werte in welchem Bluttest enthalten sind.',
     closeLabel: 'Details schließen',
+    testFilter: {
+      basis: 'Basis Bluttest',
+      verlauf: 'Verlaufs Bluttest',
+    },
+    testDescriptions: {
+      basis:
+        'Frühes Screening, bevor Symptome entstehen. Dein Baby hat im 1. und 2. Trimester noch keine eigene Schilddrüse und braucht deine Hormone für die Gehirnentwicklung. Auch für Nervenentwicklung und Zellteilung ist es anfangs komplett auf deine Reserven angewiesen.',
+      verlauf:
+        'Dein Körper verändert sich rasant — 40 % mehr Blutvolumen, höherer Mineralstoffbedarf, steigende Belastung für Leber und Nieren. Der Verlaufs-Bluttest zeigt, ob deine Reserven mithalten und dein Baby gut versorgt ist.',
+    },
+    testTimings: {
+      basis: 'optimal in SSW 12–16',
+      verlauf: 'optimal in SSW 24–28 und SSW 32–36',
+    },
     detailLabels: {
       mother: 'Für dich',
       baby: 'Für dein Baby',
@@ -26,10 +41,11 @@ export const bodyMap = {
         id: 'tsh',
         label: 'Schilddrüse',
         sub: 'TSH + fT4',
-        x: 47,
-        y: 15,
+        x: 48,
+        y: 14,
         side: 'L',
         cat: 'vitamin',
+        tests: ['basis'],
         mother:
           'Steuert deinen Energiehaushalt, Stimmung und Stoffwechsel. Eine unterschwellige Schilddrüsenschwäche bleibt oft unerkannt — du fühlst dich einfach nur „müde".',
         baby:
@@ -40,10 +56,11 @@ export const bodyMap = {
         id: 'vitd',
         label: 'Vitamin D',
         sub: '25-OH',
-        x: 49,
-        y: 27,
-        side: 'L',
+        x: 52,
+        y: 26,
+        side: 'R',
         cat: 'vitamin',
+        tests: ['basis'],
         mother:
           '80% der Schwangeren in Berlin haben einen Mangel. Beeinflusst Immunsystem, Stimmung und Knochengesundheit.',
         baby:
@@ -58,6 +75,7 @@ export const bodyMap = {
         y: 40,
         side: 'L',
         cat: 'blood',
+        tests: ['basis', 'verlauf'],
         mother:
           'Nicht nur Hämoglobin — Ferritin zeigt deine echten Eisenreserven. Du kannst „normale" Blutwerte haben und trotzdem erschöpft sein.',
         baby:
@@ -69,10 +87,11 @@ export const bodyMap = {
         id: 'b12',
         label: 'Vitamin B12',
         sub: 'Cobalamin',
-        x: 43,
-        y: 53,
-        side: 'L',
+        x: 52,
+        y: 54,
+        side: 'R',
         cat: 'vitamin',
+        tests: ['basis'],
         mother:
           'Nervensystem, Energieproduktion, DNA-Synthese. Mangel macht müde und vergesslich — wird oft als „normal in der Schwangerschaft" abgetan.',
         baby: 'Kritisch für das Nervensystem und die Gehirnentwicklung deines Babys.',
@@ -82,10 +101,11 @@ export const bodyMap = {
         id: 'folate',
         label: 'Folsäure',
         sub: 'Folat',
-        x: 47,
+        x: 48,
         y: 66,
         side: 'L',
         cat: 'vitamin',
+        tests: ['basis'],
         mother:
           'Das bekannteste Schwangerschaftsvitamin — aber wird dein Spiegel jemals gemessen? Supplemente sind nicht gleich ausreichend.',
         baby:
@@ -97,10 +117,11 @@ export const bodyMap = {
         id: 'minerals',
         label: 'Mineralien',
         sub: 'Magnesium · Calcium · Zink',
-        x: 46,
-        y: 79,
-        side: 'L',
+        x: 58,
+        y: 72,
+        side: 'R',
         cat: 'vitamin',
+        tests: ['verlauf'],
         mother:
           'Wadenkrämpfe, Herzrasen, Schlafprobleme — oft Magnesiummangel. Calcium für dein Skelett. Zink für Immunsystem und Wundheilung bei der Geburt.',
         baby:
@@ -111,10 +132,11 @@ export const bodyMap = {
         id: 'hb',
         label: 'Blutbild',
         sub: 'Hb · MCV · WBC · Thrombo',
-        x: 50,
-        y: 21,
-        side: 'R',
+        x: 42,
+        y: 22,
+        side: 'L',
         cat: 'blood',
+        tests: ['verlauf'],
         mother:
           'Zeigt Anämie, Immunstatus und Gerinnungsfähigkeit. Dein Blutvolumen steigt in der Schwangerschaft um 50%.',
         baby: 'Sauerstofftransport zum Baby. Anämie erhöht das Frühgeburtsrisiko.',
@@ -124,10 +146,11 @@ export const bodyMap = {
         id: 'liver',
         label: 'Leber',
         sub: 'ALT · AST',
-        x: 43,
+        x: 58,
         y: 34,
         side: 'R',
         cat: 'organ',
+        tests: ['verlauf'],
         mother:
           'Schwangerschaftscholestase und HELLP-Syndrom zeigen sich zuerst in den Leberwerten. Früherkennung kann lebensrettend sein.',
         baby: 'Leberkomplikationen können zu Frühgeburt führen.',
@@ -138,10 +161,11 @@ export const bodyMap = {
         id: 'sugar',
         label: 'Blutzucker',
         sub: 'Glucose · HbA1c',
-        x: 55,
-        y: 47,
+        x: 58,
+        y: 46,
         side: 'R',
         cat: 'blood',
+        tests: ['verlauf'],
         mother:
           'Gestationsdiabetes betrifft 5–10% aller Schwangeren. HbA1c zeigt den Langzeit-Trend.',
         baby:
@@ -152,10 +176,11 @@ export const bodyMap = {
         id: 'kidney',
         label: 'Niere',
         sub: 'Kreatinin · Urin',
-        x: 52,
-        y: 60,
-        side: 'R',
+        x: 42,
+        y: 58,
+        side: 'L',
         cat: 'organ',
+        tests: ['verlauf'],
         mother:
           'Deine Nieren arbeiten in der Schwangerschaft auf Hochtouren. Frühzeichen von Präeklampsie zeigen sich hier.',
         baby: 'Präeklampsie ist eine der gefährlichsten Schwangerschaftskomplikationen.',
@@ -165,10 +190,11 @@ export const bodyMap = {
         id: 'infect',
         label: 'Infektionen',
         sub: 'Toxo · CMV · Röteln',
-        x: 50,
-        y: 73,
+        x: 52,
+        y: 80,
         side: 'R',
         cat: 'safety',
+        tests: ['basis'],
         mother:
           'Einmalige Tests die zeigen, ob du immun bist. Besonders CMV — das häufigste angeborene Virus — wird fast nie getestet.',
         baby:
@@ -179,10 +205,11 @@ export const bodyMap = {
         id: 'inflam',
         label: 'Entzündung',
         sub: 'CRP · D-Dimere',
-        x: 48,
-        y: 86,
-        side: 'R',
+        x: 45,
+        y: 88,
+        side: 'L',
         cat: 'safety',
+        tests: ['verlauf'],
         mother:
           'Stille Entzündungen und Gerinnungsrisiken. D-Dimere steigen in der Schwangerschaft natürlich — aber zu stark erhöhte Werte können auf Thrombose hinweisen.',
         baby: 'Chronische Entzündung beeinflusst die Plazenta-Funktion.',
@@ -197,8 +224,23 @@ export const bodyMap = {
       'We do not just look at numbers — we look at what they mean for you and for your baby.',
     description:
       '22 markers. 18 of them are not part of standard gynecological screening. The other 4 may be checked, but in isolation and without the full picture. Click on an area to see why it matters.',
-    hint: 'Click on a marker',
+    hint:
+      'We offer two analysis packages, depending on your stage of pregnancy. Click a button to see which markers each blood test includes.',
     closeLabel: 'Close details',
+    testFilter: {
+      basis: 'Baseline test',
+      verlauf: 'Follow-up test',
+    },
+    testDescriptions: {
+      basis:
+        'Early screening, before symptoms appear. In the first and second trimester, your baby does not yet have its own thyroid and depends on your hormones for brain development. For nerve development and cell division too, your baby relies entirely on your reserves at the start.',
+      verlauf:
+        'Your body is changing rapidly — 40% more blood volume, higher mineral demand, increasing load on liver and kidneys. The follow-up blood test shows whether your reserves are keeping up and your baby is well supplied.',
+    },
+    testTimings: {
+      basis: 'best in weeks 12–16',
+      verlauf: 'best in weeks 24–28 and 32–36',
+    },
     detailLabels: {
       mother: 'For you',
       baby: 'For your baby',
@@ -215,10 +257,11 @@ export const bodyMap = {
         id: 'tsh',
         label: 'Thyroid',
         sub: 'TSH + fT4',
-        x: 47,
-        y: 15,
+        x: 48,
+        y: 14,
         side: 'L',
         cat: 'vitamin',
+        tests: ['basis'],
         mother:
           'It regulates your energy, mood, and metabolism. Mild thyroid dysfunction often goes unnoticed — you are simply told that you are tired.',
         baby:
@@ -229,10 +272,11 @@ export const bodyMap = {
         id: 'vitd',
         label: 'Vitamin D',
         sub: '25-OH',
-        x: 49,
-        y: 27,
-        side: 'L',
+        x: 52,
+        y: 26,
+        side: 'R',
         cat: 'vitamin',
+        tests: ['basis'],
         mother:
           'Around 80% of pregnant women in Berlin are deficient. It affects the immune system, mood, and bone health.',
         baby:
@@ -247,6 +291,7 @@ export const bodyMap = {
         y: 40,
         side: 'L',
         cat: 'blood',
+        tests: ['basis', 'verlauf'],
         mother:
           'Hemoglobin is not the whole story — ferritin shows your real iron reserves. Your lab work can look “normal” and you can still be depleted.',
         baby:
@@ -258,10 +303,11 @@ export const bodyMap = {
         id: 'b12',
         label: 'Vitamin B12',
         sub: 'Cobalamin',
-        x: 43,
-        y: 53,
-        side: 'L',
+        x: 52,
+        y: 54,
+        side: 'R',
         cat: 'vitamin',
+        tests: ['basis'],
         mother:
           'It matters for your nervous system, energy production, and DNA synthesis. Deficiency can cause fatigue and forgetfulness and is often dismissed as “normal in pregnancy.”',
         baby: 'Critical for your baby’s nervous system and brain development.',
@@ -271,10 +317,11 @@ export const bodyMap = {
         id: 'folate',
         label: 'Folate',
         sub: 'Folate',
-        x: 47,
+        x: 48,
         y: 66,
         side: 'L',
         cat: 'vitamin',
+        tests: ['basis'],
         mother:
           'It is the best-known pregnancy vitamin — but is your level ever actually measured? Supplements are not automatically enough.',
         baby:
@@ -286,10 +333,11 @@ export const bodyMap = {
         id: 'minerals',
         label: 'Minerals',
         sub: 'Magnesium · Calcium · Zinc',
-        x: 46,
-        y: 79,
-        side: 'L',
+        x: 58,
+        y: 72,
+        side: 'R',
         cat: 'vitamin',
+        tests: ['verlauf'],
         mother:
           'Calf cramps, palpitations, and poor sleep can point to magnesium deficiency. Calcium supports your skeleton. Zinc matters for immunity and wound healing during birth.',
         baby:
@@ -300,10 +348,11 @@ export const bodyMap = {
         id: 'hb',
         label: 'Blood Count',
         sub: 'Hb · MCV · WBC · Platelets',
-        x: 50,
-        y: 21,
-        side: 'R',
+        x: 42,
+        y: 22,
+        side: 'L',
         cat: 'blood',
+        tests: ['verlauf'],
         mother:
           'It shows anemia, immune status, and clotting capacity. Your blood volume increases by around 50% during pregnancy.',
         baby: 'It affects oxygen transport to the baby. Anemia increases the risk of preterm birth.',
@@ -313,10 +362,11 @@ export const bodyMap = {
         id: 'liver',
         label: 'Liver',
         sub: 'ALT · AST',
-        x: 43,
+        x: 58,
         y: 34,
         side: 'R',
         cat: 'organ',
+        tests: ['verlauf'],
         mother:
           'Pregnancy cholestasis and HELLP syndrome can show up first in liver values. Early recognition can be life-saving.',
         baby: 'Liver complications can lead to preterm birth.',
@@ -327,10 +377,11 @@ export const bodyMap = {
         id: 'sugar',
         label: 'Blood Sugar',
         sub: 'Glucose · HbA1c',
-        x: 55,
-        y: 47,
+        x: 58,
+        y: 46,
         side: 'R',
         cat: 'blood',
+        tests: ['verlauf'],
         mother:
           'Gestational diabetes affects roughly 5–10% of pregnancies. HbA1c shows the longer-term trend.',
         baby:
@@ -341,10 +392,11 @@ export const bodyMap = {
         id: 'kidney',
         label: 'Kidneys',
         sub: 'Creatinine · Urine',
-        x: 52,
-        y: 60,
-        side: 'R',
+        x: 42,
+        y: 58,
+        side: 'L',
         cat: 'organ',
+        tests: ['verlauf'],
         mother:
           'Your kidneys work at full capacity during pregnancy. Early signs of preeclampsia often appear here.',
         baby: 'Preeclampsia is one of the most dangerous pregnancy complications.',
@@ -354,10 +406,11 @@ export const bodyMap = {
         id: 'infect',
         label: 'Infections',
         sub: 'Toxo · CMV · Rubella',
-        x: 50,
-        y: 73,
+        x: 52,
+        y: 80,
         side: 'R',
         cat: 'safety',
+        tests: ['basis'],
         mother:
           'These one-time tests show whether you are immune. CMV in particular — the most common congenital virus — is still rarely checked.',
         baby:
@@ -368,10 +421,11 @@ export const bodyMap = {
         id: 'inflam',
         label: 'Inflammation',
         sub: 'CRP · D-Dimers',
-        x: 48,
-        y: 86,
-        side: 'R',
+        x: 45,
+        y: 88,
+        side: 'L',
         cat: 'safety',
+        tests: ['verlauf'],
         mother:
           'Silent inflammation and clotting risks matter. D-dimers naturally rise during pregnancy, but values that are too high can point to thrombosis.',
         baby: 'Chronic inflammation can affect placental function.',
