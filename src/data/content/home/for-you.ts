@@ -13,8 +13,8 @@ export const forYou = {
     closing: 'Dann bist du hier richtig.',
     additions: {
       eyebrow: 'Was Yaya hinzufügt',
-      titlePrefix: 'Dein Team,',
-      titleAccent: 'eine Ebene erweitert.',
+      titlePrefix: 'Jemand mehr',
+      titleAccent: 'an deiner Seite.',
       intro:
         'Dein medizinisches Team begleitet dich gut. Yaya kommt dazu — mit dem, wofür in Sprechstunden kaum Zeit bleibt.',
       steps: [
@@ -50,8 +50,8 @@ export const forYou = {
     closing: 'Then you are in the right place.',
     additions: {
       eyebrow: 'What Yaya adds',
-      titlePrefix: 'Your team,',
-      titleAccent: 'one layer deeper.',
+      titlePrefix: 'Someone else',
+      titleAccent: 'by your side.',
       intro:
         'Your medical team takes good care of you. Yaya comes alongside — with what short appointments cannot cover.',
       steps: [
